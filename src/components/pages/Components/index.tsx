@@ -19,6 +19,38 @@ import { useToast } from "@/hooks/useToast";
 import { ToasterContainer } from "@/components/materials/Toaster";
 import { MdHome } from "react-icons/md";
 
+// Static data moved outside component to avoid recreation on each render
+const tabItems = [
+	{ id: "overview", label: "Overview", content: <div>Overview content</div> },
+	{ id: "analytics", label: "Analytics", content: <div>Analytics content</div> },
+	{ id: "reports", label: "Reports", content: <div>Reports content</div> },
+];
+
+const tableColumns = [
+	{ key: "name", title: "Name", sortable: true },
+	{ key: "email", title: "Email" },
+	{ key: "role", title: "Role" },
+	{ key: "status", title: "Status" },
+];
+
+const tableData = [
+	{ name: "John Doe", email: "john@example.com", role: "Admin", status: "Active" },
+	{ name: "Jane Smith", email: "jane@example.com", role: "User", status: "Inactive" },
+	{ name: "Bob Johnson", email: "bob@example.com", role: "User", status: "Active" },
+];
+
+const breadcrumbItems: BreadcrumbItem[] = [
+	{ label: "Home", href: "/", icon: <MdHome /> },
+	{ label: "UI Kit", href: "/ui-kit" },
+	{ label: "Demo", href: "/ui-kit/demo" },
+	{ label: "UI Kit", href: "/ui-kit" },
+	{ label: "Demo", href: "/ui-kit/demo" },
+	{ label: "UI Kit", href: "/ui-kit" },
+	{ label: "Demo", href: "/ui-kit/demo" },
+	{ label: "UI Kit", href: "/ui-kit" },
+	{ label: "Demo", href: "/ui-kit/demo" },
+];
+
 export default function Components() {
 	const { toasts, toast, removeToast } = useToast();
 	const [showModalSmall, setShowModalSmall] = useState(false);
@@ -28,36 +60,6 @@ export default function Components() {
 	const [showModalFull, setShowModalFull] = useState(false);
 	const [currentPage, setCurrentPage] = useState(1);
 
-	const tabItems = [
-		{ id: "overview", label: "Overview", content: <div>Overview content</div> },
-		{ id: "analytics", label: "Analytics", content: <div>Analytics content</div> },
-		{ id: "reports", label: "Reports", content: <div>Reports content</div> },
-	];
-
-	const tableColumns = [
-		{ key: "name", title: "Name", sortable: true },
-		{ key: "email", title: "Email" },
-		{ key: "role", title: "Role" },
-		{ key: "status", title: "Status" },
-	];
-
-	const tableData = [
-		{ name: "John Doe", email: "john@example.com", role: "Admin", status: "Active" },
-		{ name: "Jane Smith", email: "jane@example.com", role: "User", status: "Inactive" },
-		{ name: "Bob Johnson", email: "bob@example.com", role: "User", status: "Active" },
-	];
-
-	const breadcrumbItems: BreadcrumbItem[] = [
-		{ label: "Home", href: "/", icon: <MdHome /> },
-		{ label: "UI Kit", href: "/ui-kit" },
-		{ label: "Demo", href: "/ui-kit/demo" },
-		{ label: "UI Kit", href: "/ui-kit" },
-		{ label: "Demo", href: "/ui-kit/demo" },
-		{ label: "UI Kit", href: "/ui-kit" },
-		{ label: "Demo", href: "/ui-kit/demo" },
-		{ label: "UI Kit", href: "/ui-kit" },
-		{ label: "Demo", href: "/ui-kit/demo" },
-	];
 
 	return (
 		<main className={classes.root}>

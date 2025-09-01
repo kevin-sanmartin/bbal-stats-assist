@@ -12,47 +12,47 @@ import Badge from "@/components/elements/Badge";
 import { useToast } from "@/hooks/useToast";
 import { ToasterContainer } from "@/components/materials/Toaster";
 
+// Demo players data - moved outside component to avoid recreation on each render
+const demoPlayers = [
+	{ 
+		id: 1, 
+		name: "Michael Jordan", 
+		number: 23, 
+		position: "SG" as const, 
+		stats: { points: 28, rebounds: 6, assists: 5, steals: 2, fouls: 1 } 
+	},
+	{ 
+		id: 2, 
+		name: "LeBron James", 
+		number: 6, 
+		position: "SF" as const, 
+		stats: { points: 25, rebounds: 8, assists: 7, steals: 1, fouls: 2 } 
+	},
+	{ 
+		id: 3, 
+		name: "Stephen Curry", 
+		number: 30, 
+		position: "PG" as const, 
+		stats: { points: 32, rebounds: 4, assists: 8, steals: 3, fouls: 0 } 
+	},
+	{ 
+		id: 4, 
+		name: "Shaquille O'Neal", 
+		number: 34, 
+		position: "C" as const, 
+		stats: { points: 22, rebounds: 12, assists: 2, steals: 0, fouls: 4 } 
+	},
+	{ 
+		id: 5, 
+		name: "Tim Duncan", 
+		number: 21, 
+		position: "PF" as const, 
+		stats: { points: 18, rebounds: 10, assists: 3, steals: 1, fouls: 2 } 
+	},
+];
+
 export default function BasketStats() {
 	const { toasts, toast, removeToast } = useToast();
-	
-	// Demo players data
-	const demoPlayers = [
-		{ 
-			id: 1, 
-			name: "Michael Jordan", 
-			number: 23, 
-			position: "SG" as const, 
-			stats: { points: 28, rebounds: 6, assists: 5, steals: 2, fouls: 1 } 
-		},
-		{ 
-			id: 2, 
-			name: "LeBron James", 
-			number: 6, 
-			position: "SF" as const, 
-			stats: { points: 25, rebounds: 8, assists: 7, steals: 1, fouls: 2 } 
-		},
-		{ 
-			id: 3, 
-			name: "Stephen Curry", 
-			number: 30, 
-			position: "PG" as const, 
-			stats: { points: 32, rebounds: 4, assists: 8, steals: 3, fouls: 0 } 
-		},
-		{ 
-			id: 4, 
-			name: "Shaquille O'Neal", 
-			number: 34, 
-			position: "C" as const, 
-			stats: { points: 22, rebounds: 12, assists: 2, steals: 0, fouls: 4 } 
-		},
-		{ 
-			id: 5, 
-			name: "Tim Duncan", 
-			number: 21, 
-			position: "PF" as const, 
-			stats: { points: 18, rebounds: 10, assists: 3, steals: 1, fouls: 2 } 
-		},
-	];
 
 	const [selectedPlayer, setSelectedPlayer] = useState<number | null>(null);
 	const [playerStats, setPlayerStats] = useState<Record<number, any>>({
