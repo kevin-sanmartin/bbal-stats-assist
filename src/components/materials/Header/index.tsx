@@ -15,6 +15,9 @@ export default function Header() {
 						<Link href="/" className={classes.navLink}>
 							Accueil
 						</Link>
+						<Link href="/basketstats" className={classes.navLink}>
+							BasketStats
+						</Link>
 						<Link href="/components" className={classes.navLink}>
 							Composants
 						</Link>

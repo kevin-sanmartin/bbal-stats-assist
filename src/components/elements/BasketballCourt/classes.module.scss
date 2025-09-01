@@ -1,0 +1,129 @@
+.basketballCourt {
+	width: 100%;
+	max-width: 800px;
+	margin: 0 auto;
+	background-color: var(--color-surface);
+	border-radius: var(--radius-lg);
+	padding: var(--spacing-4);
+	box-shadow: var(--shadow-md);
+	border: 1px solid var(--color-border);
+}
+
+.courtSvg {
+	width: 100%;
+	height: auto;
+	display: block;
+}
+
+// === THEMES ===
+
+.theme-classic {
+	.courtSvg {
+		color: #8B4513; // Brown classic color
+	}
+	
+	background: linear-gradient(135deg, #DEB887 0%, #CD853F 100%);
+}
+
+.theme-modern {
+	.courtSvg {
+		color: var(--color-primary);
+	}
+	
+	background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-surface-secondary) 100%);
+}
+
+.theme-minimal {
+	.courtSvg {
+		color: var(--color-text-muted);
+	}
+	
+	background-color: var(--color-surface);
+	box-shadow: none;
+	border: 2px dashed var(--color-border);
+}
+
+// === COURT ELEMENTS ===
+
+.courtBorder {
+	stroke-width: 4;
+}
+
+.centerLine,
+.centerCircle {
+	stroke-width: 2;
+	opacity: 0.9;
+}
+
+.leftBasket,
+.rightBasket {
+	rect, line, path, circle {
+		stroke-width: 2;
+	}
+	
+	// Panneau plus épais
+	line:last-child {
+		stroke-width: 3;
+	}
+}
+
+
+// === SIZES ===
+
+.size-sm {
+	max-width: 400px;
+	padding: var(--spacing-2);
+}
+
+.size-md {
+	max-width: 600px;
+	padding: var(--spacing-3);
+}
+
+.size-lg {
+	max-width: 800px;
+	padding: var(--spacing-4);
+}
+
+
+// === RESPONSIVE ===
+
+@media (max-width: 768px) {
+	.basketballCourt {
+		padding: var(--spacing-2);
+	}
+	
+	.size-lg {
+		max-width: 100%;
+	}
+}
+
+@media (max-width: 480px) {
+	.basketballCourt {
+		padding: var(--spacing-1);
+	}
+}
+
+// === DARK MODE ADAPTATIONS ===
+
+[data-theme="dark"] {
+	.theme-classic {
+		background: linear-gradient(135deg, #654321 0%, #8B4513 100%);
+		
+		.courtSvg {
+			color: #DEB887;
+		}
+	}
+	
+	.theme-modern {
+		.courtSvg {
+			color: var(--color-primary);
+		}
+	}
+	
+	.theme-minimal {
+		.courtSvg {
+			color: var(--color-text-secondary);
+		}
+	}
+}

@@ -2,6 +2,12 @@
 :root {
 	// === LIGHT THEME (DEFAULT) ===
 
+	// Primary Colors - Basketball Orange
+	// --color-primary: #ff6b35;
+	// --color-primary-hover: #e55a2b;
+	// --color-primary-light: #fff4f0;
+	// --color-primary-dark: #d94d1f;
+
 	// Primary Colors
 	--color-primary: #2563eb;
 	--color-primary-hover: #1d4ed8;
@@ -48,6 +54,7 @@
 	--color-border: #e2e8f0;
 	--color-border-hover: #cbd5e1;
 	--color-border-focus: #2563eb;
+	// --color-border-focus: #ff6b35; // B
 
 	// Shadow Colors
 	--shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
@@ -125,6 +132,12 @@
 	--color-primary-light: rgba(59, 130, 246, 0.1);
 	--color-primary-dark: #1d4ed8;
 
+	// Primary Colors - Basketball Orange
+	// --color-primary: #ff8c65;
+	// --color-primary-hover: #ff6b35;
+	// --color-primary-light: rgba(255, 107, 53, 0.1);
+	// --color-primary-dark: #e55a2b;
+
 	// Neutral Colors (inverted)
 	--color-gray-50: #0f172a;
 	--color-gray-100: #1e293b;
@@ -164,6 +177,7 @@
 	--color-border: #334155;
 	--color-border-hover: #475569;
 	--color-border-focus: #3b82f6;
+	// --color-border-focus: #ff8c65; // Basketball Orange
 
 	// Shadow Colors (adjusted for dark mode)
 	--shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
