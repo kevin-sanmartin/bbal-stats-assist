@@ -4,7 +4,7 @@ import classes from "./classes.module.scss";
 import PlayerCard from "@/components/elements/PlayerCard";
 import StatCounter from "@/components/elements/StatCounter";
 import GameScoreboard from "@/components/materials/GameScoreboard";
-import BasketballCourt from "@/components/elements/BasketballCourt";
+import BasketballCourt, { CourtPosition } from "@/components/elements/BasketballCourt";
 import Button from "@/components/elements/Button";
 import Card from "@/components/elements/Card";
 import KPICard from "@/components/materials/KPICard";
@@ -14,40 +14,40 @@ import { ToasterContainer } from "@/components/materials/Toaster";
 
 // Demo players data - moved outside component to avoid recreation on each render
 const demoPlayers = [
-	{ 
-		id: 1, 
-		name: "Michael Jordan", 
-		number: 23, 
-		position: "SG" as const, 
-		stats: { points: 28, rebounds: 6, assists: 5, steals: 2, fouls: 1 } 
+	{
+		id: 1,
+		name: "Michael Jordan",
+		number: 23,
+		position: "SG" as const,
+		stats: { points: 28, rebounds: 6, assists: 5, steals: 2, fouls: 1 },
 	},
-	{ 
-		id: 2, 
-		name: "LeBron James", 
-		number: 6, 
-		position: "SF" as const, 
-		stats: { points: 25, rebounds: 8, assists: 7, steals: 1, fouls: 2 } 
+	{
+		id: 2,
+		name: "LeBron James",
+		number: 6,
+		position: "SF" as const,
+		stats: { points: 25, rebounds: 8, assists: 7, steals: 1, fouls: 2 },
 	},
-	{ 
-		id: 3, 
-		name: "Stephen Curry", 
-		number: 30, 
-		position: "PG" as const, 
-		stats: { points: 32, rebounds: 4, assists: 8, steals: 3, fouls: 0 } 
+	{
+		id: 3,
+		name: "Stephen Curry",
+		number: 30,
+		position: "PG" as const,
+		stats: { points: 32, rebounds: 4, assists: 8, steals: 3, fouls: 0 },
 	},
-	{ 
-		id: 4, 
-		name: "Shaquille O'Neal", 
-		number: 34, 
-		position: "C" as const, 
-		stats: { points: 22, rebounds: 12, assists: 2, steals: 0, fouls: 4 } 
+	{
+		id: 4,
+		name: "Shaquille O'Neal",
+		number: 34,
+		position: "C" as const,
+		stats: { points: 22, rebounds: 12, assists: 2, steals: 0, fouls: 4 },
 	},
-	{ 
-		id: 5, 
-		name: "Tim Duncan", 
-		number: 21, 
-		position: "PF" as const, 
-		stats: { points: 18, rebounds: 10, assists: 3, steals: 1, fouls: 2 } 
+	{
+		id: 5,
+		name: "Tim Duncan",
+		number: 21,
+		position: "PF" as const,
+		stats: { points: 18, rebounds: 10, assists: 3, steals: 1, fouls: 2 },
 	},
 ];
 
@@ -64,14 +64,14 @@ export default function BasketStats() {
 	});
 
 	const updateStat = (playerId: number, stat: string, value: number) => {
-		setPlayerStats(prev => ({
+		setPlayerStats((prev) => ({
 			...prev,
 			[playerId]: {
 				...prev[playerId],
-				[stat]: value
-			}
+				[stat]: value,
+			},
 		}));
-		toast.success(`${stat} mis à jour pour le joueur #${demoPlayers.find(p => p.id === playerId)?.number}`, "Statistique");
+		toast.success(`${stat} mis à jour pour le joueur #${demoPlayers.find((p) => p.id === playerId)?.number}`, "Statistique");
 	};
 
 	const resetStats = () => {
@@ -85,11 +85,15 @@ export default function BasketStats() {
 		toast.info("Toutes les statistiques ont été remises à zéro", "Reset");
 	};
 
+	const handleCourtClick = (position: CourtPosition) => {
+		console.log("🎯 Court clicked at position:", position);
+		toast.info(`Clic sur le terrain : x=${position.x.toFixed(2)}, y=${position.y.toFixed(2)}`, "Position");
+	};
+
 	const totalPoints = Object.values(playerStats).reduce((sum: number, stats: any) => sum + stats.points, 0);
 	const totalRebounds = Object.values(playerStats).reduce((sum: number, stats: any) => sum + stats.rebounds, 0);
 	const totalAssists = Object.values(playerStats).reduce((sum: number, stats: any) => sum + stats.assists, 0);
 	const totalFouls = Object.values(playerStats).reduce((sum: number, stats: any) => sum + stats.fouls, 0);
-
 
 	return (
 		<main className={classes.root}>
@@ -107,6 +111,14 @@ export default function BasketStats() {
 					</div>
 				</div>
 
+				{/* Visualisation du terrain */}
+				<div className={classes.section}>
+					<h2>Terrain de basketball</h2>
+					<div className={classes.courtContainer}>
+						<BasketballCourt size="lg" theme="modern" onCourtClick={handleCourtClick} />
+					</div>
+				</div>
+
 				{/* Tableau de bord du match */}
 				<div className={classes.section}>
 					<h2>Tableau de bord du match</h2>
@@ -120,20 +132,9 @@ export default function BasketStats() {
 								totalPoints: totalPoints + 78,
 								totalRebounds: totalRebounds + 32,
 								totalAssists: totalAssists + 18,
-								totalFouls: totalFouls + 8
+								totalFouls: totalFouls + 8,
 							}}
 							size="lg"
-						/>
-					</div>
-				</div>
-
-				{/* Visualisation du terrain */}
-				<div className={classes.section}>
-					<h2>Terrain de basketball</h2>
-					<div className={classes.courtContainer}>
-						<BasketballCourt
-							size="lg"
-							theme="modern"
 						/>
 					</div>
 				</div>
@@ -185,7 +186,7 @@ export default function BasketStats() {
 				<div className={classes.section}>
 					<h2>Équipe - Lakers</h2>
 					<div className={classes.playersGrid}>
-						{demoPlayers.map(player => (
+						{demoPlayers.map((player) => (
 							<PlayerCard
 								key={player.id}
 								name={player.name}
@@ -204,9 +205,9 @@ export default function BasketStats() {
 				{selectedPlayer && (
 					<div className={classes.section}>
 						<h2>
-							Saisie des statistiques - {demoPlayers.find(p => p.id === selectedPlayer)?.name} 
+							Saisie des statistiques - {demoPlayers.find((p) => p.id === selectedPlayer)?.name}
 							<Badge variant="primary" size="md">
-								#{demoPlayers.find(p => p.id === selectedPlayer)?.number}
+								#{demoPlayers.find((p) => p.id === selectedPlayer)?.number}
 							</Badge>
 						</h2>
 						<Card variant="elevated" padding="lg">
@@ -214,7 +215,7 @@ export default function BasketStats() {
 								<StatCounter
 									label="Points"
 									value={playerStats[selectedPlayer]?.points || 0}
-									onChange={(value) => updateStat(selectedPlayer, 'points', value)}
+									onChange={(value) => updateStat(selectedPlayer, "points", value)}
 									variant="default"
 									max={50}
 									size="lg"
@@ -222,7 +223,7 @@ export default function BasketStats() {
 								<StatCounter
 									label="Rebonds"
 									value={playerStats[selectedPlayer]?.rebounds || 0}
-									onChange={(value) => updateStat(selectedPlayer, 'rebounds', value)}
+									onChange={(value) => updateStat(selectedPlayer, "rebounds", value)}
 									variant="default"
 									max={20}
 									size="lg"
@@ -230,7 +231,7 @@ export default function BasketStats() {
 								<StatCounter
 									label="Passes"
 									value={playerStats[selectedPlayer]?.assists || 0}
-									onChange={(value) => updateStat(selectedPlayer, 'assists', value)}
+									onChange={(value) => updateStat(selectedPlayer, "assists", value)}
 									variant="default"
 									max={15}
 									size="lg"
@@ -238,7 +239,7 @@ export default function BasketStats() {
 								<StatCounter
 									label="Fautes"
 									value={playerStats[selectedPlayer]?.fouls || 0}
-									onChange={(value) => updateStat(selectedPlayer, 'fouls', value)}
+									onChange={(value) => updateStat(selectedPlayer, "fouls", value)}
 									variant="danger"
 									max={5}
 									size="lg"
@@ -251,31 +252,13 @@ export default function BasketStats() {
 				{/* Démonstration des différentes tailles */}
 				<div className={classes.section}>
 					<h2>Variations des composants</h2>
-					
+
 					<div className={classes.subsection}>
 						<h3>PlayerCard - Différentes tailles</h3>
 						<div className={classes.playerSizesGrid}>
-							<PlayerCard
-								name="Magic Johnson"
-								number={32}
-								position="PG"
-								stats={{ points: 15, rebounds: 5, assists: 10 }}
-								size="sm"
-							/>
-							<PlayerCard
-								name="Kobe Bryant"
-								number={24}
-								position="SG"
-								stats={{ points: 28, rebounds: 6, assists: 4 }}
-								size="md"
-							/>
-							<PlayerCard
-								name="Kareem Abdul-Jabbar"
-								number={33}
-								position="C"
-								stats={{ points: 24, rebounds: 11, assists: 2 }}
-								size="lg"
-							/>
+							<PlayerCard name="Magic Johnson" number={32} position="PG" stats={{ points: 15, rebounds: 5, assists: 10 }} size="sm" />
+							<PlayerCard name="Kobe Bryant" number={24} position="SG" stats={{ points: 28, rebounds: 6, assists: 4 }} size="md" />
+							<PlayerCard name="Kareem Abdul-Jabbar" number={33} position="C" stats={{ points: 24, rebounds: 11, assists: 2 }} size="lg" />
 						</div>
 					</div>
 

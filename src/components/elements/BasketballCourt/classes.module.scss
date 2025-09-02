@@ -1,3 +1,5 @@
+@use "./../../../themes/constants.module.scss";
+
 .basketballCourt {
 	width: 100%;
 	max-width: 800px;
@@ -19,17 +21,17 @@
 
 .theme-classic {
 	.courtSvg {
-		color: #8B4513; // Brown classic color
+		color: #8b4513; // Brown classic color
 	}
-	
-	background: linear-gradient(135deg, #DEB887 0%, #CD853F 100%);
+
+	background: linear-gradient(135deg, #deb887 0%, #cd853f 100%);
 }
 
 .theme-modern {
 	.courtSvg {
 		color: var(--color-primary);
 	}
-	
+
 	background: linear-gradient(135deg, var(--color-surface) 0%, var(--color-surface-secondary) 100%);
 }
 
@@ -37,7 +39,7 @@
 	.courtSvg {
 		color: var(--color-text-muted);
 	}
-	
+
 	background-color: var(--color-surface);
 	box-shadow: none;
 	border: 2px dashed var(--color-border);
@@ -57,16 +59,18 @@
 
 .leftBasket,
 .rightBasket {
-	rect, line, path, circle {
+	rect,
+	line,
+	path,
+	circle {
 		stroke-width: 2;
 	}
-	
+
 	// Panneau plus épais
 	line:last-child {
 		stroke-width: 3;
 	}
 }
-
 
 // === SIZES ===
 
@@ -85,20 +89,37 @@
 	padding: var(--spacing-4);
 }
 
-
 // === RESPONSIVE ===
 
-@media (max-width: 768px) {
+// Par défaut: Terrain horizontal (au-dessus de sm)
+.horizontalCourt {
+	display: block;
+}
+
+.verticalCourt {
+	display: none;
+}
+
+// Mobile: Terrain vertical seulement en sm
+@media (max-width: 500px) {
 	.basketballCourt {
 		padding: var(--spacing-2);
 	}
-	
+
+	.horizontalCourt {
+		display: none;
+	}
+
+	.verticalCourt {
+		display: block;
+	}
+
 	.size-lg {
 		max-width: 100%;
 	}
 }
 
-@media (max-width: 480px) {
+@media (max-width: constants.$screen-sm) {
 	.basketballCourt {
 		padding: var(--spacing-1);
 	}
@@ -108,19 +129,19 @@
 
 [data-theme="dark"] {
 	.theme-classic {
-		background: linear-gradient(135deg, #654321 0%, #8B4513 100%);
-		
+		background: linear-gradient(135deg, #654321 0%, #8b4513 100%);
+
 		.courtSvg {
-			color: #DEB887;
+			color: #deb887;
 		}
 	}
-	
+
 	.theme-modern {
 		.courtSvg {
 			color: var(--color-primary);
 		}
 	}
-	
+
 	.theme-minimal {
 		.courtSvg {
 			color: var(--color-text-secondary);

@@ -1,63 +1,73 @@
-import { ReactNode } from "react";
+import { ReactNode, MouseEvent } from "react";
 import classes from "./classes.module.scss";
 import classNames from "classnames";
+import VerticalCourt from "./VerticalCourt";
+import HorizontalCourt from "./HorizontalCourt";
 
 export type CourtSize = "sm" | "md" | "lg";
 export type CourtTheme = "classic" | "modern" | "minimal";
+
+export interface CourtPosition {
+	x: number; // 0-1
+	y: number; // 0-1
+}
 
 interface BasketballCourtProps {
 	size?: CourtSize;
 	theme?: CourtTheme;
 	className?: string;
+	onCourtClick?: (position: CourtPosition) => void;
 }
 
-export default function BasketballCourt({ size = "md", theme = "modern", className }: BasketballCourtProps) {
+export default function BasketballCourt({ size = "md", theme = "modern", className, onCourtClick }: BasketballCourtProps) {
 	const courtClasses = classNames(classes.basketballCourt, classes[`size-${size}`], classes[`theme-${theme}`], className);
+
+	const handleCourtClick = (event: MouseEvent<SVGSVGElement>) => {
+		console.log("🏀 Court clicked!");
+
+		if (!onCourtClick) {
+			console.log("⚠️ No onCourtClick callback provided");
+			return;
+		}
+
+		const svg = event.currentTarget;
+		const rect = svg.getBoundingClientRect();
+		const viewBox = svg.viewBox.baseVal;
+
+		console.log("📊 Raw click data:", {
+			clientX: event.clientX,
+			clientY: event.clientY,
+			rectLeft: rect.left,
+			rectTop: rect.top,
+			rectWidth: rect.width,
+			rectHeight: rect.height,
+			viewBoxWidth: viewBox.width,
+			viewBoxHeight: viewBox.height,
+		});
+
+		const x = ((event.clientX - rect.left) / rect.width) * viewBox.width;
+		const y = ((event.clientY - rect.top) / rect.height) * viewBox.height;
+
+		console.log("📍 SVG coordinates:", { x, y });
+
+		const normalizedPosition: CourtPosition = {
+			x: x / viewBox.width,
+			y: y / viewBox.height,
+		};
+
+		console.log("✅ Normalized position (0-1):", normalizedPosition);
+
+		onCourtClick(normalizedPosition);
+	};
 
 	return (
 		<div className={courtClasses}>
-			<svg viewBox="0 0 940 500" className={classes.courtSvg} preserveAspectRatio="xMidYMid meet">
-				{/* Contour principal du terrain */}
-				<rect x="2" y="2" width="936" height="496" fill="none" stroke="currentColor" strokeWidth="3" className={classes.courtBorder} />
-
-				{/* Ligne médiane */}
-				<line x1="470" y1="2" x2="470" y2="498" stroke="currentColor" strokeWidth="2" className={classes.centerLine} />
-
-				{/* Cercle central */}
-				<circle cx="470" cy="250" r="60" fill="none" stroke="currentColor" strokeWidth="2" className={classes.centerCircle} />
-
-				{/* Panier gauche */}
-				<g className={classes.leftBasket}>
-					{/* Zone restrictive (raquette) */}
-					<rect x="2" y="170" width="190" height="160" fill="none" stroke="currentColor" strokeWidth="2" />
-					{/* Ligne des lancers francs */}
-					<line x1="192" y1="170" x2="192" y2="330" stroke="currentColor" strokeWidth="2" />
-					{/* Demi-cercle des lancers francs */}
-					<path d="M 192 170 A 80 80 0 0 1 192 330" fill="none" stroke="currentColor" strokeWidth="2" />
-					{/* Arc à 3 points gauche */}
-					<path d="M 2 92 L 2 460 L 90 460 A 100 100 0 0 0 90 40 L 2 40" fill="none" stroke="currentColor" strokeWidth="2" />
-					{/* Panier */}
-					<circle cx="30" cy="250" r="9" fill="none" stroke="currentColor" strokeWidth="2" />
-					{/* Panneau */}
-					<line x1="30" y1="230" x2="30" y2="270" stroke="currentColor" strokeWidth="3" />
-				</g>
-
-				{/* Panier droit (miroir du gauche) */}
-				<g className={classes.rightBasket}>
-					{/* Zone restrictive (raquette) */}
-					<rect x="748" y="170" width="190" height="160" fill="none" stroke="currentColor" strokeWidth="2" />
-					{/* Ligne des lancers francs */}
-					<line x1="748" y1="170" x2="748" y2="330" stroke="currentColor" strokeWidth="2" />
-					{/* Demi-cercle des lancers francs */}
-					<path d="M 748 170 A 80 80 0 0 0 748 330" fill="none" stroke="currentColor" strokeWidth="2" />
-					{/* Arc à 3 points droit */}
-					<path d="M 938 92 L 938 460 L 850 460 A 100 100 0 0 1 850 40 L 938 40" fill="none" stroke="currentColor" strokeWidth="2" />
-					{/* Panier */}
-					<circle cx="910" cy="250" r="9" fill="none" stroke="currentColor" strokeWidth="2" />
-					{/* Panneau */}
-					<line x1="910" y1="230" x2="910" y2="270" stroke="currentColor" strokeWidth="3" />
-				</g>
-			</svg>
+			<div className={classes.verticalCourt}>
+				<VerticalCourt handleCourtClick={handleCourtClick} classes={classes} />
+			</div>
+			<div className={classes.horizontalCourt}>
+				<HorizontalCourt handleCourtClick={handleCourtClick} classes={classes} />
+			</div>
 		</div>
 	);
 }
