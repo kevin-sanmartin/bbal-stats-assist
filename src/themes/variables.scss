@@ -2,30 +2,22 @@
 @use "./colors.scss";
 
 :root {
-	--content-max-width: #{constants.$screen-xl};
+	--content-max-width: #{constants.$screen-lg};
 
-	--screen-xl: #{constants.$screen-xl};
 	--screen-lg: #{constants.$screen-lg};
 	--screen-md: #{constants.$screen-md};
 	--screen-sm: #{constants.$screen-sm};
-	--screen-xs: #{constants.$screen-xs};
 }
 
 body {
 	// Get screen size in real-time
-	@media (max-width: constants.$screen-xs) {
-		--screen-size: #{constants.$screen-xs};
-	}
-	@media (min-width: constants.$screen-xs) and (max-width: constants.$screen-sm) {
+	@media (max-width: constants.$screen-sm) {
 		--screen-size: #{constants.$screen-sm};
 	}
 	@media (min-width: constants.$screen-sm) and (max-width: constants.$screen-md) {
 		--screen-size: #{constants.$screen-md};
 	}
-	@media (min-width: constants.$screen-md) and (max-width: constants.$screen-lg) {
+	@media (min-width: constants.$screen-md) {
 		--screen-size: #{constants.$screen-lg};
-	}
-	@media (min-width: constants.$screen-lg) and (max-width: constants.$screen-xl) {
-		--screen-size: #{constants.$screen-xl};
 	}
 }
