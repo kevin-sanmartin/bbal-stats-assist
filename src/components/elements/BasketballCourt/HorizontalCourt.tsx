@@ -1,9 +1,15 @@
-type HorizontalCourtProps = {
+import { CourtClick } from "./types";
+import { CourtOrientation } from "./enums";
+import { fibaToSvg } from "./utils";
+import CrossMarker from "./components/CrossMarker";
+
+interface HorizontalCourtProps {
 	handleCourtClick: (event: React.MouseEvent<SVGSVGElement>) => void;
 	classes: { [key: string]: string };
-};
+	clicks: CourtClick[];
+}
 
-export default function HorizontalCourt({ handleCourtClick, classes }: HorizontalCourtProps) {
+export default function HorizontalCourt({ handleCourtClick, classes, clicks }: HorizontalCourtProps) {
 	return (
 		<svg viewBox="0 0 940 500" className={classes.courtSvg} preserveAspectRatio="xMidYMid meet" onClick={handleCourtClick}>
 			{/* Contour principal du terrain */}
@@ -46,6 +52,12 @@ export default function HorizontalCourt({ handleCourtClick, classes }: Horizonta
 				{/* Panneau */}
 				<line x1="910" y1="230" x2="910" y2="270" stroke="currentColor" strokeWidth="3" />
 			</g>
+
+			{/* Marqueurs de clics */}
+			{clicks.map((click) => {
+				const svgPos = fibaToSvg(click.position, CourtOrientation.HORIZONTAL);
+				return <CrossMarker key={click.id} id={click.id} x={svgPos.x} y={svgPos.y} />;
+			})}
 		</svg>
 	);
 }

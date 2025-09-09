@@ -1,9 +1,15 @@
-type VerticalCourtProps = {
+import { CourtClick } from "./types";
+import { CourtOrientation } from "./enums";
+import { fibaToSvg } from "./utils";
+import CrossMarker from "./components/CrossMarker";
+
+interface VerticalCourtProps {
 	handleCourtClick: (event: React.MouseEvent<SVGSVGElement>) => void;
 	classes: { [key: string]: string };
-};
+	clicks: CourtClick[];
+}
 
-export default function VerticalCourt({ handleCourtClick, classes }: VerticalCourtProps) {
+export default function VerticalCourt({ handleCourtClick, classes, clicks }: VerticalCourtProps) {
 	return (
 		<svg viewBox="0 0 500 940" className={classes.courtSvg} preserveAspectRatio="xMidYMid meet" onClick={handleCourtClick}>
 			{/* Contour principal du terrain */}
@@ -46,6 +52,12 @@ export default function VerticalCourt({ handleCourtClick, classes }: VerticalCou
 				{/* Panneau */}
 				<line x1="230" y1="910" x2="270" y2="910" stroke="currentColor" strokeWidth="3" />
 			</g>
+
+			{/* Marqueurs de clics */}
+			{clicks.map((click) => {
+				const svgPos = fibaToSvg(click.position, CourtOrientation.VERTICAL);
+				return <CrossMarker key={click.id} id={click.id} x={svgPos.x} y={svgPos.y} />;
+			})}
 		</svg>
 	);
 }

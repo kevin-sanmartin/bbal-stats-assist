@@ -4,13 +4,15 @@ import classes from "./classes.module.scss";
 import PlayerCard from "@/components/elements/PlayerCard";
 import StatCounter from "@/components/elements/StatCounter";
 import GameScoreboard from "@/components/materials/GameScoreboard";
-import BasketballCourt, { CourtPosition } from "@/components/elements/BasketballCourt";
+import BasketballCourt from "@/components/elements/BasketballCourt";
 import Button from "@/components/elements/Button";
 import Card from "@/components/elements/Card";
 import KPICard from "@/components/materials/KPICard";
 import Badge from "@/components/elements/Badge";
 import { useToast } from "@/hooks/useToast";
 import { ToasterContainer } from "@/components/materials/Toaster";
+import { CourtPosition } from "@/components/elements/BasketballCourt/types";
+import { CourtSize, CourtTheme } from "@/components/elements/BasketballCourt/enums";
 
 // Demo players data - moved outside component to avoid recreation on each render
 const demoPlayers = [
@@ -115,7 +117,7 @@ export default function BasketStats() {
 				<div className={classes.section}>
 					<h2>Terrain de basketball</h2>
 					<div className={classes.courtContainer}>
-						<BasketballCourt size="lg" theme="modern" onCourtClick={handleCourtClick} />
+						<BasketballCourt size={CourtSize.LG} theme={CourtTheme.MODERN} onCourtClick={handleCourtClick} />
 					</div>
 				</div>
 
