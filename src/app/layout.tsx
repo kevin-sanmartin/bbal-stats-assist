@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import { cookies } from "next/headers";
 import Header from "@/components/materials/Header";
+import PageTemplate from "@/components/elements/PageTemplate";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ToastProvider } from "@/contexts/ToastContext";
 import { createServerSupabaseClient } from "@/utils/supabase/server";
@@ -41,7 +42,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 				<AuthProvider initialUser={initialUser}>
 					<ToastProvider>
 						<Header />
-						{children}
+						<PageTemplate>{children}</PageTemplate>
 					</ToastProvider>
 				</AuthProvider>
 			</body>

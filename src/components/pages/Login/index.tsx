@@ -44,9 +44,7 @@ export default function Login() {
 	};
 
 	return (
-		<main className={classes.root}>
-			<div className={classes.container}>
-				<Card variant="elevated" padding="lg" className={classes.card}>
+		<Card variant="elevated" padding="lg" className={classes.card}>
 					<div className={classes.header}>
 						<h1 className={classes.title}>Connexion</h1>
 						<p className={classes.subtitle}>Connectez-vous à votre compte</p>
@@ -103,8 +101,6 @@ export default function Login() {
 							</Link>
 						</p>
 					</div>
-				</Card>
-			</div>
-		</main>
+		</Card>
 	);
 }

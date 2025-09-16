@@ -35,12 +35,12 @@ export default function Header() {
 			<div className={classes.container}>
 				<div className={classes.content}>
 					<Link href="/" className={classes.logo}>
-						<h1>Bbal Stats Assist App</h1>
+						<h1>BSA</h1>
 					</Link>
 
 					<nav className={classes.nav}>
 						<Link href="/basketstats" className={classes.navLink}>
-							BasketStats
+							Stats
 						</Link>
 						<Link href="/components" className={classes.navLink}>
 							Composants
@@ -52,9 +52,6 @@ export default function Header() {
 								</Link>
 								<Link href="/auth/register" className={classes.navLink}>
 									Inscription
-								</Link>
-								<Link href="/auth/forgot-password" className={classes.navLink}>
-									Mot de passe oublié
 								</Link>
 							</>
 						)}

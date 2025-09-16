@@ -68,9 +68,7 @@ export default function Register() {
 	};
 
 	return (
-		<main className={classes.root}>
-			<div className={classes.container}>
-				<Card variant="elevated" padding="lg" className={classes.card}>
+		<Card variant="elevated" padding="lg" className={classes.card}>
 					<div className={classes.header}>
 						<h1 className={classes.title}>Créer un compte</h1>
 						<p className={classes.subtitle}>Rejoignez-nous dès aujourd'hui</p>
@@ -180,8 +178,6 @@ export default function Register() {
 							</Link>
 						</p>
 					</div>
-				</Card>
-			</div>
-		</main>
+		</Card>
 	);
 }

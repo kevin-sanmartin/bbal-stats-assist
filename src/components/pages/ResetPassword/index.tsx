@@ -74,25 +74,19 @@ export default function ResetPassword() {
 	// Loading state pendant la vérification du token
 	if (session === null) {
 		return (
-			<main className={classes.root}>
-				<div className={classes.container}>
-					<Card variant="elevated" padding="lg" className={classes.card}>
+			<Card variant="elevated" padding="lg" className={classes.card}>
 						<div className={classes.header}>
 							<h1 className={classes.title}>Vérification...</h1>
 							<p className={classes.subtitle}>Validation de votre lien de réinitialisation</p>
 						</div>
-					</Card>
-				</div>
-			</main>
+			</Card>
 		);
 	}
 
 	// Succès
 	if (success) {
 		return (
-			<main className={classes.root}>
-				<div className={classes.container}>
-					<Card variant="elevated" padding="lg" className={classes.card}>
+			<Card variant="elevated" padding="lg" className={classes.card}>
 						<div className={classes.header}>
 							<div className={classes.successIcon}>
 								<FiCheck />
@@ -106,17 +100,13 @@ export default function ResetPassword() {
 								Aller à l'accueil
 							</Link>
 						</div>
-					</Card>
-				</div>
-			</main>
+			</Card>
 		);
 	}
 
 	// Formulaire de reset
 	return (
-		<main className={classes.root}>
-			<div className={classes.container}>
-				<Card variant="elevated" padding="lg" className={classes.card}>
+		<Card variant="elevated" padding="lg" className={classes.card}>
 					<div className={classes.header}>
 						<h1 className={classes.title}>Nouveau mot de passe</h1>
 						<p className={classes.subtitle}>Choisissez un nouveau mot de passe sécurisé</p>
@@ -167,8 +157,6 @@ export default function ResetPassword() {
 							Retour à la connexion
 						</Link>
 					</div>
-				</Card>
-			</div>
-		</main>
+		</Card>
 	);
 }
