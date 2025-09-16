@@ -63,7 +63,7 @@ const useAuth = (initialUser: User | null) => {
 		const { error } = await supabase.auth.signInWithOAuth({
 			provider: "google",
 			options: {
-				redirectTo: `${window.location.origin}/auth/callback`,
+				redirectTo: `${window.location.origin}/api/auth/callback`,
 			},
 		});
 		if (error) throw error;
@@ -77,7 +77,7 @@ const useAuth = (initialUser: User | null) => {
 
 	const resetPassword = useCallback(async (email: string) => {
 		const { error } = await supabase.auth.resetPasswordForEmail(email, {
-			redirectTo: `${window.location.origin}/reset-password`,
+			redirectTo: `${window.location.origin}/auth/reset-password`,
 		});
 		if (error) throw error;
 	}, []);

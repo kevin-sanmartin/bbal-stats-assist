@@ -175,7 +175,7 @@ export default function Register() {
 					<div className={classes.footer}>
 						<p className={classes.footerText}>
 							Déjà un compte ?{" "}
-							<Link href="/login" className={classes.link}>
+							<Link href="/auth/login" className={classes.link}>
 								Se connecter
 							</Link>
 						</p>

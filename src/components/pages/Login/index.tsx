@@ -81,7 +81,7 @@ export default function Login() {
 						/>
 
 						<div className={classes.actions}>
-							<Link href="/forgot-password" className={classes.forgotPassword}>
+							<Link href="/auth/forgot-password" className={classes.forgotPassword}>
 								Mot de passe oublié ?
 							</Link>
 						</div>
@@ -98,7 +98,7 @@ export default function Login() {
 					<div className={classes.footer}>
 						<p className={classes.footerText}>
 							Pas encore de compte ?&nbsp;
-							<Link href="/register" className={classes.link}>
+							<Link href="/auth/register" className={classes.link}>
 								Créer un compte
 							</Link>
 						</p>

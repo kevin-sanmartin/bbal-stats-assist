@@ -163,7 +163,7 @@ export default function ResetPassword() {
 					</form>
 
 					<div className={classes.footer}>
-						<Link href="/login" className={classes.backLink}>
+						<Link href="/auth/login" className={classes.backLink}>
 							Retour à la connexion
 						</Link>
 					</div>

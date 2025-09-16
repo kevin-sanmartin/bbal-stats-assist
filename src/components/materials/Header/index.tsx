@@ -47,13 +47,13 @@ export default function Header() {
 						</Link>
 						{!loading && !user && (
 							<>
-								<Link href="/login" className={classes.navLink}>
+								<Link href="/auth/login" className={classes.navLink}>
 									Connexion
 								</Link>
-								<Link href="/register" className={classes.navLink}>
+								<Link href="/auth/register" className={classes.navLink}>
 									Inscription
 								</Link>
-								<Link href="/forgot-password" className={classes.navLink}>
+								<Link href="/auth/forgot-password" className={classes.navLink}>
 									Mot de passe oublié
 								</Link>
 							</>

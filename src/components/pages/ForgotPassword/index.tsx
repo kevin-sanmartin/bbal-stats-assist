@@ -59,7 +59,7 @@ export default function ForgotPassword() {
 						</div>
 
 						<div className={classes.actions}>
-							<Link href="/login" className={classes.backLink}>
+							<Link href="/auth/login" className={classes.backLink}>
 								<FiArrowLeft />
 								Retour à la connexion
 							</Link>
@@ -97,7 +97,7 @@ export default function ForgotPassword() {
 					</form>
 
 					<div className={classes.footer}>
-						<Link href="/login" className={classes.backLink}>
+						<Link href="/auth/login" className={classes.backLink}>
 							<FiArrowLeft />
 							Retour à la connexion
 						</Link>
