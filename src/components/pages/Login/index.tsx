@@ -1,26 +1,46 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FiMail, FiLock, FiEye, FiEyeOff } from "react-icons/fi";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Card from "@/components/elements/Card";
 import Input from "@/components/elements/Input";
 import Button from "@/components/elements/Button";
+import { useAuthContext } from "@/contexts/AuthContext";
+import { useToastContext } from "@/contexts/ToastContext";
 import classes from "./classes.module.scss";
+import ConnectWithGoogleButton from "@/components/elements/ConnectWithGoogleButton";
 
 export default function Login() {
 	const [email, setEmail] = useState("");
 	const [password, setPassword] = useState("");
 	const [showPassword, setShowPassword] = useState(false);
 	const [loading, setLoading] = useState(false);
+	const { signIn, user, loading: authLoading } = useAuthContext();
+	const { toast } = useToastContext();
+	const router = useRouter();
+
+	// Redirection si déjà connecté
+	useEffect(() => {
+		if (!authLoading && user) {
+			router.replace("/");
+		}
+	}, [user, authLoading, router]);
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
 		setLoading(true);
 
-		await new Promise((resolve) => setTimeout(resolve, 1500));
-
-		setLoading(false);
+		try {
+			await signIn(email, password);
+			toast.success("Connexion réussie ! Bienvenue.");
+			router.push("/");
+		} catch (error) {
+			toast.error("Erreur lors de la connexion. Veuillez vérifier vos identifiants et réessayer.");
+		} finally {
+			setLoading(false);
+		}
 	};
 
 	return (
@@ -61,19 +81,23 @@ export default function Login() {
 						/>
 
 						<div className={classes.actions}>
-							<Link href="#" className={classes.forgotPassword}>
+							<Link href="/forgot-password" className={classes.forgotPassword}>
 								Mot de passe oublié ?
 							</Link>
 						</div>
 
-						<Button type="submit" variant="primary" size="lg" fullWidth loading={loading}>
-							Se connecter
-						</Button>
+						<div className={classes.buttonContainer}>
+							<Button type="submit" variant="primary" size="lg" fullWidth loading={loading}>
+								Se connecter
+							</Button>
+							<div className={classes.divider} />
+							<ConnectWithGoogleButton />
+						</div>
 					</form>
 
 					<div className={classes.footer}>
 						<p className={classes.footerText}>
-							Pas encore de compte ?{" "}
+							Pas encore de compte ?&nbsp;
 							<Link href="/register" className={classes.link}>
 								Créer un compte
 							</Link>

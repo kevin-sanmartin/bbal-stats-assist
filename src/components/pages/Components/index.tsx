@@ -15,8 +15,7 @@ import Pagination from "@/components/materials/Pagination";
 import Table from "@/components/materials/Table";
 import Tabs from "@/components/materials/Tabs";
 import Breadcrumbs, { BreadcrumbItem } from "@/components/materials/Breadcrumbs";
-import { useToast } from "@/hooks/useToast";
-import { ToasterContainer } from "@/components/materials/Toaster";
+import { useToastContext } from "@/contexts/ToastContext";
 import { MdHome } from "react-icons/md";
 
 // Static data moved outside component to avoid recreation on each render
@@ -52,7 +51,7 @@ const breadcrumbItems: BreadcrumbItem[] = [
 ];
 
 export default function Components() {
-	const { toasts, toast, removeToast } = useToast();
+	const { toast } = useToastContext();
 	const [showModalSmall, setShowModalSmall] = useState(false);
 	const [showModalMedium, setShowModalMedium] = useState(false);
 	const [showModalLarge, setShowModalLarge] = useState(false);
@@ -644,7 +643,6 @@ export default function Components() {
 					<p>This is a demo modal with some content.</p>
 				</Modal>
 
-				<ToasterContainer toasts={toasts} onRemove={removeToast} />
 			</div>
 		</main>
 	);

@@ -3,6 +3,9 @@ import type { Metadata } from "next";
 import { Roboto } from "next/font/google";
 import { cookies } from "next/headers";
 import Header from "@/components/materials/Header";
+import { AuthProvider } from "@/contexts/AuthContext";
+import { ToastProvider } from "@/contexts/ToastContext";
+import { createServerSupabaseClient } from "@/utils/supabase/server";
 
 const roboto = Roboto({
 	subsets: ["latin"],
@@ -20,14 +23,27 @@ async function getServerTheme(): Promise<"light" | "dark"> {
 	return theme === "light" || theme === "dark" ? theme : "light";
 }
 
+async function getInitialUser() {
+	const supabase = await createServerSupabaseClient();
+	const {
+		data: { user },
+	} = await supabase.auth.getUser();
+	return user;
+}
+
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
 	const theme = await getServerTheme();
+	const initialUser = await getInitialUser();
 
 	return (
-		<html lang="en" className={roboto.className} data-theme={theme}>
+		<html lang="en" className={roboto.className} data-theme={theme} data-scroll-behavior="smooth">
 			<body>
-				<Header />
-				{children}
+				<AuthProvider initialUser={initialUser}>
+					<ToastProvider>
+						<Header />
+						{children}
+					</ToastProvider>
+				</AuthProvider>
 			</body>
 		</html>
 	);

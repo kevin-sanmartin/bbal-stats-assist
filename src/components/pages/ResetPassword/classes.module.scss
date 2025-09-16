@@ -30,7 +30,7 @@
 
 .container {
 	width: 100%;
-	max-width: 400px;
+	max-width: 450px;
 	z-index: 1;
 }
 
@@ -40,13 +40,15 @@
 	box-shadow: var(--shadow-xl);
 	display: flex;
 	flex-direction: column;
-	gap: var(--spacing-1);
+	gap: var(--spacing-6);
 }
 
 .header {
 	text-align: center;
 	display: flex;
 	flex-direction: column;
+	align-items: center;
+	gap: var(--spacing-3);
 }
 
 .title {
@@ -62,36 +64,21 @@
 	font-weight: var(--font-weight-normal);
 }
 
+.successIcon {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 24px;
+	height: 24px;
+	background: var(--color-success);
+	color: white;
+	border-radius: 50%;
+}
+
 .form {
 	display: flex;
 	flex-direction: column;
 	gap: var(--spacing-4);
-
-	.buttonContainer {
-		display: flex;
-		flex-direction: column;
-		gap: var(--spacing-4);
-		align-items: center;
-
-		.divider {
-			width: 100%;
-			height: 1px;
-			background: var(--color-border);
-			position: relative;
-
-			&::after {
-				content: "ou";
-				position: absolute;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%, -50%);
-				background: var(--color-surface);
-				padding: 0 var(--spacing-3);
-				font-size: var(--font-size-sm);
-				color: var(--color-text-muted);
-			}
-		}
-	}
 }
 
 .passwordToggle {
@@ -114,20 +101,7 @@
 
 .actions {
 	display: flex;
-	justify-content: flex-end;
-}
-
-.forgotPassword {
-	font-size: var(--font-size-sm);
-	color: var(--color-primary);
-	text-decoration: none;
-	font-weight: var(--font-weight-medium);
-	transition: color var(--transition-fast);
-
-	&:hover {
-		color: var(--color-primary-hover);
-		text-decoration: underline;
-	}
+	justify-content: center;
 }
 
 .footer {
@@ -139,14 +113,10 @@
 	min-height: var(--spacing-12);
 }
 
-.footerText {
-	font-size: var(--font-size-sm);
-	color: var(--color-text-secondary);
-}
-
-.link {
+.backLink {
 	color: var(--color-primary);
 	text-decoration: none;
+	font-size: var(--font-size-sm);
 	font-weight: var(--font-weight-medium);
 	transition: color var(--transition-fast);
 

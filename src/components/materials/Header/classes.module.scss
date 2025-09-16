@@ -62,6 +62,16 @@
 	}
 }
 
+.actions {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-4);
+}
+
+.logoutButton {
+	white-space: nowrap;
+}
+
 @media (max-width: 768px) {
 	.container {
 		padding: var(--spacing-3) var(--spacing-4);

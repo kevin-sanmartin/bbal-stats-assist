@@ -1,12 +1,16 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { FiMail, FiLock, FiEye, FiEyeOff, FiUser } from "react-icons/fi";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 import Card from "@/components/elements/Card";
 import Input from "@/components/elements/Input";
 import Button from "@/components/elements/Button";
 import Checkbox from "@/components/elements/Checkbox";
+import { useAuthContext } from "@/contexts/AuthContext";
+import { useToastContext } from "@/contexts/ToastContext";
+import ConnectWithGoogleButton from "@/components/elements/ConnectWithGoogleButton";
 import classes from "./classes.module.scss";
 
 export default function Register() {
@@ -20,6 +24,17 @@ export default function Register() {
 	const [showPassword, setShowPassword] = useState(false);
 	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 	const [loading, setLoading] = useState(false);
+	const [acceptTerms, setAcceptTerms] = useState(false);
+	const { signUp, user, loading: authLoading } = useAuthContext();
+	const { toast } = useToastContext();
+	const router = useRouter();
+
+	// Redirection si déjà connecté
+	useEffect(() => {
+		if (!authLoading && user) {
+			router.replace("/");
+		}
+	}, [user, authLoading, router]);
 
 	const handleInputChange = (field: string, value: string) => {
 		setFormData((prev) => ({ ...prev, [field]: value }));
@@ -27,11 +42,29 @@ export default function Register() {
 
 	const handleSubmit = async (e: React.FormEvent) => {
 		e.preventDefault();
+
+		// Validation
+		if (formData.password !== formData.confirmPassword) {
+			toast.error("Les mots de passe ne correspondent pas.");
+			return;
+		}
+
+		if (!acceptTerms) {
+			toast.error("Vous devez accepter les conditions d'utilisation.");
+			return;
+		}
+
 		setLoading(true);
 
-		await new Promise((resolve) => setTimeout(resolve, 1500));
-
-		setLoading(false);
+		try {
+			await signUp(formData.email, formData.password);
+			toast.success("Compte créé avec succès !");
+			router.push("/");
+		} catch (error: any) {
+			toast.error(error.message || "Erreur lors de la création du compte. Veuillez réessayer.");
+		} finally {
+			setLoading(false);
+		}
 	};
 
 	return (
@@ -112,6 +145,8 @@ export default function Register() {
 
 						<div className={classes.terms}>
 							<Checkbox
+								checked={acceptTerms}
+								onChange={(e) => setAcceptTerms(e.target.checked)}
 								required
 								label={
 									<span>
@@ -128,9 +163,13 @@ export default function Register() {
 							/>
 						</div>
 
-						<Button type="submit" variant="primary" size="lg" fullWidth loading={loading}>
-							Créer mon compte
-						</Button>
+						<div className={classes.buttonContainer}>
+							<Button type="submit" variant="primary" size="lg" fullWidth loading={loading}>
+								Créer mon compte
+							</Button>
+							<div className={classes.divider} />
+							<ConnectWithGoogleButton />
+						</div>
 					</form>
 
 					<div className={classes.footer}>

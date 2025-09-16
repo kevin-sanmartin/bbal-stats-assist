@@ -9,8 +9,7 @@ import Button from "@/components/elements/Button";
 import Card from "@/components/elements/Card";
 import KPICard from "@/components/materials/KPICard";
 import Badge from "@/components/elements/Badge";
-import { useToast } from "@/hooks/useToast";
-import { ToasterContainer } from "@/components/materials/Toaster";
+import { useToastContext } from "@/contexts/ToastContext";
 import { CourtPosition } from "@/components/elements/BasketballCourt/types";
 import { CourtSize, CourtTheme } from "@/components/elements/BasketballCourt/enums";
 
@@ -54,7 +53,7 @@ const demoPlayers = [
 ];
 
 export default function BasketStats() {
-	const { toasts, toast, removeToast } = useToast();
+	const { toast } = useToastContext();
 
 	const [selectedPlayer, setSelectedPlayer] = useState<number | null>(null);
 	const [playerStats, setPlayerStats] = useState<Record<number, any>>({
@@ -293,7 +292,6 @@ export default function BasketStats() {
 					</div>
 				</div>
 
-				<ToasterContainer toasts={toasts} onRemove={removeToast} />
 			</div>
 		</main>
 	);
