@@ -18,7 +18,7 @@ export default function ResetPassword() {
 	const [showPassword, setShowPassword] = useState(false);
 	const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 	const [loading, setLoading] = useState(false);
-	const [success, setSuccess] = useState(true);
+	const [success, setSuccess] = useState(false);
 	const [session, setSession] = useState<Session | null>(null);
 
 	const { updatePassword } = useAuthContext();
@@ -75,10 +75,10 @@ export default function ResetPassword() {
 	if (session === null) {
 		return (
 			<Card variant="elevated" padding="lg" className={classes.card}>
-						<div className={classes.header}>
-							<h1 className={classes.title}>Vérification...</h1>
-							<p className={classes.subtitle}>Validation de votre lien de réinitialisation</p>
-						</div>
+				<div className={classes.header}>
+					<h1 className={classes.title}>Vérification...</h1>
+					<p className={classes.subtitle}>Validation de votre lien de réinitialisation</p>
+				</div>
 			</Card>
 		);
 	}
@@ -87,19 +87,19 @@ export default function ResetPassword() {
 	if (success) {
 		return (
 			<Card variant="elevated" padding="lg" className={classes.card}>
-						<div className={classes.header}>
-							<div className={classes.successIcon}>
-								<FiCheck />
-							</div>
-							<h1 className={classes.title}>Mot de passe mis à jour !</h1>
-							<p className={classes.subtitle}>Vous allez être redirigé automatiquement...</p>
-						</div>
+				<div className={classes.header}>
+					<div className={classes.successIcon}>
+						<FiCheck />
+					</div>
+					<h1 className={classes.title}>Mot de passe mis à jour !</h1>
+					<p className={classes.subtitle}>Vous allez être redirigé automatiquement...</p>
+				</div>
 
-						<div className={classes.actions}>
-							<Link href="/" className={classes.backLink}>
-								Aller à l'accueil
-							</Link>
-						</div>
+				<div className={classes.actions}>
+					<Link href="/" className={classes.backLink}>
+						Aller à l'accueil
+					</Link>
+				</div>
 			</Card>
 		);
 	}
@@ -107,56 +107,56 @@ export default function ResetPassword() {
 	// Formulaire de reset
 	return (
 		<Card variant="elevated" padding="lg" className={classes.card}>
-					<div className={classes.header}>
-						<h1 className={classes.title}>Nouveau mot de passe</h1>
-						<p className={classes.subtitle}>Choisissez un nouveau mot de passe sécurisé</p>
-					</div>
+			<div className={classes.header}>
+				<h1 className={classes.title}>Nouveau mot de passe</h1>
+				<p className={classes.subtitle}>Choisissez un nouveau mot de passe sécurisé</p>
+			</div>
 
-					<form onSubmit={handleSubmit} className={classes.form}>
-						<Input
-							type={showPassword ? "text" : "password"}
-							placeholder="••••••••"
-							label="Nouveau mot de passe"
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-							leftIcon={<FiLock />}
-							rightIcon={
-								<button type="button" className={classes.passwordToggle} onClick={() => setShowPassword(!showPassword)}>
-									{showPassword ? <FiEyeOff /> : <FiEye />}
-								</button>
-							}
-							fullWidth
-							required
-							minLength={6}
-						/>
+			<form onSubmit={handleSubmit} className={classes.form}>
+				<Input
+					type={showPassword ? "text" : "password"}
+					placeholder="••••••••"
+					label="Nouveau mot de passe"
+					value={password}
+					onChange={(e) => setPassword(e.target.value)}
+					leftIcon={<FiLock />}
+					rightIcon={
+						<button type="button" className={classes.passwordToggle} onClick={() => setShowPassword(!showPassword)}>
+							{showPassword ? <FiEyeOff /> : <FiEye />}
+						</button>
+					}
+					fullWidth
+					required
+					minLength={6}
+				/>
 
-						<Input
-							type={showConfirmPassword ? "text" : "password"}
-							placeholder="••••••••"
-							label="Confirmer le nouveau mot de passe"
-							value={confirmPassword}
-							onChange={(e) => setConfirmPassword(e.target.value)}
-							leftIcon={<FiLock />}
-							rightIcon={
-								<button type="button" className={classes.passwordToggle} onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
-									{showConfirmPassword ? <FiEyeOff /> : <FiEye />}
-								</button>
-							}
-							fullWidth
-							required
-							minLength={6}
-						/>
+				<Input
+					type={showConfirmPassword ? "text" : "password"}
+					placeholder="••••••••"
+					label="Confirmer le nouveau mot de passe"
+					value={confirmPassword}
+					onChange={(e) => setConfirmPassword(e.target.value)}
+					leftIcon={<FiLock />}
+					rightIcon={
+						<button type="button" className={classes.passwordToggle} onClick={() => setShowConfirmPassword(!showConfirmPassword)}>
+							{showConfirmPassword ? <FiEyeOff /> : <FiEye />}
+						</button>
+					}
+					fullWidth
+					required
+					minLength={6}
+				/>
 
-						<Button type="submit" variant="primary" size="lg" fullWidth loading={loading}>
-							Mettre à jour le mot de passe
-						</Button>
-					</form>
+				<Button type="submit" variant="primary" size="lg" fullWidth loading={loading}>
+					Mettre à jour le mot de passe
+				</Button>
+			</form>
 
-					<div className={classes.footer}>
-						<Link href="/auth/login" className={classes.backLink}>
-							Retour à la connexion
-						</Link>
-					</div>
+			<div className={classes.footer}>
+				<Link href="/auth/login" className={classes.backLink}>
+					Retour à la connexion
+				</Link>
+			</div>
 		</Card>
 	);
 }
