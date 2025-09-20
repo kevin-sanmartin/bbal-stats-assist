@@ -44,58 +44,58 @@ export default function ForgotPassword() {
 	if (emailSent) {
 		return (
 			<Card variant="elevated" padding="lg" className={classes.card}>
-						<div className={classes.header}>
-							<h1 className={classes.title}>Email envoyé !</h1>
-							<p className={classes.subtitle}>
-								Nous avons envoyé un lien de réinitialisation à <strong>{email}</strong>
-							</p>
-						</div>
+				<div className={classes.header}>
+					<h1 className={classes.title}>Email envoyé !</h1>
+					<p className={classes.subtitle}>
+						Nous avons envoyé un lien de réinitialisation à <strong>{email}</strong>
+					</p>
+				</div>
 
-						<div className={classes.instructions}>
-							<p>Vérifiez votre boîte mail et cliquez sur le lien pour réinitialiser votre mot de passe.</p>
-							<p className={classes.note}>Le lien expirera dans 1 heure.</p>
-						</div>
+				<div className={classes.instructions}>
+					<p>Vérifiez votre boîte mail et cliquez sur le lien pour réinitialiser votre mot de passe.</p>
+					<p className={classes.note}>Le lien expirera dans 1 heure.</p>
+				</div>
 
-						<div className={classes.actions}>
-							<Link href="/auth/login" className={classes.backLink}>
-								<FiArrowLeft />
-								Retour à la connexion
-							</Link>
-						</div>
+				<div className={classes.actions}>
+					<Link href="/auth/login" className={classes.backLink}>
+						<FiArrowLeft />
+						Retour à la connexion
+					</Link>
+				</div>
 			</Card>
 		);
 	}
 
 	return (
 		<Card variant="elevated" padding="lg" className={classes.card}>
-					<div className={classes.header}>
-						<h1 className={classes.title}>Mot de passe oublié</h1>
-						<p className={classes.subtitle}>Entrez votre email pour recevoir un lien de réinitialisation</p>
-					</div>
+			<div className={classes.header}>
+				<h1 className={classes.title}>Mot de passe oublié</h1>
+				<p className={classes.subtitle}>Entrez votre email pour recevoir un lien de réinitialisation</p>
+			</div>
 
-					<form onSubmit={handleSubmit} className={classes.form}>
-						<Input
-							type="email"
-							placeholder="votre@email.com"
-							label="Adresse email"
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-							leftIcon={<FiMail />}
-							fullWidth
-							required
-						/>
+			<form onSubmit={handleSubmit} className={classes.form}>
+				<Input
+					type="email"
+					placeholder="votre@email.com"
+					label="Adresse email"
+					value={email}
+					onChange={(e) => setEmail(e.target.value)}
+					leftIcon={<FiMail />}
+					fullWidth
+					required
+				/>
 
-						<Button type="submit" variant="primary" size="lg" fullWidth loading={loading}>
-							Envoyer le lien de réinitialisation
-						</Button>
-					</form>
+				<Button type="submit" variant="primary" size="lg" fullWidth loading={loading}>
+					Envoyer le lien de réinitialisation
+				</Button>
+			</form>
 
-					<div className={classes.footer}>
-						<Link href="/auth/login" className={classes.backLink}>
-							<FiArrowLeft />
-							Retour à la connexion
-						</Link>
-					</div>
+			<div className={classes.footer}>
+				<Link href="/auth/login" className={classes.backLink}>
+					<FiArrowLeft />
+					Retour à la connexion
+				</Link>
+			</div>
 		</Card>
 	);
 }

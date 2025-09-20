@@ -45,62 +45,53 @@ export default function Login() {
 
 	return (
 		<Card variant="elevated" padding="lg" className={classes.card}>
-					<div className={classes.header}>
-						<h1 className={classes.title}>Connexion</h1>
-						<p className={classes.subtitle}>Connectez-vous à votre compte</p>
-					</div>
+			<div className={classes.header}>
+				<h1 className={classes.title}>Connexion</h1>
+				<p className={classes.subtitle}>Connectez-vous à votre compte</p>
+			</div>
 
-					<form onSubmit={handleSubmit} className={classes.form}>
-						<Input
-							type="email"
-							placeholder="votre@email.com"
-							label="Email"
-							value={email}
-							onChange={(e) => setEmail(e.target.value)}
-							leftIcon={<FiMail />}
-							fullWidth
-							required
-						/>
+			<form onSubmit={handleSubmit} className={classes.form}>
+				<Input type="email" placeholder="votre@email.com" label="Email" value={email} onChange={(e) => setEmail(e.target.value)} leftIcon={<FiMail />} fullWidth required />
 
-						<Input
-							type={showPassword ? "text" : "password"}
-							placeholder="••••••••"
-							label="Mot de passe"
-							value={password}
-							onChange={(e) => setPassword(e.target.value)}
-							leftIcon={<FiLock />}
-							rightIcon={
-								<button type="button" className={classes.passwordToggle} onClick={() => setShowPassword(!showPassword)}>
-									{showPassword ? <FiEyeOff /> : <FiEye />}
-								</button>
-							}
-							fullWidth
-							required
-						/>
+				<Input
+					type={showPassword ? "text" : "password"}
+					placeholder="••••••••"
+					label="Mot de passe"
+					value={password}
+					onChange={(e) => setPassword(e.target.value)}
+					leftIcon={<FiLock />}
+					rightIcon={
+						<button type="button" className={classes.passwordToggle} onClick={() => setShowPassword(!showPassword)}>
+							{showPassword ? <FiEyeOff /> : <FiEye />}
+						</button>
+					}
+					fullWidth
+					required
+				/>
 
-						<div className={classes.actions}>
-							<Link href="/auth/forgot-password" className={classes.forgotPassword}>
-								Mot de passe oublié ?
-							</Link>
-						</div>
+				<div className={classes.actions}>
+					<Link href="/auth/forgot-password" className={classes.forgotPassword}>
+						Mot de passe oublié ?
+					</Link>
+				</div>
 
-						<div className={classes.buttonContainer}>
-							<Button type="submit" variant="primary" size="lg" fullWidth loading={loading}>
-								Se connecter
-							</Button>
-							<div className={classes.divider} />
-							<ConnectWithGoogleButton />
-						</div>
-					</form>
+				<div className={classes.buttonContainer}>
+					<Button type="submit" variant="primary" size="lg" fullWidth loading={loading}>
+						Se connecter
+					</Button>
+					<div className={classes.divider} />
+					<ConnectWithGoogleButton />
+				</div>
+			</form>
 
-					<div className={classes.footer}>
-						<p className={classes.footerText}>
-							Pas encore de compte ?&nbsp;
-							<Link href="/auth/register" className={classes.link}>
-								Créer un compte
-							</Link>
-						</p>
-					</div>
+			<div className={classes.footer}>
+				<p className={classes.footerText}>
+					Pas encore de compte ?&nbsp;
+					<Link href="/auth/register" className={classes.link}>
+						Créer un compte
+					</Link>
+				</p>
+			</div>
 		</Card>
 	);
 }
