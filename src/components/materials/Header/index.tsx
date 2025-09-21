@@ -45,6 +45,11 @@ export default function Header() {
 						<Link href="/components" className={classes.navLink}>
 							Composants
 						</Link>
+						{!loading && user && (
+							<Link href="/teams" className={classes.navLink}>
+								Équipes
+							</Link>
+						)}
 						{!loading && !user && (
 							<>
 								<Link href="/auth/login" className={classes.navLink}>
@@ -60,14 +65,7 @@ export default function Header() {
 
 				<div className={classes.actions}>
 					{!loading && user && (
-						<Button
-							variant="secondary"
-							size="sm"
-							onClick={handleLogout}
-							loading={logoutLoading}
-							leftIcon={<FiLogOut />}
-							className={classes.logoutButton}
-						>
+						<Button variant="secondary" size="sm" onClick={handleLogout} loading={logoutLoading} leftIcon={<FiLogOut />} className={classes.logoutButton}>
 							Se déconnecter
 						</Button>
 					)}
