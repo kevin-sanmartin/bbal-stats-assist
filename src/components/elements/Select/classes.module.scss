@@ -1,0 +1,35 @@
+.selectContainer {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-2);
+}
+
+.selectContainer.fullWidth {
+	width: 100%;
+}
+
+.selectLabel {
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-medium);
+	color: var(--color-text-primary);
+}
+
+.select {
+	padding: var(--spacing-2);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-md);
+	font-size: var(--font-size-base);
+	background: var(--color-surface);
+	color: var(--color-text-primary);
+	transition: var(--transition-fast);
+
+	&:focus {
+		outline: none;
+		border-color: var(--color-border-focus);
+		box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+	}
+
+	&:hover {
+		border-color: var(--color-border-hover);
+	}
+}
