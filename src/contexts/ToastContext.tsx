@@ -1,5 +1,5 @@
 "use client";
-import { createContext, useContext } from "react";
+import { createContext, PropsWithChildren, useContext } from "react";
 import { useToast } from "@/hooks/useToast";
 import { ToasterContainer } from "@/components/materials/Toaster";
 
@@ -15,11 +15,7 @@ type ToastContextType = {
 
 const ToastContext = createContext<ToastContextType | undefined>(undefined);
 
-interface ToastProviderProps {
-	children: React.ReactNode;
-}
-
-export function ToastProvider({ children }: ToastProviderProps) {
+export function ToastProvider({ children }: PropsWithChildren) {
 	const { toasts, toast, removeToast } = useToast();
 
 	return (
