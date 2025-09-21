@@ -4,10 +4,12 @@
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
-	background: linear-gradient(135deg, var(--color-gray-50) 0%, var(--color-gray-100) 100%);
 	position: relative;
 	overflow: hidden;
 	padding: var(--spacing-4);
+	width: 100%;
+	max-width: var(--content-max-width);
+	margin: 0 auto;
 
 	@media (max-width: 480px) {
 		padding: var(--spacing-3);

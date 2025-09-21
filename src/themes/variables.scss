@@ -2,7 +2,7 @@
 @use "./colors.scss";
 
 :root {
-	--content-max-width: #{constants.$screen-lg};
+	--content-max-width: 1200px;
 
 	--screen-lg: #{constants.$screen-lg};
 	--screen-md: #{constants.$screen-md};
