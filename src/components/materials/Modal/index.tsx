@@ -58,7 +58,7 @@ export default function Modal({ isOpen, onClose, title, children, footer, size =
 								{title}
 							</h2>
 
-							<button className={classes.closeButton} onClick={onClose} aria-label="Close modal">
+							<button type="button" className={classes.closeButton} onClick={onClose} aria-label="Close modal">
 								×
 							</button>
 						</div>

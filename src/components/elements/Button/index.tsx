@@ -14,7 +14,19 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	rightIcon?: ReactNode;
 }
 
-export default function Button({ children, variant = "primary", size = "md", loading = false, fullWidth = false, leftIcon, rightIcon, className, disabled, ...props }: ButtonProps) {
+export default function Button({
+	children,
+	type = "button",
+	variant = "primary",
+	size = "md",
+	loading = false,
+	fullWidth = false,
+	leftIcon,
+	rightIcon,
+	className,
+	disabled,
+	...props
+}: ButtonProps) {
 	const buttonClasses = classNames(
 		classes.button,
 		classes[`variant-${variant}`],
@@ -24,7 +36,7 @@ export default function Button({ children, variant = "primary", size = "md", loa
 	);
 
 	return (
-		<button className={buttonClasses} disabled={disabled || loading} {...props}>
+		<button type={type} className={buttonClasses} disabled={disabled || loading} {...props}>
 			{loading && <span className={classes.spinner} />}
 			<span className={classes.content}>
 				{leftIcon && <span className={classes.leftIcon}>{leftIcon}</span>}
