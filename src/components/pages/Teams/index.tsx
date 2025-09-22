@@ -122,13 +122,7 @@ export default function Teams(props: IProps) {
 
 			<TeamModal isOpen={isCreateModalOpen} onClose={closeModals} onSubmit={handleCreateTeam} title="Créer une nouvelle équipe" />
 			<TeamModal isOpen={isEditModalOpen} onClose={closeModals} onSubmit={handleEditTeam} title="Modifier l'équipe" initialData={selectedTeam ?? undefined} />
-			<DeleteConfirmModal
-				isOpen={isDeleteModalOpen}
-				onClose={closeModals}
-				onConfirm={handleDeleteTeam}
-				teamName={teamToDelete?.name ?? ""}
-				loading={deleteLoading}
-			/>
+			<DeleteConfirmModal isOpen={isDeleteModalOpen} onClose={closeModals} onConfirm={handleDeleteTeam} teamName={teamToDelete?.name ?? ""} loading={deleteLoading} />
 		</div>
 	);
 }

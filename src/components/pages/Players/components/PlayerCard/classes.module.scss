@@ -1,4 +1,4 @@
-.teamCard {
+.playerCard {
 	background: var(--color-surface);
 	border: 1px solid var(--color-border);
 	border-radius: var(--radius-xl);
@@ -29,20 +29,35 @@
 	}
 }
 
-.teamInfo {
+.playerHeader {
 	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-3);
+	align-items: center;
+	gap: var(--spacing-5);
 	flex: 1;
 }
 
-.teamDetails {
+.playerNumber {
+	font-size: var(--font-size-3xl);
+	font-weight: var(--font-weight-bold);
+	color: var(--color-primary);
+	background: var(--color-primary-light);
+	border-radius: var(--radius-full);
+	width: 60px;
+	height: 60px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	flex-shrink: 0;
+}
+
+.playerDetails {
 	display: flex;
 	flex-direction: column;
 	gap: var(--spacing-2);
+	flex: 1;
 }
 
-.teamName {
+.playerName {
 	font-size: var(--font-size-xl);
 	font-weight: var(--font-weight-semibold);
 	color: var(--color-text-primary);
@@ -50,36 +65,14 @@
 	letter-spacing: -0.025em;
 }
 
-.teamCategory {
-	font-size: var(--font-size-xs);
-	background: var(--color-primary-light);
-	color: var(--color-primary);
-	padding: var(--spacing-2) var(--spacing-3);
-	border-radius: var(--radius-full);
-	font-weight: var(--font-weight-medium);
-	display: inline-block;
-	width: fit-content;
-	text-transform: uppercase;
-	letter-spacing: 0.05em;
-	transition: all var(--transition-fast);
-
-	&:hover {
-		background: var(--color-primary);
-		color: var(--color-text-inverse);
-	}
-
-	@media (max-width: 640px) {
-		align-self: center;
-	}
+.playerPosition {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2);
 }
 
-.teamActions {
+.playerActions {
 	display: flex;
-	gap: var(--spacing-2);
-	flex-wrap: wrap;
-
-	@media (max-width: 480px) {
-		flex-direction: column;
-		gap: var(--spacing-2);
-	}
+	gap: var(--spacing-3);
+	justify-content: flex-end;
 }
