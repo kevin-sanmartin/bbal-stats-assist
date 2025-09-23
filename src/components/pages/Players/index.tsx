@@ -8,7 +8,7 @@ import { EPlayerPosition } from "@/enums/player";
 import { PlayersClientService } from "@/services/supabase/players/ClientService";
 import { TeamsClientService } from "@/services/supabase/teams/ClientService";
 import { useToastContext } from "@/contexts/ToastContext";
-import PlayerCard from "./components/PlayerCard";
+import PlayerTable from "./components/PlayerTable";
 import PlayerModal from "./components/PlayerModal";
 import DeletePlayerConfirmModal from "./components/DeletePlayerConfirmModal";
 import EmptyPlayersState from "./components/EmptyPlayersState";
@@ -39,7 +39,7 @@ export default function Players({ teamId }: PlayersProps) {
 		try {
 			const [teamPlayers, teamData] = await Promise.all([
 				playersService.getTeamPlayers(teamId),
-				teamsService.getUserTeams().then(teams => teams.find(t => t.id === teamId))
+				teamsService.getUserTeams().then((teams) => teams.find((t) => t.id === teamId)),
 			]);
 
 			if (!teamData) {
@@ -146,12 +146,9 @@ export default function Players({ teamId }: PlayersProps) {
 		<div className={classes.root}>
 			<div className={classes.header}>
 				<div className={classes.headerContent}>
-					<Button variant="outline" leftIcon="←" onClick={() => router.push("/teams")} className={classes.backButton}>
-						Retour aux équipes
-					</Button>
 					<div className={classes.teamInfo}>
-						<h1 className={classes.title}>Joueurs</h1>
-						<span className={classes.teamName}>{team?.name}</span>
+						<h1 className={classes.title}>Gestion des joueurs</h1>
+						<span className={classes.subtitle}>Gérez votre effectif et les informations des joueurs</span>
 					</div>
 				</div>
 				<Button onClick={() => setIsPlayerModalOpen(true)} leftIcon="+">
@@ -167,46 +164,34 @@ export default function Players({ teamId }: PlayersProps) {
 					</div>
 				)}
 
-				{!loading && players.length === 0 && (
-					<EmptyPlayersState onAddPlayer={() => setIsPlayerModalOpen(true)} />
-				)}
+				{!loading && players.length === 0 && <EmptyPlayersState onAddPlayer={() => setIsPlayerModalOpen(true)} />}
 
 				{!loading && players.length > 0 && (
 					<>
 						<div className={classes.playersCount}>
-							{players.length} joueur{players.length > 1 ? 's' : ''} dans l'équipe
+							{players.length} joueur{players.length > 1 ? "s" : ""} dans l'équipe {team?.name}
 						</div>
-						<div className={classes.playersList}>
-							{players.map((player) => (
-								<PlayerCard
-									key={player.id}
-									player={player}
-									onEdit={() => openEditModal(player)}
-									onDelete={() => openDeleteModal(player)}
-								/>
-							))}
-						</div>
+						<PlayerTable players={players} onEdit={openEditModal} onDelete={openDeleteModal} />
 					</>
 				)}
 			</div>
 
-			<PlayerModal
-				isOpen={isPlayerModalOpen}
-				onClose={closeModals}
-				onSubmit={handleCreatePlayer}
-				title="Ajouter un joueur"
-			/>
+			<PlayerModal isOpen={isPlayerModalOpen} onClose={closeModals} onSubmit={handleCreatePlayer} title="Ajouter un joueur" />
 
 			<PlayerModal
 				isOpen={isEditPlayerModalOpen}
 				onClose={closeModals}
 				onSubmit={handleEditPlayer}
 				title="Modifier le joueur"
-				initialData={selectedPlayer ? {
-					name: selectedPlayer.name,
-					number: selectedPlayer.number,
-					position: selectedPlayer.position,
-				} : undefined}
+				initialData={
+					selectedPlayer
+						? {
+								name: selectedPlayer.name,
+								number: selectedPlayer.number,
+								position: selectedPlayer.position,
+						  }
+						: undefined
+				}
 			/>
 
 			<DeletePlayerConfirmModal

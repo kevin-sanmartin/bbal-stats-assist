@@ -3,7 +3,7 @@ import { useState } from "react";
 import Button from "@/components/elements/Button";
 import { TCreateTeamInput, TTeam } from "@/types/team";
 import { ETeamCategory } from "@/enums/team";
-import TeamCard from "./components/TeamCard";
+import TeamTable from "./components/TeamTable";
 import TeamModal from "./components/TeamModal";
 import DeleteConfirmModal from "./components/DeleteConfirmModal";
 import EmptyState from "./components/EmptyState";
@@ -105,20 +105,28 @@ export default function Teams(props: IProps) {
 	return (
 		<div className={classes.root}>
 			<div className={classes.header}>
-				<h1 className={classes.title}>Gestion des équipes</h1>
+				<div className={classes.headerContent}>
+					<div className={classes.teamInfo}>
+						<h1 className={classes.title}>Gestion des équipes</h1>
+						<span className={classes.subtitle}>Créez et gérez vos équipes sportives</span>
+					</div>
+				</div>
 				<Button onClick={() => setIsCreateModalOpen(true)} leftIcon="+">
 					Nouvelle équipe
 				</Button>
 			</div>
 
-			{!hasTeams && <EmptyState onCreateTeam={() => setIsCreateModalOpen(true)} />}
-			{hasTeams && (
-				<div className={classes.teamsList}>
-					{teams.map((team) => (
-						<TeamCard key={team.id} team={team} onEdit={() => openEditModal(team)} onDelete={() => openDeleteModal(team)} />
-					))}
-				</div>
-			)}
+			<div className={classes.content}>
+				{!hasTeams && <EmptyState onCreateTeam={() => setIsCreateModalOpen(true)} />}
+				{hasTeams && (
+					<>
+						<div className={classes.teamsCount}>
+							{teams.length} équipe{teams.length > 1 ? "s" : ""} créée{teams.length > 1 ? "s" : ""}
+						</div>
+						<TeamTable teams={teams} onEdit={openEditModal} onDelete={openDeleteModal} />
+					</>
+				)}
+			</div>
 
 			<TeamModal isOpen={isCreateModalOpen} onClose={closeModals} onSubmit={handleCreateTeam} title="Créer une nouvelle équipe" />
 			<TeamModal isOpen={isEditModalOpen} onClose={closeModals} onSubmit={handleEditTeam} title="Modifier l'équipe" initialData={selectedTeam ?? undefined} />

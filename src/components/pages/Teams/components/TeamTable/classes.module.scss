@@ -1,0 +1,19 @@
+@use "themes/constants.module.scss";
+
+.teamName {
+	font-weight: var(--font-weight-medium);
+	color: var(--color-text-primary);
+	font-size: var(--font-size-base);
+}
+
+.actions {
+	display: flex;
+	gap: var(--spacing-2);
+	align-items: center;
+
+	// Responsive design
+	@media (max-width: constants.$screen-md) {
+		flex-direction: column;
+		gap: var(--spacing-1);
+	}
+}
