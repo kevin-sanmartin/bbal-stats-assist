@@ -40,7 +40,7 @@ export default function Matches({ initialTeams }: MatchesProps) {
 			const teamCompetitions = await competitionsService.getCompetitionsByTeamId(teamId);
 			setCompetitions(teamCompetitions);
 		} catch (error) {
-			console.error('Erreur lors du chargement des compétitions:', error);
+			console.error("Erreur lors du chargement des compétitions:", error);
 			setCompetitions([]);
 		} finally {
 			setIsLoadingCompetitions(false);
@@ -55,13 +55,10 @@ export default function Matches({ initialTeams }: MatchesProps) {
 	};
 
 	const handleMatchTypeSelect = (matchType: EMatchType) => {
-		const finalFlow = { ...matchFlow, matchType };
-
 		// Redirection vers la page de match appropriée
 		const queryParams = new URLSearchParams({
-			team: finalFlow.selectedTeam!,
-			type: matchType,
-			...(finalFlow.selectedCompetition && { competition: finalFlow.selectedCompetition }),
+			team: matchFlow.selectedTeam!,
+			...(matchFlow.selectedCompetition && { competition: matchFlow.selectedCompetition }),
 		});
 
 		if (matchType === EMatchType.LIVE) {
