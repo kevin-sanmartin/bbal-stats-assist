@@ -1,7 +1,8 @@
 export enum CourtSize {
 	SM = 'sm',
 	MD = 'md',
-	LG = 'lg'
+	LG = 'lg',
+	FULLWIDTH = 'fullwidth'
 }
 
 export enum CourtTheme {

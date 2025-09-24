@@ -89,6 +89,12 @@
 	padding: var(--spacing-4);
 }
 
+.size-fullwidth {
+	max-width: 100%;
+	width: 100%;
+	padding: var(--spacing-4);
+}
+
 // === RESPONSIVE ===
 
 // Par défaut: Terrain horizontal (au-dessus de sm)
