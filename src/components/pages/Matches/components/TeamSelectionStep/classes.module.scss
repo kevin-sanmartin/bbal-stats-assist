@@ -1,0 +1,56 @@
+@use "themes/constants.module.scss";
+
+.root {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-4);
+}
+
+.loading {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: var(--spacing-8);
+	color: var(--color-text-secondary);
+}
+
+
+.teamsList {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-3);
+}
+
+.teamCard {
+	&.selected {
+		border-color: var(--color-primary) !important;
+		background: var(--color-primary-50) !important;
+	}
+}
+
+.teamInfo {
+	width: 100%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--spacing-3);
+}
+
+.teamName {
+	font-size: var(--font-size-base);
+	font-weight: var(--font-weight-medium);
+	color: var(--color-text-primary);
+	margin: 0;
+}
+
+.actions {
+	display: flex;
+	justify-content: center;
+	padding-top: var(--spacing-4);
+}
+
+@media (max-width: constants.$screen-sm) {
+	.teamContent {
+		padding: var(--spacing-3);
+	}
+}

@@ -46,9 +46,14 @@ export default function Header() {
 							Composants
 						</Link>
 						{!loading && user && (
-							<Link href="/teams" className={classes.navLink}>
-								Équipes
-							</Link>
+							<>
+								<Link href="/teams" className={classes.navLink}>
+									Équipes
+								</Link>
+								<Link href="/matches" className={classes.navLink}>
+									Matches
+								</Link>
+							</>
 						)}
 						{!loading && !user && (
 							<>

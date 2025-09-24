@@ -1,0 +1,60 @@
+@use "themes/constants.module.scss";
+
+.root {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-4);
+}
+
+.typesList {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-3);
+}
+
+.typeCard {
+	&.selected {
+		border-color: var(--color-primary) !important;
+		background: var(--color-primary-50) !important;
+	}
+}
+
+.typeHeader {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.typeTitle {
+	font-size: var(--font-size-base);
+	font-weight: var(--font-weight-medium);
+	color: var(--color-text-primary);
+	margin: 0;
+}
+
+.typeIcon {
+	font-size: var(--font-size-lg);
+}
+
+.typeDescription {
+	font-size: var(--font-size-sm);
+	color: var(--color-text-secondary);
+	margin: 0;
+	line-height: 1.4;
+}
+
+.actions {
+	display: flex;
+	justify-content: center;
+	padding-top: var(--spacing-4);
+}
+
+@media (max-width: constants.$screen-sm) {
+	.typesList {
+		grid-template-columns: 1fr;
+	}
+
+	.typeContent {
+		padding: var(--spacing-3);
+	}
+}

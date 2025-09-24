@@ -1,12 +1,11 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Button from "@/components/elements/Button";
 import { TPlayer, TCreatePlayerInput } from "@/types/player";
 import { EPlayerPosition } from "@/enums/player";
 import { PlayersClientService } from "@/services/supabase/players/ClientService";
-import { TeamsClientService } from "@/services/supabase/teams/ClientService";
 import { useToastContext } from "@/contexts/ToastContext";
 import PlayerTable from "./components/PlayerTable";
 import PlayerModal from "./components/PlayerModal";
@@ -16,51 +15,21 @@ import classes from "./classes.module.scss";
 
 interface PlayersProps {
 	teamId: string;
+	initialPlayers: TPlayer[];
+	teamName: string;
 }
 
 const playersService = PlayersClientService.getInstance();
-const teamsService = TeamsClientService.getInstance();
 
-export default function Players({ teamId }: PlayersProps) {
-	const router = useRouter();
+export default function Players({ teamId, initialPlayers, teamName }: PlayersProps) {
 	const { toast } = useToastContext();
-	const [players, setPlayers] = useState<TPlayer[]>([]);
-	const [team, setTeam] = useState<{ name: string } | null>(null);
-	const [loading, setLoading] = useState(true);
+	const [players, setPlayers] = useState<TPlayer[]>(initialPlayers);
 	const [isPlayerModalOpen, setIsPlayerModalOpen] = useState(false);
 	const [isEditPlayerModalOpen, setIsEditPlayerModalOpen] = useState(false);
 	const [isDeletePlayerModalOpen, setIsDeletePlayerModalOpen] = useState(false);
 	const [selectedPlayer, setSelectedPlayer] = useState<TPlayer | null>(null);
 	const [playerToDelete, setPlayerToDelete] = useState<TPlayer | null>(null);
 	const [deleteLoading, setDeleteLoading] = useState(false);
-
-	const loadData = async () => {
-		setLoading(true);
-		try {
-			const [teamPlayers, teamData] = await Promise.all([
-				playersService.getTeamPlayers(teamId),
-				teamsService.getUserTeams().then((teams) => teams.find((t) => t.id === teamId)),
-			]);
-
-			if (!teamData) {
-				router.push("/teams");
-				return;
-			}
-
-			setPlayers(teamPlayers);
-			setTeam({ name: teamData.name });
-		} catch (error) {
-			console.error("Erreur lors du chargement des données:", error);
-			toast.error("Impossible de charger les données");
-			router.push("/teams");
-		} finally {
-			setLoading(false);
-		}
-	};
-
-	useEffect(() => {
-		loadData();
-	}, [teamId]);
 
 	const isJerseyNumberTaken = async (number: number, excludePlayerId?: string) => {
 		const isTaken = await playersService.checkJerseyNumber(teamId, number, excludePlayerId);
@@ -157,19 +126,12 @@ export default function Players({ teamId }: PlayersProps) {
 			</div>
 
 			<div className={classes.content}>
-				{loading && (
-					<div className={classes.loading}>
-						<div className={classes.loadingSpinner}></div>
-						<p>Chargement des joueurs...</p>
-					</div>
-				)}
+				{players.length === 0 && <EmptyPlayersState onAddPlayer={() => setIsPlayerModalOpen(true)} />}
 
-				{!loading && players.length === 0 && <EmptyPlayersState onAddPlayer={() => setIsPlayerModalOpen(true)} />}
-
-				{!loading && players.length > 0 && (
+				{players.length > 0 && (
 					<>
 						<div className={classes.playersCount}>
-							{players.length} joueur{players.length > 1 ? "s" : ""} dans l'équipe {team?.name}
+							{players.length} joueur{players.length > 1 ? "s" : ""} dans l'équipe {teamName}
 						</div>
 						<PlayerTable players={players} onEdit={openEditModal} onDelete={openDeleteModal} />
 					</>

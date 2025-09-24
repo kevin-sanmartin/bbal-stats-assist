@@ -32,12 +32,8 @@ export class PlayersClientService {
 		return data;
 	}
 
-	public async getTeamPlayers(teamId: string): Promise<TPlayer[]> {
-		const { data, error } = await this.supabase
-			.from(this.tableName)
-			.select("*")
-			.eq("team_id", teamId)
-			.order("number", { ascending: true });
+	public async getPlayersByTeamId(teamId: string): Promise<TPlayer[]> {
+		const { data, error } = await this.supabase.from(this.tableName).select("*").eq("team_id", teamId).order("number", { ascending: true });
 
 		if (error) {
 			console.error("Erreur lors de la récupération des joueurs:", error);
@@ -48,12 +44,7 @@ export class PlayersClientService {
 	}
 
 	public async updatePlayer(playerId: string, updates: TUpdatePlayerInput): Promise<TPlayer> {
-		const { data, error } = await this.supabase
-			.from(this.tableName)
-			.update(updates)
-			.eq("id", playerId)
-			.select()
-			.single();
+		const { data, error } = await this.supabase.from(this.tableName).update(updates).eq("id", playerId).select().single();
 
 		if (error) {
 			console.error("Erreur lors de la mise à jour du joueur:", error);
@@ -73,11 +64,7 @@ export class PlayersClientService {
 	}
 
 	public async checkJerseyNumber(teamId: string, number: number, excludePlayerId?: string): Promise<boolean> {
-		let query = this.supabase
-			.from(this.tableName)
-			.select("id")
-			.eq("team_id", teamId)
-			.eq("number", number);
+		let query = this.supabase.from(this.tableName).select("id").eq("team_id", teamId).eq("number", number);
 
 		if (excludePlayerId) {
 			query = query.neq("id", excludePlayerId);
