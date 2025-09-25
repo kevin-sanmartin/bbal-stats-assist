@@ -1,0 +1,101 @@
+import { TGame } from "@/types/game";
+import { createServerSupabaseClient } from "@/utils/supabase/server";
+
+export interface UserStats {
+	totalGames: number;
+	totalWins: number;
+	totalPlayers: number;
+	winRate: number;
+}
+
+export class GamesServerService {
+	private static instance: GamesServerService;
+	private readonly gamesTableName = "games";
+	private readonly playersTableName = "players";
+
+	private constructor() {}
+
+	public static getInstance(): GamesServerService {
+		if (!GamesServerService.instance) {
+			GamesServerService.instance = new GamesServerService();
+		}
+		return GamesServerService.instance;
+	}
+
+	public async getUserGames(): Promise<TGame[]> {
+		const supabase = await createServerSupabaseClient();
+		const { data, error } = await supabase
+			.from(this.gamesTableName)
+			.select("*")
+			.order("created_at", { ascending: false });
+
+		if (error) {
+			console.error("Erreur lors de la récupération des matchs:", error);
+			return [];
+		}
+
+		return data || [];
+	}
+
+	public async getUserStats(): Promise<UserStats> {
+		const supabase = await createServerSupabaseClient();
+
+		try {
+			// Récupérer tous les matchs
+			const { data: games, error: gamesError } = await supabase
+				.from(this.gamesTableName)
+				.select("score, opponent_score");
+
+			if (gamesError) {
+				console.error("Erreur lors de la récupération des matchs:", gamesError);
+				throw gamesError;
+			}
+
+			// Compter les joueurs
+			const { count: playersCount, error: playersError } = await supabase
+				.from(this.playersTableName)
+				.select("*", { count: "exact", head: true });
+
+			if (playersError) {
+				console.error("Erreur lors du comptage des joueurs:", playersError);
+				throw playersError;
+			}
+
+			// Calculer les statistiques
+			const totalGames = games?.length || 0;
+			const totalWins = games?.filter(game => game.score > game.opponent_score).length || 0;
+			const totalPlayers = playersCount || 0;
+			const winRate = totalGames > 0 ? Math.round((totalWins / totalGames) * 100) : 0;
+
+			return {
+				totalGames,
+				totalWins,
+				totalPlayers,
+				winRate
+			};
+		} catch (error) {
+			console.error("Erreur lors du calcul des statistiques:", error);
+			return {
+				totalGames: 0,
+				totalWins: 0,
+				totalPlayers: 0,
+				winRate: 0
+			};
+		}
+	}
+
+	public async getTeamGamesCount(teamId: string): Promise<number> {
+		const supabase = await createServerSupabaseClient();
+		const { count, error } = await supabase
+			.from(this.gamesTableName)
+			.select("*", { count: "exact", head: true })
+			.eq("team_id", teamId);
+
+		if (error) {
+			console.error("Erreur lors du comptage des matchs de l'équipe:", error);
+			return 0;
+		}
+
+		return count || 0;
+	}
+}

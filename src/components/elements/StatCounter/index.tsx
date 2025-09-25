@@ -19,6 +19,7 @@ interface StatCounterProps {
 	disabled?: boolean;
 	onChange?: (value: number) => void;
 	className?: string;
+	suffix?: string;
 }
 
 export default function StatCounter({
@@ -32,7 +33,8 @@ export default function StatCounter({
 	showButtons = true,
 	disabled = false,
 	onChange,
-	className
+	className,
+	suffix
 }: StatCounterProps) {
 	const containerClasses = classNames(
 		classes.statCounter,
@@ -77,7 +79,7 @@ export default function StatCounter({
 				)}
 
 				<div className={classes.valueContainer}>
-					<span className={classes.value}>{value}</span>
+					<span className={classes.value}>{value}{suffix}</span>
 				</div>
 
 				{showButtons && (
