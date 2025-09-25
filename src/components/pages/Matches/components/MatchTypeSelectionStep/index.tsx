@@ -41,12 +41,11 @@ export default function MatchTypeSelectionStep({ onMatchTypeSelect }: MatchTypeS
 				<Card
 					variant="outlined"
 					padding="md"
-					hoverable
-					className={`${classes.typeCard} ${selectedType === EMatchType.MANUAL ? classes.selected : ""}`}
-					onClick={() => handleTypeClick(EMatchType.MANUAL)}>
+					className={`${classes.typeCard} ${classes.disabled}`}>
 					<div className={classes.typeHeader}>
 						<h3 className={classes.typeTitle}>Saisie manuelle</h3>
 						<div className={classes.typeIcon}>📝</div>
+						<div className={classes.comingSoon}>Bientôt disponible</div>
 					</div>
 					<p className={classes.typeDescription}>Entrez les statistiques après le match via un formulaire</p>
 				</Card>

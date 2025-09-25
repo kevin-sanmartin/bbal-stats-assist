@@ -1,0 +1,71 @@
+@use "themes/constants.module.scss";
+
+.form {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-4);
+}
+
+.formGroup {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-2);
+}
+
+.label {
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-medium);
+	color: var(--color-text-primary);
+}
+
+.scoresRow {
+	display: flex;
+	align-items: end;
+	gap: var(--spacing-3);
+
+	.formGroup {
+		flex: 1;
+	}
+}
+
+.scoresSeparator {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	font-size: var(--font-size-xl);
+	font-weight: var(--font-weight-bold);
+	color: var(--color-text-secondary);
+	padding-bottom: var(--spacing-2);
+	min-width: 20px;
+}
+
+.error {
+	font-size: var(--font-size-xs);
+	color: var(--color-error);
+	font-weight: var(--font-weight-medium);
+}
+
+.actions {
+	display: flex;
+	justify-content: flex-end;
+	gap: var(--spacing-3);
+	padding-top: var(--spacing-4);
+	border-top: 1px solid var(--color-border);
+}
+
+@media (max-width: constants.$screen-sm) {
+	.actions {
+		flex-direction: column;
+		gap: var(--spacing-2);
+	}
+
+	.scoresRow {
+		flex-direction: column;
+		align-items: stretch;
+
+		.scoresSeparator {
+			padding: var(--spacing-2) 0;
+			align-self: center;
+		}
+	}
+}

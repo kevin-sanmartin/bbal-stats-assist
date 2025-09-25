@@ -6,5 +6,8 @@ export interface CourtPosition {
 export interface CourtClick {
 	id: string;
 	position: CourtPosition;
-	timestamp: number;
+	// Infos optionnelles pour les actions déjà effectuées
+	actionType?: string;
+	playerName?: string;
+	color?: string;
 }

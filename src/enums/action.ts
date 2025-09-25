@@ -1,0 +1,9 @@
+export enum EActionType {
+	THREE_PTS = "3PTS",
+	TWO_PTS = "2PTS",
+	FREE_THROW = "FREE_THROW",
+	REBOUND = "REBOUND",
+	ASSIST = "ASSIST",
+	STEAL = "STEAL",
+	FOUL = "FOUL",
+}

@@ -1,7 +1,7 @@
 import { CourtClick } from "./types";
 import { CourtOrientation } from "./enums";
 import { fibaToSvg } from "./utils";
-import CrossMarker from "./components/CrossMarker";
+import ActionMarker from "./components/ActionMarker";
 
 interface HorizontalCourtProps {
 	handleCourtClick: (event: React.MouseEvent<SVGSVGElement>) => void;
@@ -53,10 +53,20 @@ export default function HorizontalCourt({ handleCourtClick, classes, clicks }: H
 				<line x1="910" y1="230" x2="910" y2="270" stroke="currentColor" strokeWidth="3" />
 			</g>
 
-			{/* Marqueurs de clics */}
+			{/* Marqueurs d'actions */}
 			{clicks.map((click) => {
 				const svgPos = fibaToSvg(click.position, CourtOrientation.HORIZONTAL);
-				return <CrossMarker key={click.id} id={click.id} x={svgPos.x} y={svgPos.y} />;
+				return (
+					<ActionMarker
+						key={click.id}
+						id={click.id}
+						x={svgPos.x}
+						y={svgPos.y}
+						actionType={click.actionType}
+						playerName={click.playerName}
+						color={click.color}
+					/>
+				);
 			})}
 		</svg>
 	);

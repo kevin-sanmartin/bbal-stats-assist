@@ -15,10 +15,10 @@ interface BasketballCourtProps {
 	theme?: CourtTheme;
 	className?: string;
 	onCourtClick: (position: CourtPosition) => void;
+	actions?: CourtClick[]; // Actions à afficher sur le terrain
 }
 
-export default function BasketballCourt({ size = CourtSize.MD, theme = CourtTheme.MODERN, className, onCourtClick }: BasketballCourtProps) {
-	const [clicks, setClicks] = useState<CourtClick[]>([]);
+export default function BasketballCourt({ size = CourtSize.MD, theme = CourtTheme.MODERN, className, onCourtClick, actions = [] }: BasketballCourtProps) {
 	const courtClasses = classNames(classes.basketballCourt, classes[`size-${size}`], classes[`theme-${theme}`], className);
 
 	const handleCourtClick = (event: MouseEvent<SVGSVGElement>) => {
@@ -48,24 +48,16 @@ export default function BasketballCourt({ size = CourtSize.MD, theme = CourtThem
 
 		console.log("📍 FIBA position (meters):", fibaPosition);
 
-		// Ajouter le clic à la liste des marqueurs
-		const newClick: CourtClick = {
-			id: generateClickId(),
-			position: fibaPosition,
-			timestamp: Date.now(),
-		};
-		setClicks((prev) => [...prev, newClick]);
-
 		onCourtClick(fibaPosition);
 	};
 
 	return (
 		<div className={courtClasses}>
 			<div className={classes.verticalCourt}>
-				<VerticalCourt handleCourtClick={handleCourtClick} classes={classes} clicks={clicks} />
+				<VerticalCourt handleCourtClick={handleCourtClick} classes={classes} clicks={actions} />
 			</div>
 			<div className={classes.horizontalCourt}>
-				<HorizontalCourt handleCourtClick={handleCourtClick} classes={classes} clicks={clicks} />
+				<HorizontalCourt handleCourtClick={handleCourtClick} classes={classes} clicks={actions} />
 			</div>
 		</div>
 	);
