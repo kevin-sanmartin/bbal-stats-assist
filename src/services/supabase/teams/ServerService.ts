@@ -42,3 +42,9 @@ export class TeamsServerService {
 		return data;
 	}
 }
+
+// Exports pour l'utilisation dans les pages
+const service = TeamsServerService.getInstance();
+
+export const getUserTeams = () => service.getUserTeams();
+export const getTeamById = (teamId: string) => service.getTeamById(teamId);

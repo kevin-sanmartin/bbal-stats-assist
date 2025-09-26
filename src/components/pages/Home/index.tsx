@@ -124,8 +124,8 @@ export default function Home({ initialTeams, initialGames, userStats }: HomeProp
 										<Button variant="outline" size="sm" onClick={() => router.push(`/teams/${team.id}/players`)}>
 											👥 Joueurs
 										</Button>
-										<Button variant="primary" size="sm" onClick={() => router.push(`/matches?team=${team.id}`)}>
-											🏀 Match
+										<Button variant="primary" size="sm" onClick={() => router.push(`/teams/${team.id}/history`)}>
+											📊 Historique
 										</Button>
 									</div>
 								</Card>

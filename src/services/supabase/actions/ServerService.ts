@@ -18,7 +18,10 @@ export class ActionsServerService {
 		const supabase = await createServerSupabaseClient();
 		const { data, error } = await supabase
 			.from(this.tableName)
-			.select("*")
+			.select(`
+				*,
+				players:player_id (name, number, position)
+			`)
 			.eq("game_id", gameId)
 			.order("created_at");
 
@@ -62,3 +65,10 @@ export class ActionsServerService {
 		return data || [];
 	}
 }
+
+// Exports pour l'utilisation dans les pages
+const service = ActionsServerService.getInstance();
+
+export const getActionsByGameId = (gameId: string) => service.getGameActions(gameId);
+export const getActionById = (actionId: string) => service.getActionById(actionId);
+export const getPlayerActions = (playerId: string) => service.getPlayerActions(playerId);

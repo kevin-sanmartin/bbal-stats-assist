@@ -26,8 +26,12 @@ export class GamesServerService {
 		const supabase = await createServerSupabaseClient();
 		const { data, error } = await supabase
 			.from(this.gamesTableName)
-			.select("*")
-			.order("created_at", { ascending: false });
+			.select(`
+				*,
+				teams:team_id (name, category),
+				competitions:competition_id (name)
+			`)
+			.order("date", { ascending: false });
 
 		if (error) {
 			console.error("Erreur lors de la récupération des matchs:", error);
@@ -35,6 +39,26 @@ export class GamesServerService {
 		}
 
 		return data || [];
+	}
+
+	public async getGameById(gameId: string): Promise<TGame | null> {
+		const supabase = await createServerSupabaseClient();
+		const { data, error } = await supabase
+			.from(this.gamesTableName)
+			.select(`
+				*,
+				teams:team_id (name, category),
+				competitions:competition_id (name)
+			`)
+			.eq("id", gameId)
+			.single();
+
+		if (error) {
+			console.error("Erreur lors de la récupération du match:", error);
+			return null;
+		}
+
+		return data;
 	}
 
 	public async getUserStats(): Promise<UserStats> {
@@ -84,6 +108,26 @@ export class GamesServerService {
 		}
 	}
 
+	public async getTeamGames(teamId: string): Promise<TGame[]> {
+		const supabase = await createServerSupabaseClient();
+		const { data, error } = await supabase
+			.from(this.gamesTableName)
+			.select(`
+				*,
+				teams:team_id (name, category),
+				competitions:competition_id (name)
+			`)
+			.eq("team_id", teamId)
+			.order("date", { ascending: false });
+
+		if (error) {
+			console.error("Erreur lors de la récupération des matchs de l'équipe:", error);
+			return [];
+		}
+
+		return data || [];
+	}
+
 	public async getTeamGamesCount(teamId: string): Promise<number> {
 		const supabase = await createServerSupabaseClient();
 		const { count, error } = await supabase
@@ -99,3 +143,12 @@ export class GamesServerService {
 		return count || 0;
 	}
 }
+
+// Exports pour l'utilisation dans les pages
+const service = GamesServerService.getInstance();
+
+export const getUserGames = () => service.getUserGames();
+export const getGameById = (gameId: string) => service.getGameById(gameId);
+export const getUserStats = () => service.getUserStats();
+export const getTeamGames = (teamId: string) => service.getTeamGames(teamId);
+export const getTeamGamesCount = (teamId: string) => service.getTeamGamesCount(teamId);

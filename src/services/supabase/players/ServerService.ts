@@ -26,3 +26,8 @@ export class PlayersServerService {
 		return data || [];
 	}
 }
+
+// Exports pour l'utilisation dans les pages
+const service = PlayersServerService.getInstance();
+
+export const getPlayersByTeamId = (teamId: string) => service.getPlayersByTeamId(teamId);

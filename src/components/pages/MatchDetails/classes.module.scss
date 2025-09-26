@@ -1,0 +1,444 @@
+@use "themes/constants.module.scss";
+
+.root {
+	flex: 1;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-6);
+}
+
+// === HEADER ===
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: var(--spacing-6);
+
+	h1 {
+		font-size: var(--font-size-2xl);
+		font-weight: var(--font-weight-bold);
+		color: var(--color-text-primary);
+		margin: 0;
+	}
+}
+
+.headerContent {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--spacing-2);
+	flex: 1;
+}
+
+.matchInfo {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-3);
+	font-size: var(--font-size-lg);
+	color: var(--color-text-secondary);
+}
+
+.teamName {
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-primary);
+}
+
+.vs {
+	font-weight: var(--font-weight-medium);
+	color: var(--color-text-tertiary);
+}
+
+.opponent {
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-text-primary);
+}
+
+.headerActions {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-3);
+}
+
+// === GAME SUMMARY ===
+
+.gameSummary {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-4);
+	padding: var(--spacing-6);
+}
+
+.summaryHeader {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.gameDate {
+	font-size: var(--font-size-lg);
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-text-primary);
+	text-transform: capitalize;
+}
+
+.matchup {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--spacing-8);
+}
+
+.team {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--spacing-3);
+	flex: 1;
+	max-width: 250px;
+}
+
+.teamName {
+	font-size: var(--font-size-xl);
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-text-primary);
+	text-align: center;
+	line-height: 1.2;
+}
+
+.teamScore {
+	font-size: var(--font-size-6xl);
+	font-weight: var(--font-weight-bold);
+	color: var(--color-primary);
+	font-family: monospace;
+}
+
+.vs {
+	font-size: var(--font-size-lg);
+	font-weight: var(--font-weight-medium);
+	color: var(--color-text-secondary);
+	text-transform: uppercase;
+	letter-spacing: 2px;
+}
+
+.gameInfo {
+	display: flex;
+	justify-content: center;
+	gap: var(--spacing-3);
+	flex-wrap: wrap;
+}
+
+// === FILTERS ===
+
+.filtersCard {
+	padding: var(--spacing-5);
+
+	h3 {
+		font-size: var(--font-size-lg);
+		font-weight: var(--font-weight-semibold);
+		color: var(--color-text-primary);
+		margin: 0 0 var(--spacing-4) 0;
+	}
+}
+
+.actionFilters {
+	display: flex;
+	gap: var(--spacing-2);
+	flex-wrap: wrap;
+}
+
+.filterButton {
+	white-space: nowrap;
+}
+
+// === MAIN CONTENT ===
+
+.mainContent {
+	display: grid;
+	grid-template-columns: 2fr 1fr;
+	gap: var(--spacing-6);
+	align-items: start;
+}
+
+// === COURT SECTION ===
+
+.courtSection {
+	display: flex;
+	flex-direction: column;
+}
+
+.courtCard {
+	padding: var(--spacing-5);
+
+	h3 {
+		font-size: var(--font-size-lg);
+		font-weight: var(--font-weight-semibold);
+		color: var(--color-text-primary);
+		margin: 0 0 var(--spacing-4) 0;
+	}
+}
+
+.courtContainer {
+	display: flex;
+	justify-content: center;
+	background-color: var(--color-background);
+	border-radius: var(--radius-lg);
+	padding: var(--spacing-4);
+	margin-bottom: var(--spacing-3);
+}
+
+.courtInfo {
+	text-align: center;
+	color: var(--color-text-secondary);
+	font-size: var(--font-size-sm);
+	margin: 0;
+}
+
+// === STATS SECTION ===
+
+.statsSection {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-4);
+}
+
+.statsCard {
+	padding: var(--spacing-5);
+
+	h3 {
+		font-size: var(--font-size-lg);
+		font-weight: var(--font-weight-semibold);
+		color: var(--color-text-primary);
+		margin: 0 0 var(--spacing-4) 0;
+	}
+}
+
+.statsGrid {
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: var(--spacing-3);
+}
+
+// === ACTIONS LIST ===
+
+.actionsListCard {
+	padding: var(--spacing-5);
+
+	h3 {
+		font-size: var(--font-size-lg);
+		font-weight: var(--font-weight-semibold);
+		color: var(--color-text-primary);
+		margin: 0 0 var(--spacing-4) 0;
+	}
+}
+
+.actionsList {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-2);
+	max-height: 400px;
+	overflow-y: auto;
+}
+
+.actionItem {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-3);
+	padding: var(--spacing-3);
+	background-color: var(--color-surface);
+	border-radius: var(--radius-md);
+	border: 1px solid var(--color-border);
+}
+
+.actionIndex {
+	font-size: var(--font-size-xs);
+	color: var(--color-text-tertiary);
+	font-weight: var(--font-weight-medium);
+	font-family: monospace;
+	min-width: 24px;
+}
+
+.actionDetails {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+}
+
+.actionPlayer {
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-medium);
+	color: var(--color-text-primary);
+}
+
+.actionType {
+	font-size: var(--font-size-xs);
+	color: var(--color-text-secondary);
+	text-transform: uppercase;
+}
+
+.actionPosition {
+	font-size: var(--font-size-xs);
+	color: var(--color-text-tertiary);
+	font-family: monospace;
+}
+
+.moreActions {
+	text-align: center;
+	padding: var(--spacing-2);
+	color: var(--color-text-secondary);
+	font-size: var(--font-size-sm);
+	font-style: italic;
+}
+
+// === PLAYER STATISTICS ===
+
+.playersStatsCard {
+	padding: var(--spacing-5);
+
+	h3 {
+		font-size: var(--font-size-lg);
+		font-weight: var(--font-weight-semibold);
+		color: var(--color-text-primary);
+		margin: 0 0 var(--spacing-4) 0;
+	}
+}
+
+.playerNumber {
+	font-weight: var(--font-weight-bold);
+	color: var(--color-primary);
+	font-family: monospace;
+}
+
+.playerName {
+	font-weight: var(--font-weight-medium);
+	color: var(--color-text-primary);
+}
+
+.emptyTable {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--spacing-4);
+	padding: var(--spacing-8);
+}
+
+.emptyIcon {
+	font-size: var(--font-size-4xl);
+	opacity: 0.5;
+}
+
+// === RESPONSIVE ===
+
+@media (max-width: constants.$screen-lg) {
+	.mainContent {
+		grid-template-columns: 1fr;
+		gap: var(--spacing-4);
+	}
+
+	.statsGrid {
+		grid-template-columns: repeat(3, 1fr);
+	}
+}
+
+@media (max-width: constants.$screen-md) {
+	.root {
+		gap: var(--spacing-4);
+	}
+
+	.header {
+		flex-direction: column;
+		align-items: stretch;
+		gap: var(--spacing-4);
+
+		h1 {
+			font-size: var(--font-size-xl);
+			text-align: center;
+		}
+	}
+
+	.headerContent {
+		order: -1;
+	}
+
+	.matchInfo {
+		justify-content: center;
+		font-size: var(--font-size-base);
+	}
+
+	.gameSummary {
+		padding: var(--spacing-4);
+	}
+
+	.matchup {
+		gap: var(--spacing-4);
+	}
+
+	.teamScore {
+		font-size: var(--font-size-4xl);
+	}
+
+	.actionFilters {
+		justify-content: center;
+	}
+
+	.statsGrid {
+		grid-template-columns: repeat(2, 1fr);
+	}
+}
+
+@media (max-width: constants.$screen-sm) {
+	.headerActions {
+		flex-direction: column;
+		gap: var(--spacing-2);
+		align-items: stretch;
+	}
+
+	.matchInfo {
+		flex-direction: column;
+		gap: var(--spacing-1);
+		text-align: center;
+	}
+
+	.summaryHeader {
+		flex-direction: column;
+		gap: var(--spacing-3);
+		text-align: center;
+	}
+
+	.matchup {
+		flex-direction: column;
+		gap: var(--spacing-4);
+	}
+
+	.team {
+		flex-direction: row;
+		justify-content: space-between;
+		max-width: 100%;
+		width: 100%;
+		padding: var(--spacing-3);
+		background-color: var(--color-surface);
+		border-radius: var(--radius-md);
+	}
+
+	.teamScore {
+		font-size: var(--font-size-3xl);
+	}
+
+	.vs {
+		font-size: var(--font-size-base);
+		order: -1;
+	}
+
+	.statsGrid {
+		grid-template-columns: 1fr;
+	}
+
+	.actionFilters {
+		flex-direction: column;
+	}
+
+	.filterButton {
+		text-align: center;
+	}
+}
