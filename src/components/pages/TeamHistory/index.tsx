@@ -3,7 +3,7 @@
 import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
 import { TTeam } from "@/types/team";
-import { TGame } from "@/types/game";
+import { TGame, TGameWithRelations } from "@/types/game";
 import Card from "@/components/elements/Card";
 import Button from "@/components/elements/Button";
 import Badge from "@/components/elements/Badge";
@@ -15,7 +15,7 @@ import classes from "./classes.module.scss";
 
 interface TeamHistoryProps {
 	team: TTeam;
-	games: TGame[];
+	games: TGameWithRelations[];
 }
 
 export default function TeamHistory({ team, games }: TeamHistoryProps) {
@@ -28,20 +28,13 @@ export default function TeamHistory({ team, games }: TeamHistoryProps) {
 
 		// Filtrer par compétition
 		if (selectedCompetition !== "ALL") {
-			filtered = filtered.filter(game =>
-				selectedCompetition === "NONE"
-					? !game.competitions?.name
-					: game.competitions?.name === selectedCompetition
-			);
+			filtered = filtered.filter((game) => (selectedCompetition === "NONE" ? !game.competition?.name : game.competition?.name === selectedCompetition));
 		}
 
 		// Filtrer par recherche
 		if (searchTerm.trim()) {
 			const term = searchTerm.toLowerCase().trim();
-			filtered = filtered.filter(game =>
-				game.opponent.toLowerCase().includes(term) ||
-				(game.competitions?.name?.toLowerCase().includes(term))
-			);
+			filtered = filtered.filter((game) => game.opponent.toLowerCase().includes(term) || game.competition?.name?.toLowerCase().includes(term));
 		}
 
 		return filtered;
@@ -49,12 +42,12 @@ export default function TeamHistory({ team, games }: TeamHistoryProps) {
 
 	// Options des compétitions disponibles
 	const competitionOptions = useMemo(() => {
-		const competitions = Array.from(new Set(games.map(game => game.competitions?.name).filter(Boolean)));
-		const hasNoCompetition = games.some(game => !game.competitions?.name);
+		const competitions = Array.from(new Set(games.map((game) => game.competition?.name).filter((name): name is string => Boolean(name))));
+		const hasNoCompetition = games.some((game) => !game.competition?.name);
 
 		const options = [{ value: "ALL", label: "Toutes les compétitions" }];
 
-		competitions.forEach(comp => {
+		competitions.forEach((comp) => {
 			options.push({ value: comp, label: comp });
 		});
 
@@ -68,9 +61,9 @@ export default function TeamHistory({ team, games }: TeamHistoryProps) {
 	// Calcul des statistiques de l'équipe
 	const teamStats = useMemo(() => {
 		const totalGames = games.length;
-		const wins = games.filter(game => game.score > game.opponent_score).length;
-		const losses = games.filter(game => game.score < game.opponent_score).length;
-		const draws = games.filter(game => game.score === game.opponent_score).length;
+		const wins = games.filter((game) => game.score > game.opponent_score).length;
+		const losses = games.filter((game) => game.score < game.opponent_score).length;
+		const draws = games.filter((game) => game.score === game.opponent_score).length;
 		const winRate = totalGames > 0 ? Math.round((wins / totalGames) * 100) : 0;
 		const totalPointsFor = games.reduce((sum, game) => sum + game.score, 0);
 		const totalPointsAgainst = games.reduce((sum, game) => sum + game.opponent_score, 0);
@@ -99,9 +92,15 @@ export default function TeamHistory({ team, games }: TeamHistoryProps) {
 	};
 
 	const getLocationBadge = (location: string) => {
-		return location === "HOME" ?
-			<Badge variant="info" size="sm">🏠 Domicile</Badge> :
-			<Badge variant="default" size="sm">✈️ Extérieur</Badge>;
+		return location === "HOME" ? (
+			<Badge variant="info" size="sm">
+				🏠 Domicile
+			</Badge>
+		) : (
+			<Badge variant="default" size="sm">
+				✈️ Extérieur
+			</Badge>
+		);
 	};
 
 	const formatDate = (dateString: string) => {
@@ -121,14 +120,18 @@ export default function TeamHistory({ team, games }: TeamHistoryProps) {
 		});
 	};
 
-
 	const getCategoryColor = (category: string) => {
 		switch (category) {
-			case "U13": return "success";
-			case "U15": return "info";
-			case "U18": return "warning";
-			case "SENIOR": return "primary";
-			default: return "default";
+			case "U13":
+				return "success";
+			case "U15":
+				return "info";
+			case "U18":
+				return "warning";
+			case "SENIOR":
+				return "primary";
+			default:
+				return "default";
 		}
 	};
 
@@ -145,13 +148,13 @@ export default function TeamHistory({ team, games }: TeamHistoryProps) {
 					<div className={classes.dateMain}>{formatTime(value)}</div>
 					<div className={classes.dateSecondary}>{formatDate(value).split(" ").slice(0, 2).join(" ")}</div>
 				</div>
-			)
+			),
 		},
 		{
 			key: "opponent",
 			title: "Adversaire",
 			width: "180px",
-			render: (value) => <div className={classes.opponentName}>{value}</div>
+			render: (value) => <div className={classes.opponentName}>{value}</div>,
 		},
 		{
 			key: "score",
@@ -164,27 +167,34 @@ export default function TeamHistory({ team, games }: TeamHistoryProps) {
 					<span className={classes.scoreSeparator}>-</span>
 					<span className={classes.theirScore}>{row.opponent_score}</span>
 				</div>
-			)
+			),
 		},
 		{
 			key: "result",
 			title: "Résultat",
 			width: "100px",
 			align: "center",
-			render: (value, row: TGame) => getResultBadge(row)
+			render: (value, row: TGame) => getResultBadge(row),
 		},
 		{
 			key: "location",
 			title: "Lieu",
 			width: "100px",
 			align: "center",
-			render: (value) => getLocationBadge(value)
+			render: (value) => getLocationBadge(value),
 		},
 		{
 			key: "competitions",
 			title: "Compétition",
 			width: "120px",
-			render: (value) => value?.name ? <Badge variant="primary" size="sm">{value.name}</Badge> : <span className={classes.noCompetition}>-</span>
+			render: (value) =>
+				value?.name ? (
+					<Badge variant="primary" size="sm">
+						{value.name}
+					</Badge>
+				) : (
+					<span className={classes.noCompetition}>-</span>
+				),
 		},
 		{
 			key: "actions",
@@ -192,15 +202,11 @@ export default function TeamHistory({ team, games }: TeamHistoryProps) {
 			width: "80px",
 			align: "center",
 			render: (value, row: TGame) => (
-				<Button
-					variant="outline"
-					size="sm"
-					onClick={() => router.push(`/matches/${row.id}`)}
-				>
+				<Button variant="outline" size="sm" onClick={() => router.push(`/matches/${row.id}`)}>
 					Détails
 				</Button>
-			)
-		}
+			),
+		},
 	];
 
 	return (
@@ -211,7 +217,7 @@ export default function TeamHistory({ team, games }: TeamHistoryProps) {
 				</Button>
 				<div className={classes.headerContent}>
 					<h1>{team.name}</h1>
-					<Badge variant={getCategoryColor(team.category) as any}>{team.category}</Badge>
+					<Badge variant={getCategoryColor(team.category)}>{team.category}</Badge>
 				</div>
 				<div className={classes.headerActions}>
 					<Button variant="primary" onClick={() => router.push(`/matches?team=${team.id}`)}>
@@ -225,21 +231,10 @@ export default function TeamHistory({ team, games }: TeamHistoryProps) {
 				<h2>Statistiques de l'équipe</h2>
 				<div className={classes.statsGrid}>
 					<Card className={classes.statCard}>
-						<StatCounter
-							label="Matchs joués"
-							value={teamStats.totalGames}
-							size="lg"
-							showButtons={false}
-						/>
+						<StatCounter label="Matchs joués" value={teamStats.totalGames} size="lg" showButtons={false} />
 					</Card>
 					<Card className={classes.statCard}>
-						<StatCounter
-							label="Victoires"
-							value={teamStats.wins}
-							size="lg"
-							variant="success"
-							showButtons={false}
-						/>
+						<StatCounter label="Victoires" value={teamStats.wins} size="lg" variant="success" showButtons={false} />
 					</Card>
 					<Card className={classes.statCard}>
 						<StatCounter
@@ -252,13 +247,7 @@ export default function TeamHistory({ team, games }: TeamHistoryProps) {
 						/>
 					</Card>
 					<Card className={classes.statCard}>
-						<StatCounter
-							label="Points/match"
-							value={teamStats.avgPointsFor}
-							size="lg"
-							variant="info"
-							showButtons={false}
-						/>
+						<StatCounter label="Points/match" value={teamStats.avgPointsFor} size="lg" variant="default" showButtons={false} />
 					</Card>
 				</div>
 			</div>
@@ -287,24 +276,14 @@ export default function TeamHistory({ team, games }: TeamHistoryProps) {
 						<div className={classes.activeFilters}>
 							<span className={classes.filterLabel}>Filtres actifs :</span>
 							{searchTerm && (
-								<Badge
-									variant="outline"
-									size="sm"
-									className={classes.filterChip}
-									onClose={() => setSearchTerm("")}
-								>
-									Recherche : "{searchTerm}"
-								</Badge>
+								<Button variant="outline" size="sm" className={classes.filterChip} onClick={() => setSearchTerm("")}>
+									Recherche : "{searchTerm}" ✕
+								</Button>
 							)}
 							{selectedCompetition !== "ALL" && (
-								<Badge
-									variant="outline"
-									size="sm"
-									className={classes.filterChip}
-									onClose={() => setSelectedCompetition("ALL")}
-								>
-									{competitionOptions.find(opt => opt.value === selectedCompetition)?.label}
-								</Badge>
+								<Button variant="outline" size="sm" className={classes.filterChip} onClick={() => setSelectedCompetition("ALL")}>
+									{competitionOptions.find((opt) => opt.value === selectedCompetition)?.label} ✕
+								</Button>
 							)}
 						</div>
 					)}

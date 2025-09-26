@@ -2,7 +2,7 @@
 
 import { useState, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import { TGame } from "@/types/game";
+import { TGameWithRelations } from "@/types/game";
 import { TAction } from "@/types/action";
 import { TPlayer } from "@/types/player";
 import { TTeam } from "@/types/team";
@@ -18,7 +18,7 @@ import { CourtSize } from "@/components/elements/BasketballCourt/enums";
 import classes from "./classes.module.scss";
 
 interface MatchDetailsProps {
-	game: TGame;
+	game: TGameWithRelations;
 	team: TTeam;
 	actions: TAction[];
 	players: TPlayer[];
@@ -30,12 +30,10 @@ export default function MatchDetails({ game, team, actions, players }: MatchDeta
 
 	// Convertir les actions pour le terrain
 	const courtActions = useMemo(() => {
-		const filteredActions = selectedActionType === "ALL"
-			? actions
-			: actions.filter(action => action.type === selectedActionType);
+		const filteredActions = selectedActionType === "ALL" ? actions : actions.filter((action) => action.type === selectedActionType);
 
 		return filteredActions.map((action) => {
-			const player = players.find(p => p.id === action.player_id);
+			const player = players.find((p) => p.id === action.player_id);
 			return {
 				id: action.id,
 				position: { x: action.position_x, y: action.position_y },
@@ -47,18 +45,28 @@ export default function MatchDetails({ game, team, actions, players }: MatchDeta
 
 	const getResultBadge = () => {
 		if (game.score > game.opponent_score) {
-			return <Badge variant="success" size="lg">🏆 Victoire</Badge>;
+			return (
+				<Badge variant="success" size="lg">
+					🏆 Victoire
+				</Badge>
+			);
 		} else if (game.score < game.opponent_score) {
-			return <Badge variant="danger" size="lg">😞 Défaite</Badge>;
+			return (
+				<Badge variant="danger" size="lg">
+					😞 Défaite
+				</Badge>
+			);
 		} else {
-			return <Badge variant="warning" size="lg">🤝 Match nul</Badge>;
+			return (
+				<Badge variant="warning" size="lg">
+					🤝 Match nul
+				</Badge>
+			);
 		}
 	};
 
 	const getLocationBadge = () => {
-		return game.location === "HOME" ?
-			<Badge variant="info">🏠 Domicile</Badge> :
-			<Badge variant="default">✈️ Extérieur</Badge>;
+		return game.location === "HOME" ? <Badge variant="info">🏠 Domicile</Badge> : <Badge variant="default">✈️ Extérieur</Badge>;
 	};
 
 	const formatDate = (dateString: string) => {
@@ -74,13 +82,13 @@ export default function MatchDetails({ game, team, actions, players }: MatchDeta
 	// Calcul des statistiques
 	const stats = useMemo(() => {
 		const totalActions = actions.length;
-		const points3 = actions.filter(a => a.type === EActionType.THREE_PTS).length;
-		const points2 = actions.filter(a => a.type === EActionType.TWO_PTS).length;
-		const freeThrows = actions.filter(a => a.type === EActionType.FREE_THROW).length;
-		const rebounds = actions.filter(a => a.type === EActionType.REBOUND).length;
-		const assists = actions.filter(a => a.type === EActionType.ASSIST).length;
-		const steals = actions.filter(a => a.type === EActionType.STEAL).length;
-		const fouls = actions.filter(a => a.type === EActionType.FOUL).length;
+		const points3 = actions.filter((a) => a.type === EActionType.THREE_PTS).length;
+		const points2 = actions.filter((a) => a.type === EActionType.TWO_PTS).length;
+		const freeThrows = actions.filter((a) => a.type === EActionType.FREE_THROW).length;
+		const rebounds = actions.filter((a) => a.type === EActionType.REBOUND).length;
+		const assists = actions.filter((a) => a.type === EActionType.ASSIST).length;
+		const steals = actions.filter((a) => a.type === EActionType.STEAL).length;
+		const fouls = actions.filter((a) => a.type === EActionType.FOUL).length;
 
 		return {
 			totalActions,
@@ -96,26 +104,28 @@ export default function MatchDetails({ game, team, actions, players }: MatchDeta
 
 	// Statistiques par joueur
 	const playerStats = useMemo(() => {
-		return players.map(player => {
-			const playerActions = actions.filter(a => a.player_id === player.id);
-			const threePointers = playerActions.filter(a => a.type === EActionType.THREE_PTS).length;
-			const twoPointers = playerActions.filter(a => a.type === EActionType.TWO_PTS).length;
-			const freeThrows = playerActions.filter(a => a.type === EActionType.FREE_THROW).length;
-			const points = (threePointers * 3) + (twoPointers * 2) + freeThrows;
+		return players
+			.map((player) => {
+				const playerActions = actions.filter((a) => a.player_id === player.id);
+				const threePointers = playerActions.filter((a) => a.type === EActionType.THREE_PTS).length;
+				const twoPointers = playerActions.filter((a) => a.type === EActionType.TWO_PTS).length;
+				const freeThrows = playerActions.filter((a) => a.type === EActionType.FREE_THROW).length;
+				const points = threePointers * 3 + twoPointers * 2 + freeThrows;
 
-			return {
-				...player,
-				points,
-				threePointers,
-				twoPointers,
-				freeThrows,
-				rebounds: playerActions.filter(a => a.type === EActionType.REBOUND).length,
-				assists: playerActions.filter(a => a.type === EActionType.ASSIST).length,
-				steals: playerActions.filter(a => a.type === EActionType.STEAL).length,
-				fouls: playerActions.filter(a => a.type === EActionType.FOUL).length,
-				totalActions: playerActions.length
-			};
-		}).sort((a, b) => b.points - a.points);
+				return {
+					...player,
+					points,
+					threePointers,
+					twoPointers,
+					freeThrows,
+					rebounds: playerActions.filter((a) => a.type === EActionType.REBOUND).length,
+					assists: playerActions.filter((a) => a.type === EActionType.ASSIST).length,
+					steals: playerActions.filter((a) => a.type === EActionType.STEAL).length,
+					fouls: playerActions.filter((a) => a.type === EActionType.FOUL).length,
+					totalActions: playerActions.length,
+				};
+			})
+			.sort((a, b) => b.points - a.points);
 	}, [players, actions]);
 
 	const actionTypes = [
@@ -136,13 +146,13 @@ export default function MatchDetails({ game, team, actions, players }: MatchDeta
 			title: "#",
 			width: "50px",
 			align: "center",
-			render: (value) => <span className={classes.playerNumber}>{value}</span>
+			render: (value) => <span className={classes.playerNumber}>{value}</span>,
 		},
 		{
 			key: "name",
 			title: "Joueur",
 			width: "150px",
-			render: (value) => <div className={classes.playerName}>{value}</div>
+			render: (value) => <div className={classes.playerName}>{value}</div>,
 		},
 		{
 			key: "points",
@@ -150,57 +160,57 @@ export default function MatchDetails({ game, team, actions, players }: MatchDeta
 			width: "60px",
 			align: "center",
 			sortable: true,
-			render: (value) => <strong>{value}</strong>
+			render: (value) => <strong>{value}</strong>,
 		},
 		{
 			key: "threePointers",
 			title: "3pts",
 			width: "50px",
 			align: "center",
-			render: (value) => value || "-"
+			render: (value) => value || "-",
 		},
 		{
 			key: "twoPointers",
 			title: "2pts",
 			width: "50px",
 			align: "center",
-			render: (value) => value || "-"
+			render: (value) => value || "-",
 		},
 		{
 			key: "freeThrows",
 			title: "LF",
 			width: "50px",
 			align: "center",
-			render: (value) => value || "-"
+			render: (value) => value || "-",
 		},
 		{
 			key: "rebounds",
 			title: "Reb",
 			width: "50px",
 			align: "center",
-			render: (value) => value || "-"
+			render: (value) => value || "-",
 		},
 		{
 			key: "assists",
 			title: "Ast",
 			width: "50px",
 			align: "center",
-			render: (value) => value || "-"
+			render: (value) => value || "-",
 		},
 		{
 			key: "steals",
 			title: "Int",
 			width: "50px",
 			align: "center",
-			render: (value) => value || "-"
+			render: (value) => value || "-",
 		},
 		{
 			key: "fouls",
 			title: "Fts",
 			width: "50px",
 			align: "center",
-			render: (value) => value || "-"
-		}
+			render: (value) => value || "-",
+		},
 	];
 
 	return (
@@ -219,8 +229,8 @@ export default function MatchDetails({ game, team, actions, players }: MatchDeta
 					</div>
 				</div>
 				<div className={classes.headerActions}>
-					{getLocationBadge(game.location)}
-					{getResultBadge(game)}
+					{getLocationBadge()}
+					{getResultBadge()}
 				</div>
 			</div>
 
@@ -230,7 +240,9 @@ export default function MatchDetails({ game, team, actions, players }: MatchDeta
 					<div className={classes.team}>
 						<div className={classes.teamName}>{team.name}</div>
 						<div className={classes.teamScore}>{game.score}</div>
-						<Badge variant="default" size="sm">{team.category}</Badge>
+						<Badge variant="default" size="sm">
+							{team.category}
+						</Badge>
 					</div>
 					<div className={classes.vs}>vs</div>
 					<div className={classes.team}>
@@ -239,9 +251,9 @@ export default function MatchDetails({ game, team, actions, players }: MatchDeta
 					</div>
 				</div>
 
-				{game.competitions?.name && (
+				{game.competition?.name && (
 					<div className={classes.gameInfo}>
-						<Badge variant="primary">{game.competitions.name}</Badge>
+						<Badge variant="primary">{game.competition.name}</Badge>
 					</div>
 				)}
 			</Card>
@@ -256,8 +268,7 @@ export default function MatchDetails({ game, team, actions, players }: MatchDeta
 							variant={selectedActionType === type ? "primary" : "outline"}
 							size="sm"
 							onClick={() => setSelectedActionType(type)}
-							className={classes.filterButton}
-						>
+							className={classes.filterButton}>
 							{label} ({count})
 						</Button>
 					))}
@@ -278,8 +289,8 @@ export default function MatchDetails({ game, team, actions, players }: MatchDeta
 							/>
 						</div>
 						<p className={classes.courtInfo}>
-							{courtActions.length} action{courtActions.length > 1 ? 's' : ''} affichée{courtActions.length > 1 ? 's' : ''}
-							{selectedActionType !== "ALL" && ` (${actionTypes.find(a => a.type === selectedActionType)?.label})`}
+							{courtActions.length} action{courtActions.length > 1 ? "s" : ""} affichée{courtActions.length > 1 ? "s" : ""}
+							{selectedActionType !== "ALL" && ` (${actionTypes.find((a) => a.type === selectedActionType)?.label})`}
 						</p>
 					</Card>
 				</div>
@@ -291,8 +302,8 @@ export default function MatchDetails({ game, team, actions, players }: MatchDeta
 						<div className={classes.statsGrid}>
 							<StatCounter label="Actions totales" value={stats.totalActions} showButtons={false} />
 							<StatCounter label="3 Points" value={stats.points3} variant="success" showButtons={false} />
-							<StatCounter label="2 Points" value={stats.points2} variant="primary" showButtons={false} />
-							<StatCounter label="Lancers francs" value={stats.freeThrows} variant="info" showButtons={false} />
+							<StatCounter label="2 Points" value={stats.points2} variant="default" showButtons={false} />
+							<StatCounter label="Lancers francs" value={stats.freeThrows} variant="warning" showButtons={false} />
 							<StatCounter label="Rebonds" value={stats.rebounds} variant="warning" showButtons={false} />
 							<StatCounter label="Passes D." value={stats.assists} variant="success" showButtons={false} />
 						</div>
@@ -318,7 +329,7 @@ export default function MatchDetails({ game, team, actions, players }: MatchDeta
 								))}
 								{courtActions.length > 10 && (
 									<div className={classes.moreActions}>
-										... et {courtActions.length - 10} autre{courtActions.length - 10 > 1 ? 's' : ''} action{courtActions.length - 10 > 1 ? 's' : ''}
+										... et {courtActions.length - 10} autre{courtActions.length - 10 > 1 ? "s" : ""} action{courtActions.length - 10 > 1 ? "s" : ""}
 									</div>
 								)}
 							</div>

@@ -4,9 +4,10 @@ import { TeamsServerService } from "@/services/supabase/teams/ServerService";
 import { GamesServerService } from "@/services/supabase/games/ServerService";
 import { Metadata } from "next/dist/lib/metadata/types/metadata-interface";
 
-export async function generateMetadata({ params }: { params: { id: string } }): Promise<Metadata> {
+export async function generateMetadata({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> {
 	const teamsService = TeamsServerService.getInstance();
-	const team = await teamsService.getTeamById(params.id);
+	const { id } = await params;
+	const team = await teamsService.getTeamById(id);
 
 	if (!team) {
 		return {
@@ -23,11 +24,12 @@ export async function generateMetadata({ params }: { params: { id: string } }): 
 const teamsService = TeamsServerService.getInstance();
 const gamesService = GamesServerService.getInstance();
 
-export default async function Page({ params }: { params: { id: string } }) {
+export default async function Page({ params }: { params: Promise<{ id: string }> }) {
 	try {
+		const { id } = await params;
 		const [team, games] = await Promise.all([
-			teamsService.getTeamById(params.id),
-			gamesService.getTeamGames(params.id),
+			teamsService.getTeamById(id),
+			gamesService.getTeamGames(id),
 		]);
 
 		if (!team) {

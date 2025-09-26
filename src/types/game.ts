@@ -1,14 +1,21 @@
+import { TCompetition } from "./competition";
+import { TTeam } from "./team";
+
 export type TGame = {
 	id: string;
 	opponent: string;
 	score: number;
 	opponent_score: number;
 	date: string;
-	location: 'HOME' | 'AWAY';
+	location: "HOME" | "AWAY";
 	team_id: string;
 	competition_id?: string;
 	created_at: string;
-	updated_at: string;
+};
+
+export type TGameWithRelations = TGame & {
+	competition: TCompetition | null;
+	team: TTeam | null;
 };
 
 export type TCreateGameInput = {
@@ -16,7 +23,7 @@ export type TCreateGameInput = {
 	score: number;
 	opponent_score: number;
 	date: string;
-	location: 'HOME' | 'AWAY';
+	location: "HOME" | "AWAY";
 	team_id: string;
 	competition_id?: string;
 };
@@ -26,6 +33,6 @@ export type TUpdateGameInput = {
 	score?: number;
 	opponent_score?: number;
 	date?: string;
-	location?: 'HOME' | 'AWAY';
+	location?: "HOME" | "AWAY";
 	competition_id?: string;
 };

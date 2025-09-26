@@ -1,4 +1,4 @@
-import { TGame } from "@/types/game";
+import { TGame, TGameWithRelations } from "@/types/game";
 import { createServerSupabaseClient } from "@/utils/supabase/server";
 
 export interface UserStats {
@@ -22,15 +22,17 @@ export class GamesServerService {
 		return GamesServerService.instance;
 	}
 
-	public async getUserGames(): Promise<TGame[]> {
+	public async getUserGames(): Promise<TGameWithRelations[]> {
 		const supabase = await createServerSupabaseClient();
 		const { data, error } = await supabase
 			.from(this.gamesTableName)
-			.select(`
+			.select(
+				`
 				*,
-				teams:team_id (name, category),
-				competitions:competition_id (name)
-			`)
+				team:team_id (name, category),
+				competition:competition_id (name)
+			`,
+			)
 			.order("date", { ascending: false });
 
 		if (error) {
@@ -41,15 +43,17 @@ export class GamesServerService {
 		return data || [];
 	}
 
-	public async getGameById(gameId: string): Promise<TGame | null> {
+	public async getGameById(gameId: string): Promise<TGameWithRelations | null> {
 		const supabase = await createServerSupabaseClient();
 		const { data, error } = await supabase
 			.from(this.gamesTableName)
-			.select(`
+			.select(
+				`
 				*,
-				teams:team_id (name, category),
-				competitions:competition_id (name)
-			`)
+				team:team_id (name, category),
+				competition:competition_id (name)
+			`,
+			)
 			.eq("id", gameId)
 			.single();
 
@@ -66,9 +70,7 @@ export class GamesServerService {
 
 		try {
 			// Récupérer tous les matchs
-			const { data: games, error: gamesError } = await supabase
-				.from(this.gamesTableName)
-				.select("score, opponent_score");
+			const { data: games, error: gamesError } = await supabase.from(this.gamesTableName).select("score, opponent_score");
 
 			if (gamesError) {
 				console.error("Erreur lors de la récupération des matchs:", gamesError);
@@ -76,9 +78,7 @@ export class GamesServerService {
 			}
 
 			// Compter les joueurs
-			const { count: playersCount, error: playersError } = await supabase
-				.from(this.playersTableName)
-				.select("*", { count: "exact", head: true });
+			const { count: playersCount, error: playersError } = await supabase.from(this.playersTableName).select("*", { count: "exact", head: true });
 
 			if (playersError) {
 				console.error("Erreur lors du comptage des joueurs:", playersError);
@@ -87,7 +87,7 @@ export class GamesServerService {
 
 			// Calculer les statistiques
 			const totalGames = games?.length || 0;
-			const totalWins = games?.filter(game => game.score > game.opponent_score).length || 0;
+			const totalWins = games?.filter((game) => game.score > game.opponent_score).length || 0;
 			const totalPlayers = playersCount || 0;
 			const winRate = totalGames > 0 ? Math.round((totalWins / totalGames) * 100) : 0;
 
@@ -95,7 +95,7 @@ export class GamesServerService {
 				totalGames,
 				totalWins,
 				totalPlayers,
-				winRate
+				winRate,
 			};
 		} catch (error) {
 			console.error("Erreur lors du calcul des statistiques:", error);
@@ -103,20 +103,22 @@ export class GamesServerService {
 				totalGames: 0,
 				totalWins: 0,
 				totalPlayers: 0,
-				winRate: 0
+				winRate: 0,
 			};
 		}
 	}
 
-	public async getTeamGames(teamId: string): Promise<TGame[]> {
+	public async getTeamGames(teamId: string): Promise<TGameWithRelations[]> {
 		const supabase = await createServerSupabaseClient();
 		const { data, error } = await supabase
 			.from(this.gamesTableName)
-			.select(`
+			.select(
+				`
 				*,
-				teams:team_id (name, category),
-				competitions:competition_id (name)
-			`)
+				team:team_id (name, category),
+				competition:competition_id (name)
+			`,
+			)
 			.eq("team_id", teamId)
 			.order("date", { ascending: false });
 
@@ -130,10 +132,7 @@ export class GamesServerService {
 
 	public async getTeamGamesCount(teamId: string): Promise<number> {
 		const supabase = await createServerSupabaseClient();
-		const { count, error } = await supabase
-			.from(this.gamesTableName)
-			.select("*", { count: "exact", head: true })
-			.eq("team_id", teamId);
+		const { count, error } = await supabase.from(this.gamesTableName).select("*", { count: "exact", head: true }).eq("team_id", teamId);
 
 		if (error) {
 			console.error("Erreur lors du comptage des matchs de l'équipe:", error);
