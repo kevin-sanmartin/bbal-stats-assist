@@ -1,0 +1,21 @@
+@use "themes/constants.module.scss";
+
+.desktopActions {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-3);
+
+	@media screen and (max-width: constants.$screen-md) {
+		display: none;
+	}
+}
+
+.themeToggleDesktop {
+	@media screen and (max-width: constants.$screen-md) {
+		display: none;
+	}
+}
+
+.logoutButton {
+	white-space: nowrap;
+}

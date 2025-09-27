@@ -1,0 +1,48 @@
+@use "themes/constants.module.scss";
+
+.desktopNav {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-6);
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+
+	@media screen and (max-width: constants.$screen-md) {
+		display: none;
+	}
+}
+
+.navLink {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-1);
+	text-decoration: none;
+	color: var(--color-text-secondary);
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-medium);
+	padding: var(--spacing-2) var(--spacing-3);
+	border-radius: var(--radius-md);
+	transition: all var(--transition-fast);
+	white-space: nowrap;
+
+	&:hover {
+		color: var(--color-primary);
+		background: var(--color-primary-50);
+		transform: translateY(-1px);
+	}
+
+	&:focus-visible {
+		outline: 2px solid var(--color-primary);
+		outline-offset: 2px;
+	}
+
+	svg {
+		opacity: 0.7;
+		transition: opacity var(--transition-fast);
+	}
+
+	&:hover svg {
+		opacity: 1;
+	}
+}

@@ -1,0 +1,27 @@
+@use "themes/constants.module.scss";
+
+.mobileMenuButton {
+	display: none;
+	background: var(--color-surface-secondary);
+	border: none;
+	color: var(--color-text-primary);
+	cursor: pointer;
+	padding: var(--spacing-2);
+	border-radius: var(--radius-md);
+	transition: all var(--transition-fast);
+
+	@media screen and (max-width: constants.$screen-md) {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+
+	&:active {
+		transform: scale(0.95);
+	}
+
+	&:focus-visible {
+		outline: 2px solid var(--color-primary);
+		outline-offset: 2px;
+	}
+}

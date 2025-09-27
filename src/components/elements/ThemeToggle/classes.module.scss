@@ -5,13 +5,27 @@
 
 	background-color: var(--color-surface);
 	border: 1px solid var(--color-border);
-	border-radius: var(--radius-full);
+	border-radius: var(--radius-lg);
+	padding: var(--spacing-2);
 
 	font-family: inherit;
 	color: var(--color-text-primary);
 	cursor: pointer;
 
 	transition: all var(--transition-fast);
+
+	.iconContainer {
+		width: 18px;
+		height: 18px;
+	}
+
+	.icon {
+		font-size: var(--font-size-sm);
+	}
+
+	.label {
+		font-size: var(--font-size-sm);
+	}
 
 	&:hover {
 		background-color: var(--color-surface-hover);
@@ -26,59 +40,6 @@
 
 	&:active {
 		transform: scale(0.98);
-	}
-}
-
-// === SIZES ===
-
-.size-sm {
-	padding: var(--spacing-1) var(--spacing-2);
-
-	.iconContainer {
-		width: 1.25rem;
-		height: 1.25rem;
-	}
-
-	.icon {
-		font-size: var(--font-size-sm);
-	}
-
-	.label {
-		font-size: var(--font-size-xs);
-	}
-}
-
-.size-md {
-	padding: var(--spacing-2) var(--spacing-3);
-
-	.iconContainer {
-		width: 1.5rem;
-		height: 1.5rem;
-	}
-
-	.icon {
-		font-size: var(--font-size-base);
-	}
-
-	.label {
-		font-size: var(--font-size-sm);
-	}
-}
-
-.size-lg {
-	padding: var(--spacing-3) var(--spacing-4);
-
-	.iconContainer {
-		width: 2rem;
-		height: 2rem;
-	}
-
-	.icon {
-		font-size: var(--font-size-lg);
-	}
-
-	.label {
-		font-size: var(--font-size-base);
 	}
 }
 

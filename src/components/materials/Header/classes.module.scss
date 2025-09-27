@@ -1,16 +1,20 @@
+@use "themes/constants.module.scss";
+
+// Header principal
 .header {
 	position: sticky;
 	top: 0;
-	background: rgba(255, 255, 255, 0.8);
+	background: rgba(255, 255, 255, 0.95);
 	z-index: 1000;
-	border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+	border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 	backdrop-filter: blur(20px);
 	-webkit-backdrop-filter: blur(20px);
+	transition: all var(--transition-fast);
 }
 
 [data-theme="dark"] .header {
-	background: rgba(0, 0, 0, 0.8);
-	border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+	background: rgba(0, 0, 0, 0.95);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 
 .container {
@@ -22,91 +26,357 @@
 	align-items: center;
 	justify-content: space-between;
 	height: 64px;
-}
+	position: relative;
 
-.content {
-	display: flex;
-	align-items: center;
-	gap: var(--spacing-8);
-
-	@media screen and (max-width: 768px) {
-		display: none;
+	@media screen and (max-width: constants.$screen-md) {
+		padding: var(--spacing-3) var(--spacing-4);
+		height: 56px;
 	}
 }
 
+// Section gauche : Logo
+.leftSection {
+	display: flex;
+	align-items: center;
+	flex-shrink: 0;
+}
+
 .logo {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2);
 	text-decoration: none;
 	color: var(--color-text-primary);
 	transition: all var(--transition-fast);
 
 	&:hover {
-		color: var(--color-primary);
-		transform: scale(1.05);
+		transform: scale(1.02);
 	}
 
 	h1 {
-		font-size: var(--font-size-2xl);
+		font-size: var(--font-size-lg);
 		font-weight: var(--font-weight-bold);
 		letter-spacing: -0.025em;
 		background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
 		-webkit-background-clip: text;
 		-webkit-text-fill-color: transparent;
 		background-clip: text;
+		margin: 0;
+
+		@media screen and (max-width: constants.$screen-md) {
+			font-size: var(--font-size-base);
+		}
+
+		@media screen and (max-width: constants.$screen-sm) {
+			display: none;
+		}
 	}
 }
 
-.nav {
+.logoIcon {
+	font-size: 24px;
+	filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+
+	@media screen and (max-width: constants.$screen-md) {
+		font-size: 20px;
+	}
+}
+
+// Navigation Desktop
+.desktopNav {
 	display: flex;
 	align-items: center;
 	gap: var(--spacing-6);
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+
+	@media screen and (max-width: constants.$screen-md) {
+		display: none;
+	}
 }
 
 .navLink {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-1);
 	text-decoration: none;
 	color: var(--color-text-secondary);
 	font-size: var(--font-size-sm);
 	font-weight: var(--font-weight-medium);
-	transition: color var(--transition-fast);
+	padding: var(--spacing-2) var(--spacing-3);
+	border-radius: var(--radius-md);
+	transition: all var(--transition-fast);
+	white-space: nowrap;
 
 	&:hover {
 		color: var(--color-primary);
+		background: var(--color-primary-50);
+		transform: translateY(-1px);
+	}
+
+	svg {
+		opacity: 0.7;
+		transition: opacity var(--transition-fast);
+	}
+
+	&:hover svg {
+		opacity: 1;
 	}
 }
 
-.actions {
+// Section droite : Actions et menu mobile
+.rightSection {
 	display: flex;
 	align-items: center;
-	gap: var(--spacing-4);
+	gap: var(--spacing-3);
+	flex-shrink: 0;
+}
+
+.desktopActions {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-3);
+
+	@media screen and (max-width: constants.$screen-md) {
+		display: none;
+	}
+}
+
+.themeToggleDesktop {
+	@media screen and (max-width: constants.$screen-md) {
+		display: none;
+	}
 }
 
 .logoutButton {
 	white-space: nowrap;
 }
 
-@media (max-width: 768px) {
-	.container {
-		padding: var(--spacing-3) var(--spacing-4);
+// Bouton menu mobile
+.mobileMenuButton {
+	display: none;
+	background: none;
+	border: none;
+	color: var(--color-text-primary);
+	cursor: pointer;
+	padding: var(--spacing-2);
+	border-radius: var(--radius-md);
+	transition: all var(--transition-fast);
+
+	@media screen and (max-width: constants.$screen-md) {
+		display: flex;
+		align-items: center;
+		justify-content: center;
 	}
 
-	.content {
-		gap: var(--spacing-4);
+	&:hover {
+		background: var(--color-gray-100);
+		transform: scale(1.05);
 	}
 
-	.nav {
-		gap: var(--spacing-4);
-	}
-
-	.navLink {
-		font-size: var(--font-size-xs);
-	}
-
-	.logo h1 {
-		font-size: var(--font-size-lg);
+	&:active {
+		transform: scale(0.95);
 	}
 }
 
-@media (max-width: 480px) {
-	.nav {
-		gap: var(--spacing-2);
+[data-theme="dark"] .mobileMenuButton:hover {
+	background: var(--color-gray-800);
+}
+
+// Overlay mobile
+.mobileOverlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 999;
+	backdrop-filter: blur(4px);
+	-webkit-backdrop-filter: blur(4px);
+
+	@media screen and (min-width: var(--screen-md + 1px)) {
+		display: none;
 	}
+}
+
+// Menu mobile
+.mobileMenu {
+	position: fixed;
+	top: 56px;
+	right: 0;
+	width: 280px;
+	max-width: 90vw;
+	height: calc(100vh - 56px);
+	background: var(--color-background);
+	border-left: 1px solid var(--color-border);
+	z-index: 1000;
+	transform: translateX(100%);
+	animation: slideInFromRight 0.25s ease-out forwards;
+	box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
+
+	@media screen and (min-width: var(--screen-md + 1px)) {
+		display: none;
+	}
+}
+
+[data-theme="dark"] .mobileMenu {
+	box-shadow: -4px 0 24px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes slideInFromRight {
+	from {
+		transform: translateX(100%);
+	}
+	to {
+		transform: translateX(0);
+	}
+}
+
+.mobileMenuContent {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	padding: var(--spacing-4);
+}
+
+.mobileNavLink {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-3);
+	text-decoration: none;
+	color: var(--color-text-primary);
+	font-size: var(--font-size-base);
+	font-weight: var(--font-weight-medium);
+	padding: var(--spacing-4) var(--spacing-3);
+	border-radius: var(--radius-lg);
+	transition: all var(--transition-fast);
+	margin-bottom: var(--spacing-1);
+
+	&:hover {
+		background: var(--color-primary-50);
+		color: var(--color-primary);
+		transform: translateX(4px);
+	}
+
+	&:active {
+		transform: translateX(4px) scale(0.98);
+	}
+
+	svg {
+		opacity: 0.8;
+		transition: opacity var(--transition-fast);
+	}
+
+	&:hover svg {
+		opacity: 1;
+	}
+
+	span {
+		flex: 1;
+	}
+}
+
+[data-theme="dark"] .mobileNavLink:hover {
+	background: var(--color-primary-900);
+}
+
+// Footer du menu mobile
+.mobileMenuFooter {
+	margin-top: auto;
+	padding-top: var(--spacing-4);
+	border-top: 1px solid var(--color-border);
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-3);
+}
+
+.themeToggleMobile {
+	display: flex;
+	justify-content: center;
+}
+
+.mobileLogoutButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--spacing-2);
+	background: none;
+	border: 1px solid var(--color-border);
+	color: var(--color-text-secondary);
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-medium);
+	padding: var(--spacing-3) var(--spacing-4);
+	border-radius: var(--radius-lg);
+	cursor: pointer;
+	transition: all var(--transition-fast);
+	width: 100%;
+
+	&:hover:not(:disabled) {
+		background: var(--color-red-50);
+		color: var(--color-red-600);
+		border-color: var(--color-red-200);
+	}
+
+	&:disabled {
+		opacity: 0.6;
+		cursor: not-allowed;
+	}
+
+	svg {
+		transition: transform var(--transition-fast);
+	}
+
+	&:hover:not(:disabled) svg {
+		transform: translateX(-2px);
+	}
+}
+
+[data-theme="dark"] .mobileLogoutButton:hover:not(:disabled) {
+	background: var(--color-red-900);
+	color: var(--color-red-400);
+	border-color: var(--color-red-700);
+}
+
+// Améliorations tactiles
+@media (hover: none) and (pointer: coarse) {
+	.mobileNavLink {
+		padding: var(--spacing-5) var(--spacing-3);
+		font-size: var(--font-size-lg);
+	}
+
+	.mobileMenuButton {
+		padding: var(--spacing-3);
+		min-height: 44px;
+		min-width: 44px;
+	}
+
+	.mobileLogoutButton {
+		padding: var(--spacing-4);
+		min-height: 44px;
+	}
+}
+
+// Accessibilité
+@media (prefers-reduced-motion: reduce) {
+	.header,
+	.mobileMenu,
+	.navLink,
+	.mobileNavLink,
+	.mobileMenuButton,
+	.logo {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}
+
+// Focus visible pour navigation clavier
+.navLink:focus-visible,
+.mobileNavLink:focus-visible,
+.mobileMenuButton:focus-visible,
+.logo:focus-visible {
+	outline: 2px solid var(--color-primary);
+	outline-offset: 2px;
 }

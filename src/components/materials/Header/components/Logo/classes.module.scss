@@ -1,0 +1,47 @@
+@use "themes/constants.module.scss";
+
+.logo {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2);
+	text-decoration: none;
+	color: var(--color-text-primary);
+	transition: all var(--transition-fast);
+
+	&:hover {
+		transform: scale(1.02);
+	}
+
+	h1 {
+		font-size: var(--font-size-lg);
+		font-weight: var(--font-weight-bold);
+		letter-spacing: -0.025em;
+		background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
+		-webkit-background-clip: text;
+		-webkit-text-fill-color: transparent;
+		background-clip: text;
+		margin: 0;
+
+		@media screen and (max-width: constants.$screen-md) {
+			font-size: var(--font-size-base);
+		}
+
+		@media screen and (max-width: constants.$screen-sm) {
+			display: none;
+		}
+	}
+}
+
+.logoIcon {
+	font-size: 24px;
+	filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+
+	@media screen and (max-width: constants.$screen-md) {
+		font-size: 20px;
+	}
+}
+
+.logo:focus-visible {
+	outline: 2px solid var(--color-primary);
+	outline-offset: 2px;
+}

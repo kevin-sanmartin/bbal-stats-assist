@@ -1,0 +1,184 @@
+@use "themes/constants.module.scss";
+
+// Overlay mobile
+.mobileOverlay {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 999;
+	backdrop-filter: blur(4px);
+	-webkit-backdrop-filter: blur(4px);
+
+	@media screen and (min-width: constants.$screen-md + 1px) {
+		display: none;
+	}
+}
+
+// Menu mobile
+.mobileMenu {
+	position: fixed;
+	top: 56px;
+	right: 0;
+	width: 280px;
+	max-width: 90vw;
+	height: calc(100vh - 56px);
+	background: var(--color-background);
+	border-left: 1px solid var(--color-border);
+	z-index: 1000;
+	transform: translateX(100%);
+	animation: slideInFromRight 0.25s ease-out forwards;
+	box-shadow: -4px 0 24px rgba(0, 0, 0, 0.1);
+
+	@media screen and (min-width: constants.$screen-md + 1px) {
+		display: none;
+	}
+}
+
+[data-theme="dark"] .mobileMenu {
+	box-shadow: -4px 0 24px rgba(0, 0, 0, 0.3);
+}
+
+@keyframes slideInFromRight {
+	from {
+		transform: translateX(100%);
+	}
+	to {
+		transform: translateX(0);
+	}
+}
+
+.mobileMenuContent {
+	display: flex;
+	flex-direction: column;
+	height: 100%;
+	padding: var(--spacing-4);
+}
+
+.mobileNavLink {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-3);
+	text-decoration: none;
+	color: var(--color-text-primary);
+	font-size: var(--font-size-base);
+	font-weight: var(--font-weight-medium);
+	padding: var(--spacing-4) var(--spacing-3);
+	border-radius: var(--radius-lg);
+	transition: all var(--transition-fast);
+	margin-bottom: var(--spacing-1);
+
+	&:hover {
+		background: var(--color-primary-50);
+		color: var(--color-primary);
+		transform: translateX(4px);
+	}
+
+	&:active {
+		transform: translateX(4px) scale(0.98);
+	}
+
+	&:focus-visible {
+		outline: 2px solid var(--color-primary);
+		outline-offset: 2px;
+	}
+
+	svg {
+		opacity: 0.8;
+		transition: opacity var(--transition-fast);
+	}
+
+	&:hover svg {
+		opacity: 1;
+	}
+
+	span {
+		flex: 1;
+	}
+}
+
+[data-theme="dark"] .mobileNavLink:hover {
+	background: var(--color-primary-900);
+}
+
+// Footer du menu mobile
+.mobileMenuFooter {
+	margin-top: auto;
+	padding-top: var(--spacing-4);
+	border-top: 1px solid var(--color-border);
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-3);
+}
+
+.themeToggleMobile {
+	display: flex;
+	justify-content: center;
+}
+
+.mobileLogoutButton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	gap: var(--spacing-2);
+	background: none;
+	border: 1px solid var(--color-border);
+	color: var(--color-text-secondary);
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-medium);
+	padding: var(--spacing-3) var(--spacing-4);
+	border-radius: var(--radius-lg);
+	cursor: pointer;
+	transition: all var(--transition-fast);
+	width: 100%;
+
+	&:hover:not(:disabled) {
+		background: var(--color-red-50);
+		color: var(--color-red-600);
+		border-color: var(--color-red-200);
+	}
+
+	&:disabled {
+		opacity: 0.6;
+		cursor: not-allowed;
+	}
+
+	svg {
+		transition: transform var(--transition-fast);
+	}
+
+	&:hover:not(:disabled) svg {
+		transform: translateX(-2px);
+	}
+}
+
+[data-theme="dark"] .mobileLogoutButton:hover:not(:disabled) {
+	background: var(--color-red-900);
+	color: var(--color-red-400);
+	border-color: var(--color-red-700);
+}
+
+// Améliorations tactiles
+@media (hover: none) and (pointer: coarse) {
+	.mobileNavLink {
+		padding: var(--spacing-5) var(--spacing-3);
+		font-size: var(--font-size-lg);
+	}
+
+	.mobileLogoutButton {
+		padding: var(--spacing-4);
+		min-height: 44px;
+	}
+}
+
+// Accessibilité
+@media (prefers-reduced-motion: reduce) {
+	.mobileMenu,
+	.mobileNavLink {
+		animation-duration: 0.01ms !important;
+		animation-iteration-count: 1 !important;
+		transition-duration: 0.01ms !important;
+	}
+}

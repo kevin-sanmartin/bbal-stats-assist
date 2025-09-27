@@ -6,12 +6,11 @@ import classNames from "classnames";
 import { useEffect, useState } from "react";
 
 interface ThemeToggleProps {
-	size?: "sm" | "md" | "lg";
 	showLabel?: boolean;
 	className?: string;
 }
 
-export default function ThemeToggle({ size = "md", showLabel = false, className }: ThemeToggleProps) {
+export default function ThemeToggle({ showLabel = false, className }: ThemeToggleProps) {
 	const { theme, toggleTheme } = useTheme();
 	const [mounted, setMounted] = useState(false);
 
@@ -22,7 +21,7 @@ export default function ThemeToggle({ size = "md", showLabel = false, className 
 	// Éviter le flash pendant l'hydratation
 	if (!mounted) {
 		return (
-			<button className={classNames(classes.themeToggle, classes[`size-${size}`], className)} disabled>
+			<button className={classNames(classes.themeToggle, className)} disabled>
 				<div className={classes.iconContainer}>
 					<span className={`${classes.icon} ${classes.sunIcon} ${classes.active}`}>☀️</span>
 					<span className={`${classes.icon} ${classes.moonIcon}`}>🌙</span>
@@ -32,11 +31,22 @@ export default function ThemeToggle({ size = "md", showLabel = false, className 
 		);
 	}
 
-	const toggleClasses = classNames(classes.themeToggle, classes[`size-${size}`], className);
+	const toggleClasses = classNames(classes.themeToggle, className);
 	const isDark = theme === "dark";
 
+	const handleToggleTheme = (e: React.MouseEvent) => {
+		e.preventDefault();
+		e.stopPropagation();
+		toggleTheme();
+	};
+
 	return (
-		<button className={toggleClasses} onClick={toggleTheme} aria-label={`Switch to ${isDark ? "light" : "dark"} mode`} title={`Switch to ${isDark ? "light" : "dark"} mode`}>
+		<button
+			className={toggleClasses}
+			onClick={handleToggleTheme}
+			aria-label={`Switch to ${isDark ? "light" : "dark"} mode`}
+			title={`Switch to ${isDark ? "light" : "dark"} mode`}
+			type="button">
 			<div className={classes.iconContainer}>
 				<span className={`${classes.icon} ${classes.sunIcon} ${!isDark ? classes.active : ""}`}>☀️</span>
 				<span className={`${classes.icon} ${classes.moonIcon} ${isDark ? classes.active : ""}`}>🌙</span>

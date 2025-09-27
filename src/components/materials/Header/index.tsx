@@ -1,17 +1,16 @@
 "use client";
 
 import { useState } from "react";
-import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { FiLogOut } from "react-icons/fi";
-import ThemeToggle from "@/components/elements/ThemeToggle";
-import Button from "@/components/elements/Button";
 import { useAuthContext } from "@/contexts/AuthContext";
 import { useToastContext } from "@/contexts/ToastContext";
+import ThemeToggle from "@/components/elements/ThemeToggle";
+import { Logo, DesktopNav, DesktopActions, MobileMenu, MobileMenuButton } from "./components";
 import classes from "./classes.module.scss";
 
 export default function Header() {
 	const [logoutLoading, setLogoutLoading] = useState(false);
+	const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 	const { user, signOut, loading } = useAuthContext();
 	const { toast } = useToastContext();
 	const router = useRouter();
@@ -30,53 +29,30 @@ export default function Header() {
 		}
 	};
 
+	const closeMobileMenu = () => setMobileMenuOpen(false);
+	const toggleMobileMenu = () => setMobileMenuOpen((prev) => !prev);
+
+	const isUserLoggedIn = !loading && !!user;
+
 	return (
-		<header className={classes.header}>
-			<div className={classes.container}>
-				<div className={classes.content}>
-					<Link href="/" className={classes.logo}>
-						<h1>BSA</h1>
-					</Link>
+		<>
+			<header className={classes.header}>
+				<div className={classes.container}>
+					<div className={classes.leftSection}>
+						<Logo onMobileMenuClose={closeMobileMenu} />
+					</div>
 
-					<nav className={classes.nav}>
-						<Link href="/basketstats" className={classes.navLink}>
-							Stats
-						</Link>
-						<Link href="/components" className={classes.navLink}>
-							Composants
-						</Link>
-						{!loading && user && (
-							<>
-								<Link href="/teams" className={classes.navLink}>
-									Équipes
-								</Link>
-								<Link href="/matches" className={classes.navLink}>
-									Matches
-								</Link>
-							</>
-						)}
-						{!loading && !user && (
-							<>
-								<Link href="/auth/login" className={classes.navLink}>
-									Connexion
-								</Link>
-								<Link href="/auth/register" className={classes.navLink}>
-									Inscription
-								</Link>
-							</>
-						)}
-					</nav>
-				</div>
+					<DesktopNav isUserLoggedIn={isUserLoggedIn} />
 
-				<div className={classes.actions}>
-					{!loading && user && (
-						<Button variant="secondary" size="sm" onClick={handleLogout} loading={logoutLoading} leftIcon={<FiLogOut />} className={classes.logoutButton}>
-							Se déconnecter
-						</Button>
-					)}
-					<ThemeToggle showLabel />
+					<div className={classes.rightSection}>
+						<DesktopActions isUserLoggedIn={isUserLoggedIn} onLogout={handleLogout} logoutLoading={logoutLoading} />
+						<ThemeToggle />
+						<MobileMenuButton isOpen={mobileMenuOpen} onToggle={toggleMobileMenu} />
+					</div>
 				</div>
-			</div>
-		</header>
+			</header>
+
+			<MobileMenu isOpen={mobileMenuOpen} isUserLoggedIn={isUserLoggedIn} onClose={closeMobileMenu} onLogout={handleLogout} logoutLoading={logoutLoading} />
+		</>
 	);
 }
