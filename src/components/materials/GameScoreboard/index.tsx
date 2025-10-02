@@ -69,7 +69,7 @@ export default function GameScoreboard({
 
 	return (
 		<div className={scoreboardClasses}>
-			<Card variant="elevated" padding={size === "sm" ? "sm" : size === "lg" ? "lg" : "md"}>
+			<Card variant="elevated">
 				{gameTime && (
 					<div className={classes.gameInfo}>
 						<div className={classes.period}>

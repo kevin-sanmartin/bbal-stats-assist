@@ -43,7 +43,7 @@ export default function ForgotPassword() {
 
 	if (emailSent) {
 		return (
-			<Card variant="elevated" padding="lg" className={classes.card}>
+			<Card variant="elevated" className={classes.card}>
 				<div className={classes.header}>
 					<h1 className={classes.title}>Email envoyé !</h1>
 					<p className={classes.subtitle}>
@@ -67,7 +67,7 @@ export default function ForgotPassword() {
 	}
 
 	return (
-		<Card variant="elevated" padding="lg" className={classes.card}>
+		<Card variant="elevated" className={classes.card}>
 			<div className={classes.header}>
 				<h1 className={classes.title}>Mot de passe oublié</h1>
 				<p className={classes.subtitle}>Entrez votre email pour recevoir un lien de réinitialisation</p>

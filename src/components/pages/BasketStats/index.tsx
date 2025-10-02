@@ -210,7 +210,7 @@ export default function BasketStats() {
 								#{demoPlayers.find((p) => p.id === selectedPlayer)?.number}
 							</Badge>
 						</h2>
-						<Card variant="elevated" padding="lg">
+						<Card variant="elevated">
 							<div className={classes.statCountersGrid}>
 								<StatCounter
 									label="Points"

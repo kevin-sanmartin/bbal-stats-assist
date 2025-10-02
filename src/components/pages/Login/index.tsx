@@ -44,7 +44,7 @@ export default function Login() {
 	};
 
 	return (
-		<Card variant="elevated" padding="lg" className={classes.card}>
+		<Card variant="elevated" className={classes.card}>
 			<div className={classes.header}>
 				<h1 className={classes.title}>Connexion</h1>
 				<p className={classes.subtitle}>Connectez-vous à votre compte</p>

@@ -27,7 +27,6 @@ export default function MatchTypeSelectionStep({ onMatchTypeSelect }: MatchTypeS
 		<div className={classes.root}>
 			<div className={classes.typesList}>
 				<Card
-					padding="md"
 					hoverable
 					className={`${classes.typeCard} ${selectedType === EMatchType.LIVE ? classes.selected : ""}`}
 					onClick={() => handleTypeClick(EMatchType.LIVE)}>
@@ -38,7 +37,7 @@ export default function MatchTypeSelectionStep({ onMatchTypeSelect }: MatchTypeS
 					<p className={classes.typeDescription}>Saisissez les statistiques en temps réel pendant le match</p>
 				</Card>
 
-				<Card variant="outlined" padding="md" className={`${classes.typeCard} ${classes.disabled}`}>
+				<Card variant="outlined" className={`${classes.typeCard} ${classes.disabled}`}>
 					<div className={classes.typeHeader}>
 						<h3 className={classes.typeTitle}>Saisie manuelle</h3>
 						<div className={classes.typeIcon}>📝</div>

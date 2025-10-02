@@ -74,7 +74,7 @@ export default function ResetPassword() {
 	// Loading state pendant la vérification du token
 	if (session === null) {
 		return (
-			<Card variant="elevated" padding="lg" className={classes.card}>
+			<Card variant="elevated" className={classes.card}>
 				<div className={classes.header}>
 					<h1 className={classes.title}>Vérification...</h1>
 					<p className={classes.subtitle}>Validation de votre lien de réinitialisation</p>
@@ -86,7 +86,7 @@ export default function ResetPassword() {
 	// Succès
 	if (success) {
 		return (
-			<Card variant="elevated" padding="lg" className={classes.card}>
+			<Card variant="elevated" className={classes.card}>
 				<div className={classes.header}>
 					<div className={classes.successIcon}>
 						<FiCheck />
@@ -106,7 +106,7 @@ export default function ResetPassword() {
 
 	// Formulaire de reset
 	return (
-		<Card variant="elevated" padding="lg" className={classes.card}>
+		<Card variant="elevated" className={classes.card}>
 			<div className={classes.header}>
 				<h1 className={classes.title}>Nouveau mot de passe</h1>
 				<p className={classes.subtitle}>Choisissez un nouveau mot de passe sécurisé</p>

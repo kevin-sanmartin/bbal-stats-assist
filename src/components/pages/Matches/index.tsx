@@ -149,7 +149,7 @@ export default function Matches({ initialTeams }: MatchesProps) {
 					</div>
 				</div>
 
-				<Card padding="lg">
+				<Card>
 					<div className={classes.stepHeader}>
 						<h2 className={classes.stepTitle}>{getStepTitle()}</h2>
 						<p className={classes.stepSubtitle}>{getStepSubtitle()}</p>

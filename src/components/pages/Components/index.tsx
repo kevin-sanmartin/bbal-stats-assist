@@ -121,20 +121,6 @@ export default function Components() {
 				<div className={classes.section}>
 					<h2>Cards</h2>
 					<div className={classes.grid}>
-						<Card variant="default" hoverable padding="lg">
-							<p>This is a simple card with some default content.</p>
-						</Card>
-						<Card variant="bordered" hoverable padding="lg">
-							<p>This is a simple card with some bordered content.</p>
-						</Card>
-						<Card variant="elevated" hoverable padding="lg">
-							<p>This is a simple card with some elevated content.</p>
-						</Card>
-						<Card variant="outlined" hoverable padding="lg">
-							<p>This is a simple card with some outlined content.</p>
-						</Card>
-					</div>
-					<div className={classes.grid}>
 						<Card variant="default" hoverable>
 							<p>This is a simple card with some default content.</p>
 						</Card>
@@ -145,20 +131,6 @@ export default function Components() {
 							<p>This is a simple card with some elevated content.</p>
 						</Card>
 						<Card variant="outlined" hoverable>
-							<p>This is a simple card with some outlined content.</p>
-						</Card>
-					</div>
-					<div className={classes.grid}>
-						<Card variant="default" hoverable padding="sm">
-							<p>This is a simple card with some default content.</p>
-						</Card>
-						<Card variant="bordered" hoverable padding="sm">
-							<p>This is a simple card with some bordered content.</p>
-						</Card>
-						<Card variant="elevated" hoverable padding="sm">
-							<p>This is a simple card with some elevated content.</p>
-						</Card>
-						<Card variant="outlined" hoverable padding="sm">
 							<p>This is a simple card with some outlined content.</p>
 						</Card>
 					</div>

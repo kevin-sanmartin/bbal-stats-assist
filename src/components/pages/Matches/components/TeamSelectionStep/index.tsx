@@ -41,7 +41,6 @@ export default function TeamSelectionStep({ onTeamSelect, teams }: TeamSelection
 				{teams.map((team) => (
 					<Card
 						key={team.id}
-						padding="md"
 						hoverable
 						className={`${classes.teamCard} ${selectedTeam === team.id ? classes.selected : ""}`}
 						onClick={() => handleTeamClick(team.id)}>
