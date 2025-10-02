@@ -212,7 +212,6 @@ export default function BasketStats() {
 									onChange={(value) => updateStat(selectedPlayer, "points", value)}
 									variant="default"
 									max={50}
-									size="lg"
 								/>
 								<StatCounter
 									label="Rebonds"
@@ -220,7 +219,6 @@ export default function BasketStats() {
 									onChange={(value) => updateStat(selectedPlayer, "rebounds", value)}
 									variant="default"
 									max={20}
-									size="lg"
 								/>
 								<StatCounter
 									label="Passes"
@@ -228,7 +226,6 @@ export default function BasketStats() {
 									onChange={(value) => updateStat(selectedPlayer, "assists", value)}
 									variant="default"
 									max={15}
-									size="lg"
 								/>
 								<StatCounter
 									label="Fautes"
@@ -236,7 +233,6 @@ export default function BasketStats() {
 									onChange={(value) => updateStat(selectedPlayer, "fouls", value)}
 									variant="danger"
 									max={5}
-									size="lg"
 								/>
 							</div>
 						</Card>
@@ -259,10 +255,10 @@ export default function BasketStats() {
 					<div className={classes.subsection}>
 						<h3>StatCounter - Différentes variantes</h3>
 						<div className={classes.statVariantsGrid}>
-							<StatCounter label="Points" value={12} variant="default" size="md" showButtons={false} />
-							<StatCounter label="Rebounds" value={8} variant="default" size="md" showButtons={false} />
-							<StatCounter label="Assists" value={6} variant="default" size="md" showButtons={false} />
-							<StatCounter label="Fouls" value={3} variant="danger" size="md" showButtons={false} />
+							<StatCounter label="Points" value={12} variant="default" />
+							<StatCounter label="Rebounds" value={8} variant="default" />
+							<StatCounter label="Assists" value={6} variant="default" />
+							<StatCounter label="Fouls" value={3} variant="danger" />
 						</div>
 					</div>
 

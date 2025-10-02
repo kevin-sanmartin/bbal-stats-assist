@@ -214,23 +214,21 @@ export default function TeamHistory({ team, games }: TeamHistoryProps) {
 				<h2>Statistiques de l'équipe</h2>
 				<div className={classes.statsGrid}>
 					<Card className={classes.statCard}>
-						<StatCounter label="Matchs joués" value={teamStats.totalGames} size="lg" showButtons={false} />
+						<StatCounter label="Matchs joués" value={teamStats.totalGames} />
 					</Card>
 					<Card className={classes.statCard}>
-						<StatCounter label="Victoires" value={teamStats.wins} size="lg" variant="success" showButtons={false} />
+						<StatCounter label="Victoires" value={teamStats.wins} variant="success" />
 					</Card>
 					<Card className={classes.statCard}>
 						<StatCounter
 							label="Taux de victoire"
 							value={teamStats.winRate}
 							suffix="%"
-							size="lg"
 							variant={teamStats.winRate >= 70 ? "success" : teamStats.winRate >= 50 ? "warning" : "danger"}
-							showButtons={false}
 						/>
 					</Card>
 					<Card className={classes.statCard}>
-						<StatCounter label="Points/match" value={teamStats.avgPointsFor} size="lg" variant="default" showButtons={false} />
+						<StatCounter label="Points/match" value={teamStats.avgPointsFor} variant="default" />
 					</Card>
 				</div>
 			</div>
