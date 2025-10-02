@@ -181,34 +181,6 @@ export default function Components() {
 				<div className={classes.section}>
 					<h2>Alerts</h2>
 					<div className={classes.grid}>
-						<Alert variant="info" title="Information" size="lg" closable onClose={() => {}}>
-							This is an informational alert message.
-						</Alert>
-						<Alert variant="success" title="Success!" size="lg" closable onClose={() => {}}>
-							Operation completed successfully.
-						</Alert>
-						<Alert variant="warning" title="Warning" size="lg" closable onClose={() => {}}>
-							Please check your input data.
-						</Alert>
-						<Alert variant="danger" title="Error" size="lg" closable onClose={() => {}}>
-							Something went wrong.
-						</Alert>
-					</div>
-					<div className={classes.grid}>
-						<Alert variant="info" title="Information" size="lg">
-							This is an informational alert message.
-						</Alert>
-						<Alert variant="success" title="Success!" size="lg">
-							Operation completed successfully.
-						</Alert>
-						<Alert variant="warning" title="Warning" size="lg">
-							Please check your input data.
-						</Alert>
-						<Alert variant="danger" title="Error" size="lg">
-							Something went wrong.
-						</Alert>
-					</div>
-					<div className={classes.grid}>
 						<Alert variant="info" title="Information" closable onClose={() => {}}>
 							This is an informational alert message.
 						</Alert>
@@ -219,48 +191,6 @@ export default function Components() {
 							Please check your input data.
 						</Alert>
 						<Alert variant="danger" title="Error" closable onClose={() => {}}>
-							Something went wrong.
-						</Alert>
-					</div>
-					<div className={classes.grid}>
-						<Alert variant="info" title="Information">
-							This is an informational alert message.
-						</Alert>
-						<Alert variant="success" title="Success!">
-							Operation completed successfully.
-						</Alert>
-						<Alert variant="warning" title="Warning">
-							Please check your input data.
-						</Alert>
-						<Alert variant="danger" title="Error">
-							Something went wrong.
-						</Alert>
-					</div>
-					<div className={classes.grid}>
-						<Alert variant="info" title="Information" size="sm" closable onClose={() => {}}>
-							This is an informational alert message.
-						</Alert>
-						<Alert variant="success" title="Success!" size="sm" closable onClose={() => {}}>
-							Operation completed successfully.
-						</Alert>
-						<Alert variant="warning" title="Warning" size="sm" closable onClose={() => {}}>
-							Please check your input data.
-						</Alert>
-						<Alert variant="danger" title="Error" size="sm" closable onClose={() => {}}>
-							Something went wrong.
-						</Alert>
-					</div>
-					<div className={classes.grid}>
-						<Alert variant="info" title="Information" size="sm">
-							This is an informational alert message.
-						</Alert>
-						<Alert variant="success" title="Success!" size="sm">
-							Operation completed successfully.
-						</Alert>
-						<Alert variant="warning" title="Warning" size="sm">
-							Please check your input data.
-						</Alert>
-						<Alert variant="danger" title="Error" size="sm">
 							Something went wrong.
 						</Alert>
 					</div>

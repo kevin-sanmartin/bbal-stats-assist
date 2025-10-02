@@ -4,11 +4,9 @@ import classNames from "classnames";
 import { IoInformationCircleOutline, IoCheckmarkCircleOutline, IoWarningOutline, IoAlertCircleOutline, IoClose } from "react-icons/io5";
 
 export type AlertVariant = "info" | "success" | "warning" | "danger";
-export type AlertSize = "sm" | "md" | "lg";
 
 interface AlertProps {
 	variant?: AlertVariant;
-	size?: AlertSize;
 	title?: string;
 	icon?: ReactNode;
 	closable?: boolean;
@@ -16,8 +14,8 @@ interface AlertProps {
 	className?: string;
 }
 
-export default function Alert({ variant = "info", size = "md", title, children, icon, closable = false, onClose, className }: PropsWithChildren<AlertProps>) {
-	const alertClasses = classNames(classes.alert, classes[`variant-${variant}`], classes[`size-${size}`], className);
+export default function Alert({ variant = "info", title, children, icon, closable = false, onClose, className }: PropsWithChildren<AlertProps>) {
+	const alertClasses = classNames(classes.alert, classes[`variant-${variant}`], className);
 
 	const defaultIcons = {
 		info: <IoInformationCircleOutline />,

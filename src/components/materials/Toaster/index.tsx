@@ -24,7 +24,7 @@ export function ToasterContainer({ toasts, onRemove }: ToasterContainerProps) {
 		<div className={classes.toaster}>
 			{toasts.map((toast) => (
 				<div key={toast.id} className={`${classes.toast} ${toast.isExiting ? classes.exiting : ""}`}>
-					<Alert variant={toast.variant} title={toast.title} closable onClose={() => onRemove(toast.id)} size="md">
+					<Alert variant={toast.variant} title={toast.title} closable onClose={() => onRemove(toast.id)}>
 						{toast.message}
 					</Alert>
 				</div>
