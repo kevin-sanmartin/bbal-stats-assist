@@ -1,18 +1,16 @@
 import classes from "./classes.module.scss";
 import classNames from "classnames";
 
-export type LoaderSize = "sm" | "md" | "lg" | "xl";
 export type LoaderVariant = "default" | "primary" | "dots";
 
 interface LoaderProps {
-	size?: LoaderSize;
 	variant?: LoaderVariant;
 	label?: string;
 	className?: string;
 }
 
-export default function Loader({ size = "md", variant = "default", label, className }: LoaderProps) {
-	const loaderClasses = classNames(classes.loader, classes[`size-${size}`], classes[`variant-${variant}`], className);
+export default function Loader({ variant = "default", label, className }: LoaderProps) {
+	const loaderClasses = classNames(classes.loader, classes[`variant-${variant}`], className);
 
 	if (variant === "dots") {
 		return (

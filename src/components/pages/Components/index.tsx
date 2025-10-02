@@ -197,18 +197,11 @@ export default function Components() {
 				</div>
 
 				<div className={classes.section}>
-					<h2>Loading</h2>
+					<h2>Loader</h2>
 					<div className={classes.flexRow}>
-						<Loader variant="dots" label="Loading..." size="xl" />
-						<Loader variant="dots" label="Loading..." size="lg" />
 						<Loader variant="dots" label="Loading..." />
-						<Loader variant="dots" label="Loading..." size="sm" />
-					</div>
-					<div className={classes.flexRow}>
-						<Loader size="xl" variant="primary" />
-						<Loader size="lg" variant="primary" />
-						<Loader size="md" />
-						<Loader size="sm" />
+						<Loader variant="primary" />
+						<Loader variant="default" />
 					</div>
 				</div>
 
