@@ -13,7 +13,7 @@ const gamesService = GamesServerService.getInstance();
 
 // Respect the coding style, inside /app it's always "Page" and import <*YourPage*> from "@/components/pages"
 export default async function Page() {
-	const [initialTeams, initialGames, userStats] = await Promise.all([teamsService.getUserTeams(), gamesService.getUserGames(), gamesService.getUserStats()]);
+	const [teams, userStats] = await Promise.all([teamsService.getUserTeams(), gamesService.getUserStats()]);
 
-	return <Home initialTeams={initialTeams} initialGames={initialGames} userStats={userStats} />;
+	return <Home teams={teams} userStats={userStats} />;
 }

@@ -1,4 +1,5 @@
 import { ETeamCategory } from "../enums/team";
+import { TPlayer } from "./player";
 
 export type TTeam = {
 	id: string;
@@ -6,6 +7,10 @@ export type TTeam = {
 	category: ETeamCategory;
 	user_id: string;
 	created_at: string;
+};
+
+export type TTeamWithPlayers = TTeam & {
+	players: Partial<TPlayer[]>;
 };
 
 export type TCreateTeamInput = {

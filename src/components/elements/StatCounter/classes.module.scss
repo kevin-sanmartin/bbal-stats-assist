@@ -7,6 +7,7 @@
 	border: 1px solid var(--color-border);
 	border-radius: var(--radius-md);
 	transition: all var(--transition-fast);
+	padding: var(--spacing-2);
 }
 
 .disabled {
@@ -39,13 +40,13 @@
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	min-height: 2.5rem;
+	min-height: 2rem;
 	border-radius: var(--radius-sm);
 	background-color: var(--color-surface-secondary);
 }
 
 .value {
-	font-size: var(--font-size-2xl);
+	font-size: var(--font-size-lg);
 	font-weight: var(--font-weight-bold);
 	color: var(--color-text-primary);
 	user-select: none;
@@ -54,8 +55,8 @@
 .decrementButton,
 .incrementButton {
 	flex-shrink: 0;
-	width: 2.5rem;
-	height: 2.5rem;
+	width: 2rem;
+	height: 2rem;
 	display: flex !important;
 	align-items: center;
 	justify-content: center;
@@ -64,8 +65,8 @@
 	min-height: auto !important;
 
 	svg {
-		width: 1rem;
-		height: 1rem;
+		width: 0.875rem;
+		height: 0.875rem;
 	}
 }
 
@@ -77,66 +78,6 @@
 .incrementButton:hover:not(:disabled) {
 	background-color: var(--color-success-light);
 	color: var(--color-success);
-}
-
-// === SIZES ===
-
-.size-sm {
-	padding: var(--spacing-2);
-
-	.label {
-		font-size: var(--font-size-xs);
-	}
-
-	.valueContainer {
-		min-height: 2rem;
-	}
-
-	.value {
-		font-size: var(--font-size-lg);
-	}
-
-	.decrementButton,
-	.incrementButton {
-		width: 2rem;
-		height: 2rem;
-
-		svg {
-			width: 0.875rem;
-			height: 0.875rem;
-		}
-	}
-}
-
-.size-md {
-	padding: var(--spacing-3);
-}
-
-.size-lg {
-	padding: var(--spacing-4);
-
-	.label {
-		font-size: var(--font-size-sm);
-	}
-
-	.valueContainer {
-		min-height: 3rem;
-	}
-
-	.value {
-		font-size: var(--font-size-3xl);
-	}
-
-	.decrementButton,
-	.incrementButton {
-		width: 3rem;
-		height: 3rem;
-
-		svg {
-			width: 1.25rem;
-			height: 1.25rem;
-		}
-	}
 }
 
 // === VARIANTS ===

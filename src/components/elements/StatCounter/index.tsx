@@ -1,16 +1,13 @@
-import { useState } from "react";
 import classes from "./classes.module.scss";
 import classNames from "classnames";
 import Button from "@/components/elements/Button";
 import { HiMinus, HiPlus } from "react-icons/hi";
 
-export type StatCounterSize = "sm" | "md" | "lg";
 export type StatCounterVariant = "default" | "success" | "warning" | "danger";
 
 interface StatCounterProps {
 	label: string;
 	value: number;
-	size?: StatCounterSize;
 	variant?: StatCounterVariant;
 	min?: number;
 	max?: number;
@@ -25,18 +22,17 @@ interface StatCounterProps {
 export default function StatCounter({
 	label,
 	value,
-	size = "md",
 	variant = "default",
 	min = 0,
 	max = 99,
 	step = 1,
-	showButtons = true,
+	showButtons = false,
 	disabled = false,
 	onChange,
 	className,
 	suffix,
 }: StatCounterProps) {
-	const containerClasses = classNames(classes.statCounter, classes[`size-${size}`], classes[`variant-${variant}`], { [classes.disabled]: disabled }, className);
+	const containerClasses = classNames(classes.statCounter, classes[`variant-${variant}`], { [classes.disabled]: disabled }, className);
 
 	const handleIncrement = () => {
 		if (disabled || value >= max) return;

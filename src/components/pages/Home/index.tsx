@@ -2,39 +2,25 @@
 
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/contexts/AuthContext";
-import { TTeam } from "@/types/team";
-import { TGame } from "@/types/game";
+import { TTeam, TTeamWithPlayers } from "@/types/team";
 import { UserStats } from "@/services/supabase/games/ServerService";
 import Card from "@/components/elements/Card";
 import Button from "@/components/elements/Button";
 import Badge from "@/components/elements/Badge";
 import StatCounter from "@/components/elements/StatCounter";
 import classes from "./classes.module.scss";
+import { MdHistory } from "react-icons/md";
+import { FaUsers, FaTrophy } from "react-icons/fa";
+import { FaBasketball } from "react-icons/fa6";
 
 interface HomeProps {
-	initialTeams: TTeam[];
-	initialGames: TGame[];
+	teams: TTeamWithPlayers[];
 	userStats: UserStats;
 }
 
-export default function Home({ initialTeams, initialGames, userStats }: HomeProps) {
+export default function Home({ teams, userStats }: HomeProps) {
 	const { user } = useAuthContext();
 	const router = useRouter();
-
-	const getCategoryColor = (category: string) => {
-		switch (category) {
-			case "U13":
-				return "success";
-			case "U15":
-				return "info";
-			case "U18":
-				return "warning";
-			case "SENIOR":
-				return "primary";
-			default:
-				return "default";
-		}
-	};
 
 	if (!user) {
 		return (
@@ -71,14 +57,9 @@ export default function Home({ initialTeams, initialGames, userStats }: HomeProp
 					<h1>Tableau de bord</h1>
 					<p>Bienvenue, {user.email}</p>
 				</div>
-				<div className={classes.headerActions}>
-					<Button color="primary" onClick={() => router.push("/teams")}>
-						+ Nouvelle équipe
-					</Button>
-				</div>
 			</div>
 
-			{initialTeams.length === 0 ? (
+			{teams.length === 0 ? (
 				<div className={classes.emptyState}>
 					<div className={classes.emptyIcon}>🏀</div>
 					<h2>Aucune équipe trouvée</h2>
@@ -90,42 +71,35 @@ export default function Home({ initialTeams, initialGames, userStats }: HomeProp
 			) : (
 				<div className={classes.content}>
 					<div className={classes.stats}>
-						<Card className={classes.statCard}>
-							<StatCounter label="Équipes actives" value={initialTeams.length} size="lg" showButtons={false} />
-						</Card>
-						<Card className={classes.statCard}>
-							<StatCounter label="Victoires" value={userStats.totalWins} size="lg" variant="success" showButtons={false} />
-						</Card>
-						<Card className={classes.statCard}>
-							<StatCounter
-								label="Taux de victoire"
-								value={userStats.winRate}
-								suffix="%"
-								size="lg"
-								variant={userStats.winRate >= 70 ? "success" : userStats.winRate >= 50 ? "warning" : "danger"}
-								showButtons={false}
-							/>
-						</Card>
-						<Card className={classes.statCard}>
-							<StatCounter label="Joueurs total" value={userStats.totalPlayers} size="lg" variant="warning" showButtons={false} />
-						</Card>
+						<StatCounter label="Équipes actives" value={teams.length} />
+						<StatCounter label="Victoires" value={userStats.totalWins} variant="success" />
+						<StatCounter label="Taux de victoire" value={userStats.winRate} suffix="%" variant={userStats.winRate >= 70 ? "success" : "warning"} />
+						<StatCounter label="Joueurs total" value={userStats.totalPlayers} variant="warning" />
 					</div>
 
 					<div className={classes.teamsSection}>
 						<h2>Mes équipes</h2>
 						<div className={classes.teamsGrid}>
-							{initialTeams.map((team) => (
+							{teams.map((team) => (
 								<Card key={team.id} className={classes.teamCard}>
 									<div className={classes.teamHeader}>
-										<h3>{team.name}</h3>
-										<Badge variant={getCategoryColor(team.category) as any}>{team.category}</Badge>
+										<div className={classes.teamTitleContainer}>
+											<FaBasketball size={30} className={classes.teamIcon} />
+											<div className={classes.teamTitle}>
+												<h3>{team.name}</h3>
+												<p>
+													{team.players.length} joueur{team.players.length > 1 ? "s" : ""}
+												</p>
+											</div>
+										</div>
+										<Badge variant={getCategoryColor(team.category)}>{team.category}</Badge>
 									</div>
 									<div className={classes.teamActions}>
-										<Button variant="outlined" onClick={() => router.push(`/teams/${team.id}/players`)}>
-											👥 Joueurs
+										<Button variant="outlined" onClick={() => router.push(`/teams/${team.id}/players`)} leftIcon={<FaUsers size={20} />} fullWidth>
+											Joueurs
 										</Button>
-										<Button color="primary" onClick={() => router.push(`/teams/${team.id}/history`)}>
-											📊 Historique
+										<Button color="primary" onClick={() => router.push(`/teams/${team.id}/history`)} leftIcon={<MdHistory size={20} />} fullWidth>
+											Historique
 										</Button>
 									</div>
 								</Card>
@@ -137,12 +111,12 @@ export default function Home({ initialTeams, initialGames, userStats }: HomeProp
 						<h2>Actions rapides</h2>
 						<div className={classes.actionsGrid}>
 							<Card className={classes.actionCard} onClick={() => router.push("/matches")}>
-								<div className={classes.actionIcon}>🏆</div>
+								<FaTrophy size={40} className={classes.actionIcon} />
 								<h3>Nouveau match</h3>
 								<p>Démarrer un match en direct ou manuel</p>
 							</Card>
 							<Card className={classes.actionCard} onClick={() => router.push("/teams")}>
-								<div className={classes.actionIcon}>👥</div>
+								<FaUsers size={40} className={classes.actionIcon} />
 								<h3>Gérer les équipes</h3>
 								<p>Ajouter ou modifier vos équipes</p>
 							</Card>
@@ -152,4 +126,19 @@ export default function Home({ initialTeams, initialGames, userStats }: HomeProp
 			)}
 		</div>
 	);
+}
+
+function getCategoryColor(category: string) {
+	switch (category) {
+		case "U13":
+			return "success";
+		case "U15":
+			return "info";
+		case "U18":
+			return "warning";
+		case "SENIOR":
+			return "primary";
+		default:
+			return "default";
+	}
 }

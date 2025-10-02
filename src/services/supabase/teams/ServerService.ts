@@ -1,4 +1,4 @@
-import { TTeam } from "@/types/team";
+import { TTeam, TTeamWithPlayers } from "@/types/team";
 import { createServerSupabaseClient } from "@/utils/supabase/server";
 
 export class TeamsServerService {
@@ -14,9 +14,9 @@ export class TeamsServerService {
 		return TeamsServerService.instance;
 	}
 
-	public async getUserTeams(): Promise<TTeam[]> {
+	public async getUserTeams(): Promise<TTeamWithPlayers[]> {
 		const supabase = await createServerSupabaseClient();
-		const { data, error } = await supabase.from(this.tableName).select("*").order("created_at");
+		const { data, error } = await supabase.from(this.tableName).select("*, players:players(id, name)").order("created_at");
 
 		if (error) {
 			console.error("Erreur lors de la récupération des équipes:", error);
@@ -28,11 +28,7 @@ export class TeamsServerService {
 
 	public async getTeamById(teamId: string): Promise<TTeam | null> {
 		const supabase = await createServerSupabaseClient();
-		const { data, error } = await supabase
-			.from(this.tableName)
-			.select("*")
-			.eq("id", teamId)
-			.single();
+		const { data, error } = await supabase.from(this.tableName).select("*").eq("id", teamId).single();
 
 		if (error) {
 			console.error("Erreur lors de la récupération de l'équipe:", error);

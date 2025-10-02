@@ -109,11 +109,6 @@
 	}
 }
 
-.headerActions {
-	display: flex;
-	gap: var(--spacing-3);
-}
-
 // === EMPTY STATE ===
 
 .emptyState {
@@ -158,8 +153,9 @@
 
 .stats {
 	display: grid;
-	grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-	gap: var(--spacing-4);
+	grid-template-columns: repeat(2, 1fr);
+	grid-template-rows: repeat(2, 1fr);
+	gap: var(--spacing-2);
 }
 
 .statCard {
@@ -210,11 +206,30 @@
 	align-items: center;
 
 	h3 {
-		font-size: var(--font-size-lg);
+		font-size: var(--font-size-md);
 		font-weight: var(--font-weight-semibold);
 		color: var(--color-text-primary);
-		margin: 0;
 	}
+
+	p {
+		font-size: var(--font-size-sm);
+		color: var(--color-text-secondary);
+	}
+}
+
+.teamTitleContainer {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2);
+}
+
+.teamTitle {
+	display: flex;
+	flex-direction: column;
+}
+
+.teamIcon {
+	color: var(--color-primary);
 }
 
 .teamActions {
@@ -248,8 +263,8 @@
 	flex-direction: column;
 	align-items: center;
 	text-align: center;
-	gap: var(--spacing-3);
-	padding: var(--spacing-6);
+	gap: var(--spacing-1);
+	padding: var(--spacing-2);
 	cursor: pointer;
 	transition: all 0.2s ease;
 
@@ -260,7 +275,7 @@
 	}
 
 	h3 {
-		font-size: var(--font-size-lg);
+		font-size: var(--font-size-base);
 		font-weight: var(--font-weight-semibold);
 		color: var(--color-text-primary);
 		margin: 0;
@@ -275,8 +290,7 @@
 }
 
 .actionIcon {
-	font-size: 3rem;
-	opacity: 0.8;
+	color: var(--color-primary);
 }
 
 // === RESPONSIVE ===
@@ -295,10 +309,6 @@
 
 	.headerContent h1 {
 		font-size: var(--font-size-2xl);
-	}
-
-	.stats {
-		grid-template-columns: 1fr;
 	}
 
 	.teamsGrid {
@@ -336,10 +346,6 @@
 	.root {
 		padding: var(--spacing-3);
 		gap: var(--spacing-4);
-	}
-
-	.teamActions {
-		flex-direction: column;
 	}
 
 	.actionCard {
