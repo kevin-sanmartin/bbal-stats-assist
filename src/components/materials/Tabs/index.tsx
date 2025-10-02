@@ -12,7 +12,6 @@ export interface TabItem {
 }
 
 export type TabsVariant = "default" | "pills" | "underline";
-export type TabsSize = "sm" | "md" | "lg";
 
 interface TabsProps {
 	items: TabItem[];
@@ -20,12 +19,11 @@ interface TabsProps {
 	activeTab?: string;
 	onTabChange?: (tabId: string) => void;
 	variant?: TabsVariant;
-	size?: TabsSize;
 	fullWidth?: boolean;
 	className?: string;
 }
 
-export default function Tabs({ items, defaultActiveTab, activeTab: controlledActiveTab, onTabChange, variant = "default", size = "md", fullWidth = false, className }: TabsProps) {
+export default function Tabs({ items, defaultActiveTab, activeTab: controlledActiveTab, onTabChange, variant = "default", fullWidth = false, className }: TabsProps) {
 	const [internalActiveTab, setInternalActiveTab] = useState(defaultActiveTab || items[0]?.id);
 
 	const activeTab = controlledActiveTab ?? internalActiveTab;
@@ -38,7 +36,7 @@ export default function Tabs({ items, defaultActiveTab, activeTab: controlledAct
 		onTabChange?.(tabId);
 	};
 
-	const tabsClasses = classNames(classes.tabs, classes[`variant-${variant}`], classes[`size-${size}`], { [classes.fullWidth]: fullWidth }, className);
+	const tabsClasses = classNames(classes.tabs, classes[`variant-${variant}`], { [classes.fullWidth]: fullWidth }, className);
 
 	return (
 		<div className={classes.container}>

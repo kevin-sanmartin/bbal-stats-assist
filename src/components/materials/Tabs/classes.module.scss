@@ -19,6 +19,9 @@
 	justify-content: center;
 	gap: var(--spacing-2);
 
+	padding: var(--spacing-2) var(--spacing-3);
+	font-size: var(--font-size-sm);
+
 	background: none;
 	border: none;
 	cursor: pointer;
@@ -55,7 +58,6 @@
 	border-bottom: 1px solid var(--color-border);
 
 	.tab {
-		padding: var(--spacing-3) var(--spacing-4);
 		border-bottom: 2px solid transparent;
 
 		&.active {
@@ -68,7 +70,7 @@
 	gap: var(--spacing-1);
 
 	.tab {
-		padding: var(--spacing-2) var(--spacing-4);
+		padding: var(--spacing-1) var(--spacing-3);
 		border-radius: var(--radius-lg);
 
 		&:hover:not(.disabled):not(.active) {
@@ -84,7 +86,6 @@
 
 .variant-underline {
 	.tab {
-		padding: var(--spacing-3) var(--spacing-4);
 		position: relative;
 
 		&.active::after {
@@ -96,33 +97,6 @@
 			height: 2px;
 			background-color: var(--color-primary);
 		}
-	}
-}
-
-// === SIZES ===
-
-.size-sm {
-	.tab {
-		font-size: var(--font-size-sm);
-		padding: var(--spacing-2) var(--spacing-3);
-	}
-
-	&.variant-pills .tab {
-		padding: var(--spacing-1) var(--spacing-3);
-	}
-}
-
-.size-md {
-	.tab {
-		font-size: var(--font-size-base);
-		padding: var(--spacing-3) var(--spacing-4);
-	}
-}
-
-.size-lg {
-	.tab {
-		font-size: var(--font-size-lg);
-		padding: var(--spacing-4) var(--spacing-6);
 	}
 }
 

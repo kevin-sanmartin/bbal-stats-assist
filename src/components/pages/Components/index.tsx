@@ -207,23 +207,11 @@ export default function Components() {
 
 				<div className={classes.section}>
 					<h2>Tabs</h2>
+
 					<div className={classes.flexRow}>
-						<h3>Large</h3>
-						<Tabs items={tabItems} size="lg" variant="pills" />
-						<Tabs items={tabItems} size="lg" variant="default" />
-						<Tabs items={tabItems} size="lg" variant="underline" />
-					</div>
-					<div className={classes.flexRow}>
-						<h3>Medium</h3>
-						<Tabs items={tabItems} size="md" variant="pills" />
-						<Tabs items={tabItems} size="md" variant="default" />
-						<Tabs items={tabItems} size="md" variant="underline" />
-					</div>
-					<div className={classes.flexRow}>
-						<h3>Small</h3>
-						<Tabs items={tabItems} size="sm" variant="pills" />
-						<Tabs items={tabItems} size="sm" variant="default" />
-						<Tabs items={tabItems} size="sm" variant="underline" />
+						<Tabs items={tabItems} variant="pills" />
+						<Tabs items={tabItems} variant="default" />
+						<Tabs items={tabItems} variant="underline" />
 					</div>
 				</div>
 
