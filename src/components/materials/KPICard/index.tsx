@@ -4,7 +4,6 @@ import classes from "./classes.module.scss";
 import classNames from "classnames";
 
 export type KPITrend = "up" | "down" | "neutral";
-export type KPISize = "sm" | "md" | "lg";
 
 interface KPICardProps {
 	title: string;
@@ -14,13 +13,12 @@ interface KPICardProps {
 	trend?: KPITrend;
 	trendValue?: string | number;
 	trendLabel?: string;
-	size?: KPISize;
 	loading?: boolean;
 	className?: string;
 }
 
-export default function KPICard({ title, value, subtitle, icon, trend, trendValue, trendLabel, size = "md", loading = false, className }: KPICardProps) {
-	const cardClasses = classNames(classes.kpiCard, classes[`size-${size}`], { [classes.loading]: loading }, className);
+export default function KPICard({ title, value, subtitle, icon, trend, trendValue, trendLabel, loading = false, className }: KPICardProps) {
+	const cardClasses = classNames(classes.kpiCard, { [classes.loading]: loading }, className);
 	const trendClasses = classNames(classes.trend, { [classes[`trend-${trend}`]]: trend });
 
 	const getTrendIcon = () => {

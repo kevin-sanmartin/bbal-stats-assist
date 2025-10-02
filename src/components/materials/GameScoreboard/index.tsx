@@ -39,51 +39,33 @@ const statusLabels = {
 	upcoming: "À venir",
 	live: "En cours",
 	finished: "Terminé",
-	halftime: "Mi-temps"
+	halftime: "Mi-temps",
 };
 
 const statusColors = {
 	upcoming: "info" as const,
 	live: "success" as const,
 	finished: "default" as const,
-	halftime: "warning" as const
+	halftime: "warning" as const,
 };
 
-export default function GameScoreboard({
-	homeTeam,
-	awayTeam,
-	gameTime,
-	size = "md",
-	showStats = false,
-	stats,
-	className
-}: GameScoreboardProps) {
-	const scoreboardClasses = classNames(
-		classes.gameScoreboard,
-		classes[`size-${size}`],
-		className
-	);
+export default function GameScoreboard({ homeTeam, awayTeam, gameTime, size = "md", showStats = false, stats, className }: GameScoreboardProps) {
+	const scoreboardClasses = classNames(classes.gameScoreboard, classes[`size-${size}`], className);
 
-	const winningTeam = homeTeam.score > awayTeam.score ? "home" : 
-		awayTeam.score > homeTeam.score ? "away" : "tie";
+	const winningTeam = homeTeam.score > awayTeam.score ? "home" : awayTeam.score > homeTeam.score ? "away" : "tie";
 
 	return (
 		<div className={scoreboardClasses}>
 			<Card variant="elevated">
 				{gameTime && (
 					<div className={classes.gameInfo}>
-						<div className={classes.period}>
-							{gameTime.status === "live" ? `Q${gameTime.period}` : statusLabels[gameTime.status]}
-						</div>
+						<div className={classes.period}>{gameTime.status === "live" ? `Q${gameTime.period}` : statusLabels[gameTime.status]}</div>
 						<div className={classes.timeLeft}>{gameTime.timeLeft}</div>
 					</div>
 				)}
 
 				<div className={classes.scoreContainer}>
-					<div className={classNames(
-						classes.team,
-						{ [classes.winning]: winningTeam === "away" }
-					)}>
+					<div className={classNames(classes.team, { [classes.winning]: winningTeam === "away" })}>
 						{awayTeam.logo && (
 							<div className={classes.teamLogo}>
 								<img src={awayTeam.logo} alt={`${awayTeam.name} logo`} />
@@ -91,25 +73,18 @@ export default function GameScoreboard({
 						)}
 						<div className={classes.teamInfo}>
 							<div className={classes.teamName}>{awayTeam.name}</div>
-							{awayTeam.fouls !== undefined && (
-								<div className={classes.fouls}>Fautes: {awayTeam.fouls}</div>
-							)}
+							{awayTeam.fouls !== undefined && <div className={classes.fouls}>Fautes: {awayTeam.fouls}</div>}
 						</div>
 						<div className={classes.score}>{awayTeam.score}</div>
 					</div>
 
 					<div className={classes.vs}>vs</div>
 
-					<div className={classNames(
-						classes.team,
-						{ [classes.winning]: winningTeam === "home" }
-					)}>
+					<div className={classNames(classes.team, { [classes.winning]: winningTeam === "home" })}>
 						<div className={classes.score}>{homeTeam.score}</div>
 						<div className={classes.teamInfo}>
 							<div className={classes.teamName}>{homeTeam.name}</div>
-							{homeTeam.fouls !== undefined && (
-								<div className={classes.fouls}>Fautes: {homeTeam.fouls}</div>
-							)}
+							{homeTeam.fouls !== undefined && <div className={classes.fouls}>Fautes: {homeTeam.fouls}</div>}
 						</div>
 						{homeTeam.logo && (
 							<div className={classes.teamLogo}>
@@ -121,31 +96,10 @@ export default function GameScoreboard({
 
 				{showStats && stats && (
 					<div className={classes.statsContainer}>
-						<KPICard
-							title="Points totaux"
-							value={stats.totalPoints}
-							icon="🏀"
-							size="sm"
-						/>
-						<KPICard
-							title="Rebonds"
-							value={stats.totalRebounds}
-							icon="⬆️"
-							size="sm"
-						/>
-						<KPICard
-							title="Passes"
-							value={stats.totalAssists}
-							icon="🤝"
-							size="sm"
-						/>
-						<KPICard
-							title="Fautes"
-							value={stats.totalFouls}
-							icon="⚠️"
-							size="sm"
-							trend={stats.totalFouls > 15 ? "up" : "neutral"}
-						/>
+						<KPICard title="Points totaux" value={stats.totalPoints} icon="🏀" />
+						<KPICard title="Rebonds" value={stats.totalRebounds} icon="⬆️" />
+						<KPICard title="Passes" value={stats.totalAssists} icon="🤝" />
+						<KPICard title="Fautes" value={stats.totalFouls} icon="⚠️" trend={stats.totalFouls > 15 ? "up" : "neutral"} />
 					</div>
 				)}
 			</Card>

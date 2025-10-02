@@ -144,34 +144,14 @@ export default function Components() {
 				<div className={classes.section}>
 					<h2>KPIs</h2>
 					<div className={classes.grid}>
-						<KPICard title="Total Revenue" value="$124,560" icon="💰" trend="up" trendValue="+12.5%" trendLabel="from last month" size="lg" />
-						<KPICard title="Active Users" value="2,847" icon="👥" trend="down" trendValue="-2.3%" trendLabel="from last week" size="lg" />
-						<KPICard title="New Signups" value="1,234" icon="🆕" trend="neutral" trendValue="0%" trendLabel="from last week" size="lg" />
+						<KPICard title="Total Revenue" value="$124,560" icon="💰" trend="up" trendValue="+12.5%" trendLabel="from last month" />
+						<KPICard title="Active Users" value="2,847" icon="👥" trend="down" trendValue="-2.3%" trendLabel="from last week" />
+						<KPICard title="New Signups" value="1,234" icon="🆕" trend="neutral" trendValue="0%" trendLabel="from last week" />
 					</div>
 					<div className={classes.grid}>
-						<KPICard title="Total Revenue" value="$124,560" icon="💰" trend="up" trendValue="+12.5%" trendLabel="from last month" size="lg" loading />
-						<KPICard title="Active Users" value="2,847" icon="👥" trend="down" trendValue="-2.3%" trendLabel="from last week" size="lg" loading />
-						<KPICard title="New Signups" value="1,234" icon="🆕" trend="neutral" trendValue="0%" trendLabel="from last week" size="lg" loading />
-					</div>
-					<div className={classes.grid}>
-						<KPICard title="Total Revenue" value="$124,560" icon="💰" trend="up" trendValue="+12.5%" trendLabel="from last month" size="md" />
-						<KPICard title="Active Users" value="2,847" icon="👥" trend="down" trendValue="-2.3%" trendLabel="from last week" size="md" />
-						<KPICard title="New Signups" value="1,234" icon="🆕" trend="neutral" trendValue="0%" trendLabel="from last week" size="md" />
-					</div>
-					<div className={classes.grid}>
-						<KPICard title="Total Revenue" value="$124,560" icon="💰" trend="up" trendValue="+12.5%" trendLabel="from last month" size="md" loading />
-						<KPICard title="Active Users" value="2,847" icon="👥" trend="down" trendValue="-2.3%" trendLabel="from last week" size="md" loading />
-						<KPICard title="New Signups" value="1,234" icon="🆕" trend="neutral" trendValue="0%" trendLabel="from last week" size="md" loading />
-					</div>
-					<div className={classes.grid}>
-						<KPICard title="Total Revenue" value="$124,560" icon="💰" trend="up" trendValue="+12.5%" trendLabel="from last month" size="sm" />
-						<KPICard title="Active Users" value="2,847" icon="👥" trend="down" trendValue="-2.3%" trendLabel="from last week" size="sm" />
-						<KPICard title="New Signups" value="1,234" icon="🆕" trend="neutral" trendValue="0%" trendLabel="from last week" size="sm" />
-					</div>
-					<div className={classes.grid}>
-						<KPICard title="Total Revenue" value="$124,560" icon="💰" trend="up" trendValue="+12.5%" trendLabel="from last month" size="sm" loading />
-						<KPICard title="Active Users" value="2,847" icon="👥" trend="down" trendValue="-2.3%" trendLabel="from last week" size="sm" loading />
-						<KPICard title="New Signups" value="1,234" icon="🆕" trend="neutral" trendValue="0%" trendLabel="from last week" size="sm" loading />
+						<KPICard title="Total Revenue" value="$124,560" icon="💰" trend="up" trendValue="+12.5%" trendLabel="from last month" loading />
+						<KPICard title="Active Users" value="2,847" icon="👥" trend="down" trendValue="-2.3%" trendLabel="from last week" loading />
+						<KPICard title="New Signups" value="1,234" icon="🆕" trend="neutral" trendValue="0%" trendLabel="from last week" loading />
 					</div>
 				</div>
 

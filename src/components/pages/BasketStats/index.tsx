@@ -151,7 +151,6 @@ export default function BasketStats() {
 							trend={totalPoints > 70 ? "up" : totalPoints > 50 ? "neutral" : "down"}
 							trendValue={`${totalPoints}/100`}
 							trendLabel="objectif du match"
-							size="lg"
 						/>
 						<KPICard
 							title="Rebonds"
@@ -160,7 +159,6 @@ export default function BasketStats() {
 							trend={totalRebounds > 40 ? "up" : "neutral"}
 							trendValue={`${totalRebounds}/50`}
 							trendLabel="objectif"
-							size="lg"
 						/>
 						<KPICard
 							title="Passes décisives"
@@ -169,7 +167,6 @@ export default function BasketStats() {
 							trend={totalAssists > 20 ? "up" : "neutral"}
 							trendValue={`${totalAssists}/25`}
 							trendLabel="objectif"
-							size="lg"
 						/>
 						<KPICard
 							title="Fautes"
@@ -178,7 +175,6 @@ export default function BasketStats() {
 							trend={totalFouls > 15 ? "up" : totalFouls > 10 ? "neutral" : "down"}
 							trendValue={`${totalFouls}/20`}
 							trendLabel="limite recommandée"
-							size="lg"
 						/>
 					</div>
 				</div>
