@@ -45,23 +45,11 @@ export default function MatchDetails({ game, team, actions, players }: MatchDeta
 
 	const getResultBadge = () => {
 		if (game.score > game.opponent_score) {
-			return (
-				<Badge variant="success" size="lg">
-					🏆 Victoire
-				</Badge>
-			);
+			return <Badge variant="success">🏆 Victoire</Badge>;
 		} else if (game.score < game.opponent_score) {
-			return (
-				<Badge variant="danger" size="lg">
-					😞 Défaite
-				</Badge>
-			);
+			return <Badge variant="danger">😞 Défaite</Badge>;
 		} else {
-			return (
-				<Badge variant="warning" size="lg">
-					🤝 Match nul
-				</Badge>
-			);
+			return <Badge variant="warning">🤝 Match nul</Badge>;
 		}
 	};
 
@@ -240,9 +228,7 @@ export default function MatchDetails({ game, team, actions, players }: MatchDeta
 					<div className={classes.team}>
 						<div className={classes.teamName}>{team.name}</div>
 						<div className={classes.teamScore}>{game.score}</div>
-						<Badge variant="default" size="sm">
-							{team.category}
-						</Badge>
+						<Badge variant="default">{team.category}</Badge>
 					</div>
 					<div className={classes.vs}>vs</div>
 					<div className={classes.team}>

@@ -202,9 +202,7 @@ export default function BasketStats() {
 					<div className={classes.section}>
 						<h2>
 							Saisie des statistiques - {demoPlayers.find((p) => p.id === selectedPlayer)?.name}
-							<Badge variant="primary" size="md">
-								#{demoPlayers.find((p) => p.id === selectedPlayer)?.number}
-							</Badge>
+							<Badge variant="primary">#{demoPlayers.find((p) => p.id === selectedPlayer)?.number}</Badge>
 						</h2>
 						<Card variant="elevated">
 							<div className={classes.statCountersGrid}>

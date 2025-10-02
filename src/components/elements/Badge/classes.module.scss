@@ -4,8 +4,11 @@
 	justify-content: center;
 	width: fit-content;
 
-	font-weight: var(--font-weight-semibold);
+	padding: var(--spacing-1) var(--spacing-2);
 	font-size: var(--font-size-xs);
+	min-height: 1.25rem;
+
+	font-weight: var(--font-weight-semibold);
 	letter-spacing: 0.02em;
 	white-space: nowrap;
 	vertical-align: baseline;
@@ -21,101 +24,29 @@
 .variant-default {
 	background-color: var(--color-gray-200);
 	color: var(--color-gray-700);
-
-	&.dot {
-		background-color: var(--color-gray-500);
-	}
 }
 
 .variant-primary {
 	background-color: var(--color-primary-light);
 	color: var(--color-primary);
-
-	&.dot {
-		background-color: var(--color-primary);
-	}
 }
 
 .variant-success {
 	background-color: var(--color-success-light);
 	color: var(--color-success);
-
-	&.dot {
-		background-color: var(--color-success);
-	}
 }
 
 .variant-warning {
 	background-color: var(--color-warning-light);
 	color: var(--color-warning);
-
-	&.dot {
-		background-color: var(--color-warning);
-	}
 }
 
 .variant-danger {
 	background-color: var(--color-danger-light);
 	color: var(--color-danger);
-
-	&.dot {
-		background-color: var(--color-danger);
-	}
 }
 
 .variant-info {
 	background-color: var(--color-info-light);
 	color: var(--color-info);
-
-	&.dot {
-		background-color: var(--color-info);
-	}
-}
-
-// === SIZES ===
-
-.size-sm {
-	padding: var(--spacing-1) var(--spacing-2);
-	font-size: 10px;
-	min-height: 1.25rem;
-
-	&.dot {
-		width: 6px;
-		height: 6px;
-		min-height: unset;
-	}
-}
-
-.size-md {
-	padding: var(--spacing-1) var(--spacing-3);
-	font-size: 11px;
-	min-height: 1.5rem;
-
-	&.dot {
-		width: 8px;
-		height: 8px;
-		min-height: unset;
-	}
-}
-
-.size-lg {
-	padding: var(--spacing-2) var(--spacing-4);
-	font-size: var(--font-size-xs);
-	min-height: 1.75rem;
-
-	&.dot {
-		width: 10px;
-		height: 10px;
-		min-height: unset;
-	}
-}
-
-// === DOT MODIFIER ===
-
-.dot {
-	border-radius: var(--radius-full);
-
-	// Hide text content for dot badges
-	font-size: 0;
-	overflow: hidden;
 }

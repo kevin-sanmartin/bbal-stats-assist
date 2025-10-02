@@ -92,15 +92,7 @@ export default function TeamHistory({ team, games }: TeamHistoryProps) {
 	};
 
 	const getLocationBadge = (location: string) => {
-		return location === "HOME" ? (
-			<Badge variant="info" size="sm">
-				🏠 Domicile
-			</Badge>
-		) : (
-			<Badge variant="default" size="sm">
-				✈️ Extérieur
-			</Badge>
-		);
+		return location === "HOME" ? <Badge variant="info">🏠 Domicile</Badge> : <Badge variant="default">✈️ Extérieur</Badge>;
 	};
 
 	const formatDate = (dateString: string) => {
@@ -187,14 +179,7 @@ export default function TeamHistory({ team, games }: TeamHistoryProps) {
 			key: "competitions",
 			title: "Compétition",
 			width: "120px",
-			render: (value) =>
-				value?.name ? (
-					<Badge variant="primary" size="sm">
-						{value.name}
-					</Badge>
-				) : (
-					<span className={classes.noCompetition}>-</span>
-				),
+			render: (value) => (value?.name ? <Badge variant="primary">{value.name}</Badge> : <span className={classes.noCompetition}>-</span>),
 		},
 		{
 			key: "actions",

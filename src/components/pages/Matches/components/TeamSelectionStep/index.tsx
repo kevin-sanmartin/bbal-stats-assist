@@ -39,16 +39,10 @@ export default function TeamSelectionStep({ onTeamSelect, teams }: TeamSelection
 		<div className={classes.root}>
 			<div className={classes.teamsList}>
 				{teams.map((team) => (
-					<Card
-						key={team.id}
-						hoverable
-						className={`${classes.teamCard} ${selectedTeam === team.id ? classes.selected : ""}`}
-						onClick={() => handleTeamClick(team.id)}>
+					<Card key={team.id} hoverable className={`${classes.teamCard} ${selectedTeam === team.id ? classes.selected : ""}`} onClick={() => handleTeamClick(team.id)}>
 						<div className={classes.teamInfo}>
 							<h3 className={classes.teamName}>{team.name}</h3>
-							<Badge variant="info" size="md">
-								{team.category}
-							</Badge>
+							<Badge variant="info">{team.category}</Badge>
 						</div>
 					</Card>
 				))}

@@ -158,29 +158,6 @@ export default function Components() {
 				<div className={classes.section}>
 					<h2>Badges</h2>
 					<div className={classes.flexRow}>
-						<Badge variant="default" size="lg">
-							Default
-						</Badge>
-						<Badge variant="primary" size="lg">
-							Primary
-						</Badge>
-						<Badge variant="success" size="lg">
-							Success
-						</Badge>
-						<Badge variant="warning" size="lg">
-							Warning
-						</Badge>
-						<Badge variant="danger" size="lg">
-							Danger
-						</Badge>
-						<Badge variant="success" size="lg">
-							Success
-						</Badge>
-						<Badge variant="info" size="lg">
-							Info
-						</Badge>
-					</div>
-					<div className={classes.flexRow}>
 						<Badge variant="default">Default</Badge>
 						<Badge variant="primary">Primary</Badge>
 						<Badge variant="success">Success</Badge>
@@ -188,62 +165,6 @@ export default function Components() {
 						<Badge variant="danger">Danger</Badge>
 						<Badge variant="success">Success</Badge>
 						<Badge variant="info">Info</Badge>
-					</div>
-					<div className={classes.flexRow}>
-						<Badge variant="default" size="sm">
-							Default
-						</Badge>
-						<Badge variant="primary" size="sm">
-							Primary
-						</Badge>
-						<Badge variant="success" size="sm">
-							Success
-						</Badge>
-						<Badge variant="warning" size="sm">
-							Warning
-						</Badge>
-						<Badge variant="danger" size="sm">
-							Danger
-						</Badge>
-						<Badge variant="success" size="sm">
-							Success
-						</Badge>
-						<Badge variant="info" size="sm">
-							Info
-						</Badge>
-					</div>
-					<div className={classes.flexRow}>
-						<Badge dot variant="success" size="lg">
-							Online
-						</Badge>
-						<Badge dot variant="danger" size="lg">
-							Offline
-						</Badge>
-						<Badge dot variant="info" size="lg">
-							Away
-						</Badge>
-					</div>
-					<div className={classes.flexRow}>
-						<Badge dot variant="success">
-							Online
-						</Badge>
-						<Badge dot variant="danger">
-							Offline
-						</Badge>
-						<Badge dot variant="info">
-							Away
-						</Badge>
-					</div>
-					<div className={classes.flexRow}>
-						<Badge dot variant="success" size="sm">
-							Online
-						</Badge>
-						<Badge dot variant="danger" size="sm">
-							Offline
-						</Badge>
-						<Badge dot variant="info" size="sm">
-							Away
-						</Badge>
 					</div>
 				</div>
 

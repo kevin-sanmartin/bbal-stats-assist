@@ -57,9 +57,7 @@ export default function PlayerCard({ name, number, position, stats, size = "sm",
 						<h3 className={classes.name}>{name}</h3>
 						<span className={classes.number}>#{number}</span>
 					</div>
-					<Badge variant={positionColors[position]} size={size === "lg" ? "md" : "sm"}>
-						{position}
-					</Badge>
+					<Badge variant={positionColors[position]}>{position}</Badge>
 				</div>
 			</div>
 

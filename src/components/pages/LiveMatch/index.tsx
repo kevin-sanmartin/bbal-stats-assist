@@ -229,9 +229,7 @@ export default function LiveMatch({ players, teamId, competitionId }: LiveMatchP
 					<div className={classes.actionsHeader}>
 						<div className={classes.headerLeft}>
 							<h3>Dernières actions</h3>
-							<Badge variant="info" size="sm">
-								{actions.length}
-							</Badge>
+							<Badge variant="info">{actions.length}</Badge>
 						</div>
 						<Button variant="outlined" onClick={handleUndoLastAction} disabled={actions.length === 0}>
 							↶ Annuler
@@ -248,7 +246,7 @@ export default function LiveMatch({ players, teamId, competitionId }: LiveMatchP
 							{getLastActions().map((action, index) => (
 								<div key={action.id} className={classes.actionItem}>
 									<div className={classes.actionMain}>
-										<Badge variant={getActionVariant(action.type)} size="md" className={classes.actionBadge}>
+										<Badge variant={getActionVariant(action.type)} className={classes.actionBadge}>
 											{getActionLabel(action.type)}
 										</Badge>
 										<span className={classes.actionIndex}>#{actions.length - index}</span>
