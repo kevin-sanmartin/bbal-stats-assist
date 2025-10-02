@@ -4,16 +4,14 @@
 .header {
 	position: sticky;
 	top: 0;
-	background: rgba(255, 255, 255, 0.95);
+	background: var(--color-background);
 	z-index: 1000;
 	border-bottom: 1px solid rgba(0, 0, 0, 0.08);
-	backdrop-filter: blur(20px);
-	-webkit-backdrop-filter: blur(20px);
+
 	transition: all var(--transition-fast);
 }
 
 [data-theme="dark"] .header {
-	background: rgba(0, 0, 0, 0.95);
 	border-bottom: 1px solid rgba(255, 255, 255, 0.08);
 }
 

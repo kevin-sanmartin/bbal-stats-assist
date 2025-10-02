@@ -16,18 +16,9 @@
 		font-size: var(--font-size-lg);
 		font-weight: var(--font-weight-bold);
 		letter-spacing: -0.025em;
-		background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-hover) 100%);
-		-webkit-background-clip: text;
-		-webkit-text-fill-color: transparent;
-		background-clip: text;
-		margin: 0;
 
 		@media screen and (max-width: constants.$screen-md) {
 			font-size: var(--font-size-base);
-		}
-
-		@media screen and (max-width: constants.$screen-sm) {
-			display: none;
 		}
 	}
 }
