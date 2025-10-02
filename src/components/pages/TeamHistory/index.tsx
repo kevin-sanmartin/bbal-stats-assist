@@ -138,7 +138,6 @@ export default function TeamHistory({ team, games }: TeamHistoryProps) {
 			render: (value) => (
 				<div className={classes.dateCell}>
 					<div className={classes.dateMain}>{formatTime(value)}</div>
-					<div className={classes.dateSecondary}>{formatDate(value).split(" ").slice(0, 2).join(" ")}</div>
 				</div>
 			),
 		},
