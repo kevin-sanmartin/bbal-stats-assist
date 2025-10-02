@@ -102,7 +102,7 @@
 	flex-direction: column;
 	gap: var(--spacing-2);
 	padding: var(--spacing-3);
-	background-color: var(--color-surface);
+	background: var(--color-surface);
 	border-radius: var(--radius-md);
 	border: 1px solid var(--color-border);
 	transition: all 0.2s ease;
@@ -113,7 +113,6 @@
 		box-shadow: var(--shadow-sm);
 	}
 }
-
 
 .actionMain {
 	display: flex;

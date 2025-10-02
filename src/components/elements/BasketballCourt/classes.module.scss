@@ -4,7 +4,7 @@
 	width: 100%;
 	max-width: 800px;
 	margin: 0 auto;
-	background-color: var(--color-surface);
+	background: var(--color-surface);
 	border-radius: var(--radius-lg);
 	padding: var(--spacing-4);
 	box-shadow: var(--shadow-md);
@@ -40,7 +40,7 @@
 		color: var(--color-text-muted);
 	}
 
-	background-color: var(--color-surface);
+	background: var(--color-surface);
 	box-shadow: none;
 	border: 2px dashed var(--color-border);
 }
@@ -130,7 +130,6 @@
 		padding: var(--spacing-1);
 	}
 }
-
 
 // === DARK MODE ADAPTATIONS ===
 

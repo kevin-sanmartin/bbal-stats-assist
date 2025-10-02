@@ -39,7 +39,7 @@
 
 	// Surface Colors
 	--color-background: #ffffff;
-	--color-surface: #ffffff;
+	--color-surface: #fdfdfd;
 	--color-surface-hover: #f8fafc;
 	--color-surface-secondary: #f1f5f9;
 	--color-overlay: rgba(15, 23, 42, 0.8);
@@ -161,8 +161,8 @@
 	--color-info-light: rgba(96, 165, 250, 0.1);
 
 	// Surface Colors
-	--color-background: #0f172a;
-	--color-surface: #1e293b;
+	--color-background: #0f1520;
+	--color-surface: linear-gradient(135deg, #1a1f2e 50%, #0f1520 150%);
 	--color-surface-hover: #334155;
 	--color-surface-secondary: #334155;
 	--color-overlay: rgba(15, 23, 42, 0.9);
