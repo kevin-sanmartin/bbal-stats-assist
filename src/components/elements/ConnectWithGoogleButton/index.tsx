@@ -20,8 +20,7 @@ export default function ConnectWithGoogleButton() {
 	return (
 		<Button
 			type="button"
-			variant="secondary"
-			size="lg"
+			variant="ghost"
 			fullWidth
 			loading={loading}
 			onClick={handleGoogleSignIn}

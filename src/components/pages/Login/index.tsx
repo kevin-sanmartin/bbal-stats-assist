@@ -76,7 +76,7 @@ export default function Login() {
 				</div>
 
 				<div className={classes.buttonContainer}>
-					<Button type="submit" variant="primary" size="lg" fullWidth loading={loading}>
+					<Button type="submit" fullWidth loading={loading}>
 						Se connecter
 					</Button>
 					<div className={classes.divider} />

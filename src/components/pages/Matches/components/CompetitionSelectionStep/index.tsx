@@ -41,7 +41,7 @@ export default function CompetitionSelectionStep({ onCompetitionSelect, selected
 		try {
 			const competition = await competitionsService.createCompetition({
 				name: newCompetitionName.trim(),
-				team_id: selectedTeamId
+				team_id: selectedTeamId,
 			});
 			onCompetitionSelect(competition.id);
 		} catch (err) {
@@ -58,43 +58,24 @@ export default function CompetitionSelectionStep({ onCompetitionSelect, selected
 	};
 
 	if (isLoading) {
-		return (
-			<div className={classes.loading}>
-				Chargement...
-			</div>
-		);
+		return <div className={classes.loading}>Chargement...</div>;
 	}
 
 	return (
 		<div className={classes.root}>
 			{!showCreateForm && !showCompetitionsList && (
 				<div className={classes.mainActions}>
-					<Button
-						variant="primary"
-						size="lg"
-						onClick={handleFriendlyMatch}
-						className={classes.actionButton}
-					>
+					<Button onClick={handleFriendlyMatch} className={classes.actionButton}>
 						🏀 Match amical
 					</Button>
 
 					{competitions.length > 0 && (
-						<Button
-							variant="secondary"
-							size="lg"
-							onClick={() => setShowCompetitionsList(true)}
-							className={classes.actionButton}
-						>
+						<Button variant="ghost" onClick={() => setShowCompetitionsList(true)} className={classes.actionButton}>
 							🏆 Compétition ({competitions.length})
 						</Button>
 					)}
 
-					<Button
-						variant="outline"
-						size="lg"
-						onClick={() => setShowCreateForm(true)}
-						className={classes.actionButton}
-					>
+					<Button variant="outlined" onClick={() => setShowCreateForm(true)} className={classes.actionButton}>
 						+ Nouvelle compétition
 					</Button>
 				</div>
@@ -104,18 +85,14 @@ export default function CompetitionSelectionStep({ onCompetitionSelect, selected
 				<div className={classes.competitionsList}>
 					<div className={classes.header}>
 						<h3 className={classes.title}>Choisir une compétition</h3>
-						<Button variant="ghost" size="sm" onClick={resetForms}>✕</Button>
+						<Button variant="ghost" onClick={resetForms}>
+							✕
+						</Button>
 					</div>
 
 					<div className={classes.competitions}>
 						{competitions.map((competition) => (
-							<Button
-								key={competition.id}
-								variant="ghost"
-								size="md"
-								onClick={() => handleSelectCompetition(competition.id)}
-								className={classes.competitionButton}
-							>
+							<Button key={competition.id} variant="ghost" onClick={() => handleSelectCompetition(competition.id)} className={classes.competitionButton}>
 								{competition.name}
 							</Button>
 						))}
@@ -127,7 +104,9 @@ export default function CompetitionSelectionStep({ onCompetitionSelect, selected
 				<div className={classes.createForm}>
 					<div className={classes.header}>
 						<h3 className={classes.title}>Nouvelle compétition</h3>
-						<Button variant="ghost" size="sm" onClick={resetForms}>✕</Button>
+						<Button variant="ghost" onClick={resetForms}>
+							✕
+						</Button>
 					</div>
 
 					<Input
@@ -135,26 +114,16 @@ export default function CompetitionSelectionStep({ onCompetitionSelect, selected
 						value={newCompetitionName}
 						onChange={(e) => setNewCompetitionName(e.target.value)}
 						disabled={isCreating}
-						onKeyPress={(e) => e.key === 'Enter' && handleCreateCompetition()}
+						onKeyPress={(e) => e.key === "Enter" && handleCreateCompetition()}
 					/>
 
-					<Button
-						variant="primary"
-						size="md"
-						onClick={handleCreateCompetition}
-						disabled={!newCompetitionName.trim() || isCreating}
-						loading={isCreating}
-					>
+					<Button onClick={handleCreateCompetition} disabled={!newCompetitionName.trim() || isCreating} loading={isCreating}>
 						Créer et utiliser
 					</Button>
 				</div>
 			)}
 
-			{error && (
-				<div className={classes.error}>
-					{error}
-				</div>
-			)}
+			{error && <div className={classes.error}>{error}</div>}
 		</div>
 	);
 }

@@ -203,7 +203,7 @@ export default function LiveMatch({ players, teamId, competitionId }: LiveMatchP
 			<div className={classes.header}>
 				<h1>Match Live</h1>
 
-				<Button variant="primary" onClick={handleEndMatch} disabled={actions.length === 0}>
+				<Button onClick={handleEndMatch} disabled={actions.length === 0}>
 					Fin du match
 				</Button>
 			</div>
@@ -233,7 +233,7 @@ export default function LiveMatch({ players, teamId, competitionId }: LiveMatchP
 								{actions.length}
 							</Badge>
 						</div>
-						<Button variant="outline" size="sm" onClick={handleUndoLastAction} disabled={actions.length === 0}>
+						<Button variant="outlined" onClick={handleUndoLastAction} disabled={actions.length === 0}>
 							↶ Annuler
 						</Button>
 					</div>
@@ -251,9 +251,7 @@ export default function LiveMatch({ players, teamId, competitionId }: LiveMatchP
 										<Badge variant={getActionVariant(action.type)} size="md" className={classes.actionBadge}>
 											{getActionLabel(action.type)}
 										</Badge>
-										<span className={classes.actionIndex}>
-											#{actions.length - index}
-										</span>
+										<span className={classes.actionIndex}>#{actions.length - index}</span>
 									</div>
 									<div className={classes.actionPlayer}>
 										<Avatar name={action.playerName} size="xs" />

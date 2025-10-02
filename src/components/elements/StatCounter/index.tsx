@@ -34,15 +34,9 @@ export default function StatCounter({
 	disabled = false,
 	onChange,
 	className,
-	suffix
+	suffix,
 }: StatCounterProps) {
-	const containerClasses = classNames(
-		classes.statCounter,
-		classes[`size-${size}`],
-		classes[`variant-${variant}`],
-		{ [classes.disabled]: disabled },
-		className
-	);
+	const containerClasses = classNames(classes.statCounter, classes[`size-${size}`], classes[`variant-${variant}`], { [classes.disabled]: disabled }, className);
 
 	const handleIncrement = () => {
 		if (disabled || value >= max) return;
@@ -64,32 +58,23 @@ export default function StatCounter({
 			<div className={classes.header}>
 				<span className={classes.label}>{label}</span>
 			</div>
-			
+
 			<div className={classes.counter}>
 				{showButtons && (
-					<Button
-						variant="ghost"
-						size={size}
-						disabled={!canDecrement}
-						onClick={handleDecrement}
-						className={classes.decrementButton}
-					>
+					<Button variant="ghost" disabled={!canDecrement} onClick={handleDecrement} className={classes.decrementButton}>
 						<HiMinus />
 					</Button>
 				)}
 
 				<div className={classes.valueContainer}>
-					<span className={classes.value}>{value}{suffix}</span>
+					<span className={classes.value}>
+						{value}
+						{suffix}
+					</span>
 				</div>
 
 				{showButtons && (
-					<Button
-						variant="ghost"
-						size={size}
-						disabled={!canIncrement}
-						onClick={handleIncrement}
-						className={classes.incrementButton}
-					>
+					<Button variant="ghost" disabled={!canIncrement} onClick={handleIncrement} className={classes.incrementButton}>
 						<HiPlus />
 					</Button>
 				)}

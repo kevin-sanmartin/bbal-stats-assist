@@ -14,24 +14,14 @@ interface PlayerSelectionModalProps {
 	title?: string;
 }
 
-export default function PlayerSelectionModal({
-	isOpen,
-	onClose,
-	players,
-	onPlayerSelect,
-	title = "Sélectionner le joueur"
-}: PlayerSelectionModalProps) {
+export default function PlayerSelectionModal({ isOpen, onClose, players, onPlayerSelect, title = "Sélectionner le joueur" }: PlayerSelectionModalProps) {
 	const [searchTerm, setSearchTerm] = useState("");
 
 	const filteredPlayers = useMemo(() => {
 		if (!searchTerm.trim()) return players;
 
 		const term = searchTerm.toLowerCase().trim();
-		return players.filter(player =>
-			player.name.toLowerCase().includes(term) ||
-			player.number.toString().includes(term) ||
-			player.position.toLowerCase().includes(term)
-		);
+		return players.filter((player) => player.name.toLowerCase().includes(term) || player.number.toString().includes(term) || player.position.toLowerCase().includes(term));
 	}, [players, searchTerm]);
 
 	const handlePlayerClick = (player: TPlayer) => {
@@ -78,14 +68,14 @@ export default function PlayerSelectionModal({
 						{searchTerm ? (
 							<>
 								<p>Aucun joueur trouvé pour "{searchTerm}"</p>
-								<Button variant="secondary" onClick={() => setSearchTerm("")}>
+								<Button variant="ghost" onClick={() => setSearchTerm("")}>
 									Effacer la recherche
 								</Button>
 							</>
 						) : (
 							<>
 								<p>Aucun joueur disponible dans cette équipe</p>
-								<Button variant="secondary" onClick={handleClose}>
+								<Button variant="ghost" onClick={handleClose}>
 									Fermer
 								</Button>
 							</>

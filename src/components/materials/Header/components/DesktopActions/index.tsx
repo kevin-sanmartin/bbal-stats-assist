@@ -16,16 +16,14 @@ export default function DesktopActions({ isUserLoggedIn, onLogout, logoutLoading
 		<div className={classes.desktopActions}>
 			{!isUserLoggedIn && (
 				<>
-					<Button variant="outline" size="sm" onClick={() => router.push("/auth/login")}>
+					<Button variant="outlined" onClick={() => router.push("/auth/login")}>
 						Connexion
 					</Button>
-					<Button variant="primary" size="sm" onClick={() => router.push("/auth/register")}>
-						Inscription
-					</Button>
+					<Button onClick={() => router.push("/auth/register")}>Inscription</Button>
 				</>
 			)}
 			{isUserLoggedIn && (
-				<Button variant="outline" size="sm" onClick={onLogout} loading={logoutLoading} leftIcon={<FiLogOut />} className={classes.logoutButton}>
+				<Button variant="outlined" onClick={onLogout} loading={logoutLoading} leftIcon={<FiLogOut />} className={classes.logoutButton}>
 					Déconnexion
 				</Button>
 			)}

@@ -106,7 +106,7 @@ export default function BasketStats() {
 						<p>Showcase des composants spécialisés pour le suivi des statistiques basketball</p>
 					</div>
 					<div className={classes.headerActions}>
-						<Button variant="outline" onClick={resetStats}>
+						<Button variant="outlined" onClick={resetStats}>
 							Reset Stats
 						</Button>
 					</div>
@@ -196,7 +196,6 @@ export default function BasketStats() {
 								stats={playerStats[player.id]}
 								active={selectedPlayer === player.id}
 								onClick={() => setSelectedPlayer(selectedPlayer === player.id ? null : player.id)}
-								size="md"
 							/>
 						))}
 					</div>
@@ -291,7 +290,6 @@ export default function BasketStats() {
 						</div>
 					</div>
 				</div>
-
 			</div>
 		</main>
 	);

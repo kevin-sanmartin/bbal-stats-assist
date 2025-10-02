@@ -217,7 +217,7 @@ export default function MatchDetails({ game, team, actions, players }: MatchDeta
 		<div className={classes.root}>
 			{/* Header */}
 			<div className={classes.header}>
-				<Button variant="outline" onClick={() => router.push(`/teams/${team.id}/history`)}>
+				<Button variant="outlined" onClick={() => router.push(`/teams/${team.id}/history`)}>
 					← Historique
 				</Button>
 				<div className={classes.headerContent}>
@@ -265,8 +265,7 @@ export default function MatchDetails({ game, team, actions, players }: MatchDeta
 					{actionTypes.map(({ type, label, count }) => (
 						<Button
 							key={type}
-							variant={selectedActionType === type ? "primary" : "outline"}
-							size="sm"
+							variant={selectedActionType === type ? "contained" : "outlined"}
 							onClick={() => setSelectedActionType(type)}
 							className={classes.filterButton}>
 							{label} ({count})

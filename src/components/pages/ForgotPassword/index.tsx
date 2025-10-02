@@ -85,7 +85,7 @@ export default function ForgotPassword() {
 					required
 				/>
 
-				<Button type="submit" variant="primary" size="lg" fullWidth loading={loading}>
+				<Button type="submit" fullWidth loading={loading}>
 					Envoyer le lien de réinitialisation
 				</Button>
 			</form>

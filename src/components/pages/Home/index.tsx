@@ -56,7 +56,7 @@ export default function Home({ initialTeams, initialGames, userStats }: HomeProp
 							<span>Interface mobile optimisée</span>
 						</div>
 					</div>
-					<Button variant="primary" onClick={() => router.push("/auth/login")}>
+					<Button color="primary" onClick={() => router.push("/auth/login")}>
 						Se connecter
 					</Button>
 				</div>
@@ -72,7 +72,7 @@ export default function Home({ initialTeams, initialGames, userStats }: HomeProp
 					<p>Bienvenue, {user.email}</p>
 				</div>
 				<div className={classes.headerActions}>
-					<Button variant="primary" onClick={() => router.push("/teams")}>
+					<Button color="primary" onClick={() => router.push("/teams")}>
 						+ Nouvelle équipe
 					</Button>
 				</div>
@@ -83,7 +83,7 @@ export default function Home({ initialTeams, initialGames, userStats }: HomeProp
 					<div className={classes.emptyIcon}>🏀</div>
 					<h2>Aucune équipe trouvée</h2>
 					<p>Créez votre première équipe pour commencer à suivre vos statistiques</p>
-					<Button variant="primary" onClick={() => router.push("/teams")}>
+					<Button color="primary" onClick={() => router.push("/teams")}>
 						Créer ma première équipe
 					</Button>
 				</div>
@@ -121,10 +121,10 @@ export default function Home({ initialTeams, initialGames, userStats }: HomeProp
 										<Badge variant={getCategoryColor(team.category) as any}>{team.category}</Badge>
 									</div>
 									<div className={classes.teamActions}>
-										<Button variant="outline" size="sm" onClick={() => router.push(`/teams/${team.id}/players`)}>
+										<Button variant="outlined" onClick={() => router.push(`/teams/${team.id}/players`)}>
 											👥 Joueurs
 										</Button>
-										<Button variant="primary" size="sm" onClick={() => router.push(`/teams/${team.id}/history`)}>
+										<Button color="primary" onClick={() => router.push(`/teams/${team.id}/history`)}>
 											📊 Historique
 										</Button>
 									</div>

@@ -46,10 +46,10 @@ export default function PlayerTable({ players, onEdit, onDelete }: PlayerTablePr
 			width: "25%",
 			render: (_, player: TPlayer) => (
 				<div className={classes.actions}>
-					<Button variant="outline" size="sm" fullWidth onClick={() => onEdit(player)}>
+					<Button variant="outlined" fullWidth onClick={() => onEdit(player)}>
 						Modifier
 					</Button>
-					<Button variant="danger" size="sm" fullWidth onClick={() => onDelete(player)}>
+					<Button color="danger" fullWidth onClick={() => onDelete(player)}>
 						Supprimer
 					</Button>
 				</div>

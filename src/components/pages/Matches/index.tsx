@@ -154,7 +154,7 @@ export default function Matches({ initialTeams }: MatchesProps) {
 						<h2 className={classes.stepTitle}>{getStepTitle()}</h2>
 						<p className={classes.stepSubtitle}>{getStepSubtitle()}</p>
 						{currentStep !== "team" && (
-							<Button variant="secondary" size="sm" onClick={handleBack} className={classes.backButton}>
+							<Button variant="ghost" onClick={handleBack} className={classes.backButton}>
 								← Retour
 							</Button>
 						)}

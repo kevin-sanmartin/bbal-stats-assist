@@ -91,7 +91,7 @@ export default function TeamModal({ isOpen, onClose, onSubmit, title, initialDat
 				/>
 
 				<div className={classes.modalActions}>
-					<Button type="button" variant="outline" onClick={handleClose} disabled={loading}>
+					<Button type="button" variant="outlined" onClick={handleClose} disabled={loading}>
 						Annuler
 					</Button>
 					<Button type="submit" disabled={!formData.name.trim()} loading={loading}>

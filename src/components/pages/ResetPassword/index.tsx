@@ -147,7 +147,7 @@ export default function ResetPassword() {
 					minLength={6}
 				/>
 
-				<Button type="submit" variant="primary" size="lg" fullWidth loading={loading}>
+				<Button type="submit" fullWidth loading={loading}>
 					Mettre à jour le mot de passe
 				</Button>
 			</form>

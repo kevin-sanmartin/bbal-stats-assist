@@ -86,13 +86,7 @@ export default function PlayerModal({ isOpen, onClose, onSubmit, title, initialD
 	return (
 		<Modal isOpen={isOpen} onClose={handleClose} title={title}>
 			<form className={classes.form} onSubmit={handleSubmit}>
-				<Input
-					label="Nom du joueur"
-					placeholder="Ex: Jean Dupont"
-					value={formData.name}
-					onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-					fullWidth
-				/>
+				<Input label="Nom du joueur" placeholder="Ex: Jean Dupont" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} fullWidth />
 
 				<Input
 					label="Numéro de maillot"
@@ -116,7 +110,7 @@ export default function PlayerModal({ isOpen, onClose, onSubmit, title, initialD
 				/>
 
 				<div className={classes.modalActions}>
-					<Button type="button" variant="outline" onClick={handleClose} disabled={loading}>
+					<Button type="button" variant="outlined" onClick={handleClose} disabled={loading}>
 						Annuler
 					</Button>
 					<Button type="submit" disabled={!formData.name.trim()} loading={loading}>

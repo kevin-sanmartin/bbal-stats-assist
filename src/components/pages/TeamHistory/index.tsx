@@ -202,7 +202,7 @@ export default function TeamHistory({ team, games }: TeamHistoryProps) {
 			width: "80px",
 			align: "center",
 			render: (value, row: TGame) => (
-				<Button variant="outline" size="sm" onClick={() => router.push(`/matches/${row.id}`)}>
+				<Button variant="outlined" onClick={() => router.push(`/matches/${row.id}`)}>
 					Détails
 				</Button>
 			),
@@ -212,7 +212,7 @@ export default function TeamHistory({ team, games }: TeamHistoryProps) {
 	return (
 		<div className={classes.root}>
 			<div className={classes.header}>
-				<Button variant="outline" onClick={() => router.push("/")}>
+				<Button variant="outlined" onClick={() => router.push("/")}>
 					← Accueil
 				</Button>
 				<div className={classes.headerContent}>
@@ -220,9 +220,7 @@ export default function TeamHistory({ team, games }: TeamHistoryProps) {
 					<Badge variant={getCategoryColor(team.category)}>{team.category}</Badge>
 				</div>
 				<div className={classes.headerActions}>
-					<Button variant="primary" onClick={() => router.push(`/matches?team=${team.id}`)}>
-						+ Nouveau match
-					</Button>
+					<Button onClick={() => router.push(`/matches?team=${team.id}`)}>+ Nouveau match</Button>
 				</div>
 			</div>
 
@@ -276,12 +274,12 @@ export default function TeamHistory({ team, games }: TeamHistoryProps) {
 						<div className={classes.activeFilters}>
 							<span className={classes.filterLabel}>Filtres actifs :</span>
 							{searchTerm && (
-								<Button variant="outline" size="sm" className={classes.filterChip} onClick={() => setSearchTerm("")}>
+								<Button variant="outlined" className={classes.filterChip} onClick={() => setSearchTerm("")}>
 									Recherche : "{searchTerm}" ✕
 								</Button>
 							)}
 							{selectedCompetition !== "ALL" && (
-								<Button variant="outline" size="sm" className={classes.filterChip} onClick={() => setSelectedCompetition("ALL")}>
+								<Button variant="outlined" className={classes.filterChip} onClick={() => setSelectedCompetition("ALL")}>
 									{competitionOptions.find((opt) => opt.value === selectedCompetition)?.label} ✕
 								</Button>
 							)}
@@ -303,10 +301,10 @@ export default function TeamHistory({ team, games }: TeamHistoryProps) {
 								{selectedCompetition !== "ALL" && ` dans cette compétition`}
 							</p>
 							<div className={classes.clearFilters}>
-								<Button variant="secondary" onClick={() => setSearchTerm("")}>
+								<Button variant="ghost" onClick={() => setSearchTerm("")}>
 									Effacer la recherche
 								</Button>
-								<Button variant="outline" onClick={() => setSelectedCompetition("ALL")}>
+								<Button variant="outlined" onClick={() => setSelectedCompetition("ALL")}>
 									Toutes les compétitions
 								</Button>
 							</div>
@@ -316,9 +314,7 @@ export default function TeamHistory({ team, games }: TeamHistoryProps) {
 							<div className={classes.emptyIcon}>🏀</div>
 							<h2>{team.name} n'a pas encore joué de match</h2>
 							<p>Commencez par créer votre premier match pour voir l'historique ici</p>
-							<Button variant="primary" onClick={() => router.push(`/matches?team=${team.id}`)}>
-								Créer un match
-							</Button>
+							<Button onClick={() => router.push(`/matches?team=${team.id}`)}>Créer un match</Button>
 						</>
 					)}
 				</div>

@@ -45,7 +45,7 @@ const positionColors = {
 	OTHER: "default" as const,
 };
 
-export default function PlayerCard({ name, number, position, stats, size = "md", active = false, avatarUrl, className, onClick }: PlayerCardProps) {
+export default function PlayerCard({ name, number, position, stats, size = "sm", active = false, avatarUrl, className, onClick }: PlayerCardProps) {
 	const cardClasses = classNames(classes.playerCard, classes[`size-${size}`], { [classes.active]: active, [classes.clickable]: onClick }, className);
 
 	return (

@@ -59,97 +59,51 @@ export default function Components() {
 	const [showModalFull, setShowModalFull] = useState(false);
 	const [currentPage, setCurrentPage] = useState(1);
 
-
 	return (
 		<main className={classes.root}>
 			<div className={classes.container}>
 				<div className={classes.section}>
 					<h2>Buttons</h2>
-
 					<div className={classes.grid}>
-						<Button variant="primary" size="lg">
+						<Button variant="contained" color="primary">
 							Primary Button
 						</Button>
-						<Button variant="primary" loading size="lg">
+						<Button variant="contained" color="info">
 							Primary Button
 						</Button>
-						<Button variant="secondary" size="lg">
-							Secondary Button
+						<Button variant="contained" color="gray">
+							Primary Button
 						</Button>
-						<Button variant="secondary" loading size="lg">
-							Secondary Button
-						</Button>
-						<Button variant="outline" size="lg">
-							Outline Button
-						</Button>
-						<Button variant="outline" loading size="lg">
-							Outline Button
-						</Button>
-						<Button variant="ghost" size="lg">
-							Ghost Button
-						</Button>
-						<Button variant="ghost" loading size="lg">
-							Ghost Button
-						</Button>
-						<Button variant="danger" size="lg">
-							Danger Button
-						</Button>
-						<Button variant="danger" loading size="lg">
-							Danger Button
+						<Button variant="contained" color="danger">
+							Primary Button
 						</Button>
 					</div>
 					<div className={classes.grid}>
-						<Button variant="primary">Primary Button</Button>
-						<Button variant="primary" loading>
-							Primary Button
-						</Button>
-						<Button variant="secondary">Secondary Button</Button>
-						<Button variant="secondary" loading>
-							Secondary Button
-						</Button>
-						<Button variant="outline">Outline Button</Button>
-						<Button variant="outline" loading>
-							Outline Button
-						</Button>
-						<Button variant="ghost">Ghost Button</Button>
-						<Button variant="ghost" loading>
+						<Button variant="ghost" color="primary">
 							Ghost Button
 						</Button>
-						<Button variant="danger">Danger Button</Button>
-						<Button variant="danger" loading>
-							Danger Button
+						<Button variant="ghost" color="info">
+							Ghost Button
+						</Button>
+						<Button variant="ghost" color="gray">
+							Ghost Button
+						</Button>
+						<Button variant="ghost" color="danger">
+							Ghost Button
 						</Button>
 					</div>
 					<div className={classes.grid}>
-						<Button variant="primary" size="sm">
-							Primary Button
+						<Button variant="outlined" color="primary">
+							Outlined Button
 						</Button>
-						<Button variant="primary" size="sm" loading>
-							Primary Button
+						<Button variant="outlined" color="info">
+							Outlined Button
 						</Button>
-						<Button variant="secondary" size="sm">
-							Secondary Button
+						<Button variant="outlined" color="gray">
+							Outlined Button
 						</Button>
-						<Button variant="secondary" size="sm" loading>
-							Secondary Button
-						</Button>
-						<Button variant="outline" size="sm">
-							Outline Button
-						</Button>
-						<Button variant="outline" size="sm" loading>
-							Outline Button
-						</Button>
-						<Button variant="ghost" size="sm">
-							Ghost Button
-						</Button>
-						<Button variant="ghost" size="sm" loading>
-							Ghost Button
-						</Button>
-						<Button variant="danger" size="sm">
-							Danger Button
-						</Button>
-						<Button variant="danger" size="sm" loading>
-							Danger Button
+						<Button variant="outlined" color="danger">
+							Outlined Button
 						</Button>
 					</div>
 				</div>
@@ -491,14 +445,7 @@ export default function Components() {
 
 				<div className={classes.section}>
 					<h2>Chart Container</h2>
-					<ChartContainer
-						title="Revenue Over Time"
-						subtitle="Monthly revenue for the past year"
-						actions={
-							<Button size="sm" variant="outline">
-								Export
-							</Button>
-						}>
+					<ChartContainer title="Revenue Over Time" subtitle="Monthly revenue for the past year" actions={<Button variant="outlined">Export</Button>}>
 						<div
 							style={{
 								display: "flex",
@@ -540,13 +487,13 @@ export default function Components() {
 					<h2>Toaster</h2>
 					<div className={classes.flexRow}>
 						<Button onClick={() => toast.success("Operation completed successfully!", "Success")}>Show Success Toast</Button>
-						<Button variant="danger" onClick={() => toast.error("Something went wrong!", "Error")}>
+						<Button color="danger" onClick={() => toast.error("Something went wrong!", "Error")}>
 							Show Error Toast
 						</Button>
-						<Button variant="secondary" onClick={() => toast.warning("Please check your input.", "Warning")}>
+						<Button variant="ghost" onClick={() => toast.warning("Please check your input.", "Warning")}>
 							Show Warning Toast
 						</Button>
-						<Button variant="outline" onClick={() => toast.info("Here's some useful information.", "Info")}>
+						<Button variant="outlined" onClick={() => toast.info("Here's some useful information.", "Info")}>
 							Show Info Toast
 						</Button>
 					</div>
@@ -570,7 +517,7 @@ export default function Components() {
 					size="sm"
 					footer={
 						<div style={{ display: "flex", gap: "var(--spacing-3)" }}>
-							<Button variant="outline" onClick={() => setShowModalSmall(false)}>
+							<Button variant="outlined" onClick={() => setShowModalSmall(false)}>
 								Cancel
 							</Button>
 							<Button onClick={() => setShowModalSmall(false)}>Confirm</Button>
@@ -586,7 +533,7 @@ export default function Components() {
 					size="md"
 					footer={
 						<div style={{ display: "flex", gap: "var(--spacing-3)" }}>
-							<Button variant="outline" onClick={() => setShowModalMedium(false)}>
+							<Button variant="outlined" onClick={() => setShowModalMedium(false)}>
 								Cancel
 							</Button>
 							<Button onClick={() => setShowModalMedium(false)}>Confirm</Button>
@@ -602,7 +549,7 @@ export default function Components() {
 					size="lg"
 					footer={
 						<div style={{ display: "flex", gap: "var(--spacing-3)" }}>
-							<Button variant="outline" onClick={() => setShowModalLarge(false)}>
+							<Button variant="outlined" onClick={() => setShowModalLarge(false)}>
 								Cancel
 							</Button>
 							<Button onClick={() => setShowModalLarge(false)}>Confirm</Button>
@@ -618,7 +565,7 @@ export default function Components() {
 					size="xl"
 					footer={
 						<div style={{ display: "flex", gap: "var(--spacing-3)" }}>
-							<Button variant="outline" onClick={() => setShowModalExtraLarge(false)}>
+							<Button variant="outlined" onClick={() => setShowModalExtraLarge(false)}>
 								Cancel
 							</Button>
 							<Button onClick={() => setShowModalExtraLarge(false)}>Confirm</Button>
@@ -634,7 +581,7 @@ export default function Components() {
 					size="full"
 					footer={
 						<div style={{ display: "flex", gap: "var(--spacing-3)" }}>
-							<Button variant="outline" onClick={() => setShowModalFull(false)}>
+							<Button variant="outlined" onClick={() => setShowModalFull(false)}>
 								Cancel
 							</Button>
 							<Button onClick={() => setShowModalFull(false)}>Confirm</Button>
@@ -642,7 +589,6 @@ export default function Components() {
 					}>
 					<p>This is a demo modal with some content.</p>
 				</Modal>
-
 			</div>
 		</main>
 	);

@@ -162,7 +162,7 @@ export default function Register() {
 				</div>
 
 				<div className={classes.buttonContainer}>
-					<Button type="submit" variant="primary" size="lg" fullWidth loading={loading}>
+					<Button type="submit" fullWidth loading={loading}>
 						Créer mon compte
 					</Button>
 					<div className={classes.divider} />

@@ -10,10 +10,8 @@ export default function EmptyPlayersState({ onAddPlayer }: EmptyPlayersStateProp
 		<div className={classes.emptyState}>
 			<div className={classes.icon}>🏀</div>
 			<h2 className={classes.title}>Aucun joueur dans cette équipe</h2>
-			<p className={classes.description}>
-				Commencez par ajouter des joueurs à votre équipe pour pouvoir saisir des statistiques et suivre leurs performances.
-			</p>
-			<Button onClick={onAddPlayer} leftIcon="+" size="lg">
+			<p className={classes.description}>Commencez par ajouter des joueurs à votre équipe pour pouvoir saisir des statistiques et suivre leurs performances.</p>
+			<Button onClick={onAddPlayer} leftIcon="+">
 				Ajouter le premier joueur
 			</Button>
 		</div>

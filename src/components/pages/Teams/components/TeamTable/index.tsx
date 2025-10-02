@@ -46,13 +46,13 @@ export default function TeamTable({ teams, onEdit, onDelete }: TeamTableProps) {
 			width: "35%",
 			render: (_, team: TTeam) => (
 				<div className={classes.actions}>
-					<Button variant="primary" size="sm" fullWidth onClick={() => handleViewPlayers(team.id)}>
+					<Button fullWidth onClick={() => handleViewPlayers(team.id)}>
 						Voir joueurs
 					</Button>
-					<Button variant="outline" size="sm" fullWidth onClick={() => onEdit(team)}>
+					<Button variant="outlined" fullWidth onClick={() => onEdit(team)}>
 						Modifier
 					</Button>
-					<Button variant="danger" size="sm" fullWidth onClick={() => onDelete(team)}>
+					<Button color="danger" fullWidth onClick={() => onDelete(team)}>
 						Supprimer
 					</Button>
 				</div>

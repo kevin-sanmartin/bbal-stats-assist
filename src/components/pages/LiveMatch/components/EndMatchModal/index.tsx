@@ -8,41 +8,31 @@ import classes from "./classes.module.scss";
 interface EndMatchModalProps {
 	isOpen: boolean;
 	onClose: () => void;
-	onSubmit: (data: {
-		opponent: string;
-		ourScore: number;
-		opponentScore: number;
-		location: 'HOME' | 'AWAY';
-	}) => void;
+	onSubmit: (data: { opponent: string; ourScore: number; opponentScore: number; location: "HOME" | "AWAY" }) => void;
 	isLoading?: boolean;
 }
 
-export default function EndMatchModal({
-	isOpen,
-	onClose,
-	onSubmit,
-	isLoading = false
-}: EndMatchModalProps) {
+export default function EndMatchModal({ isOpen, onClose, onSubmit, isLoading = false }: EndMatchModalProps) {
 	const [formData, setFormData] = useState({
-		opponent: '',
+		opponent: "",
 		ourScore: 0,
 		opponentScore: 0,
-		location: 'HOME' as 'HOME' | 'AWAY'
+		location: "HOME" as "HOME" | "AWAY",
 	});
 
 	const [errors, setErrors] = useState<Record<string, string>>({});
 
 	const handleInputChange = (field: string, value: string | number) => {
-		setFormData(prev => ({
+		setFormData((prev) => ({
 			...prev,
-			[field]: value
+			[field]: value,
 		}));
 
 		// Clear error when user starts typing
 		if (errors[field]) {
-			setErrors(prev => ({
+			setErrors((prev) => ({
 				...prev,
-				[field]: ''
+				[field]: "",
 			}));
 		}
 	};
@@ -51,15 +41,15 @@ export default function EndMatchModal({
 		const newErrors: Record<string, string> = {};
 
 		if (!formData.opponent.trim()) {
-			newErrors.opponent = 'Le nom de l\'équipe adverse est requis';
+			newErrors.opponent = "Le nom de l'équipe adverse est requis";
 		}
 
 		if (formData.ourScore < 0) {
-			newErrors.ourScore = 'Le score ne peut pas être négatif';
+			newErrors.ourScore = "Le score ne peut pas être négatif";
 		}
 
 		if (formData.opponentScore < 0) {
-			newErrors.opponentScore = 'Le score ne peut pas être négatif';
+			newErrors.opponentScore = "Le score ne peut pas être négatif";
 		}
 
 		setErrors(newErrors);
@@ -79,22 +69,17 @@ export default function EndMatchModal({
 			onClose();
 			// Reset form
 			setFormData({
-				opponent: '',
+				opponent: "",
 				ourScore: 0,
 				opponentScore: 0,
-				location: 'HOME'
+				location: "HOME",
 			});
 			setErrors({});
 		}
 	};
 
 	return (
-		<Modal
-			isOpen={isOpen}
-			onClose={handleClose}
-			title="Finaliser le match"
-			size="md"
-		>
+		<Modal isOpen={isOpen} onClose={handleClose} title="Finaliser le match" size="md">
 			<form onSubmit={handleSubmit} className={classes.form}>
 				<div className={classes.formGroup}>
 					<label htmlFor="opponent" className={classes.label}>
@@ -104,13 +89,11 @@ export default function EndMatchModal({
 						id="opponent"
 						type="text"
 						value={formData.opponent}
-						onChange={(e) => handleInputChange('opponent', e.target.value)}
+						onChange={(e) => handleInputChange("opponent", e.target.value)}
 						placeholder="Nom de l'équipe adverse"
 						disabled={isLoading}
 					/>
-					{errors.opponent && (
-						<span className={classes.error}>{errors.opponent}</span>
-					)}
+					{errors.opponent && <span className={classes.error}>{errors.opponent}</span>}
 				</div>
 
 				<div className={classes.scoresRow}>
@@ -123,12 +106,10 @@ export default function EndMatchModal({
 							type="number"
 							min="0"
 							value={formData.ourScore}
-							onChange={(e) => handleInputChange('ourScore', parseInt(e.target.value) || 0)}
+							onChange={(e) => handleInputChange("ourScore", parseInt(e.target.value) || 0)}
 							disabled={isLoading}
 						/>
-						{errors.ourScore && (
-							<span className={classes.error}>{errors.ourScore}</span>
-						)}
+						{errors.ourScore && <span className={classes.error}>{errors.ourScore}</span>}
 					</div>
 
 					<div className={classes.scoresSeparator}>-</div>
@@ -142,12 +123,10 @@ export default function EndMatchModal({
 							type="number"
 							min="0"
 							value={formData.opponentScore}
-							onChange={(e) => handleInputChange('opponentScore', parseInt(e.target.value) || 0)}
+							onChange={(e) => handleInputChange("opponentScore", parseInt(e.target.value) || 0)}
 							disabled={isLoading}
 						/>
-						{errors.opponentScore && (
-							<span className={classes.error}>{errors.opponentScore}</span>
-						)}
+						{errors.opponentScore && <span className={classes.error}>{errors.opponentScore}</span>}
 					</div>
 				</div>
 
@@ -157,29 +136,20 @@ export default function EndMatchModal({
 					</label>
 					<Select
 						value={formData.location}
-						onChange={(e) => handleInputChange('location', e.target.value as 'HOME' | 'AWAY')}
+						onChange={(e) => handleInputChange("location", e.target.value as "HOME" | "AWAY")}
 						options={[
-							{ value: 'HOME', label: 'Domicile' },
-							{ value: 'AWAY', label: 'Extérieur' }
+							{ value: "HOME", label: "Domicile" },
+							{ value: "AWAY", label: "Extérieur" },
 						]}
 					/>
 				</div>
 
 				<div className={classes.actions}>
-					<Button
-						type="button"
-						variant="secondary"
-						onClick={handleClose}
-						disabled={isLoading}
-					>
+					<Button type="button" variant="ghost" onClick={handleClose} disabled={isLoading}>
 						Annuler
 					</Button>
-					<Button
-						type="submit"
-						variant="primary"
-						disabled={isLoading}
-					>
-						{isLoading ? 'Sauvegarde...' : 'Finaliser le match'}
+					<Button type="submit" disabled={isLoading}>
+						{isLoading ? "Sauvegarde..." : "Finaliser le match"}
 					</Button>
 				</div>
 			</form>

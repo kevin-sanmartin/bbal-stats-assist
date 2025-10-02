@@ -2,12 +2,12 @@ import { ButtonHTMLAttributes, ReactNode } from "react";
 import classes from "./classes.module.scss";
 import classNames from "classnames";
 
-export type ButtonVariant = "primary" | "secondary" | "outline" | "ghost" | "danger";
-export type ButtonSize = "sm" | "md" | "lg";
+export type ButtonVariant = "contained" | "outlined" | "ghost";
+export type ButtonColor = "primary" | "gray" | "info" | "danger";
 
 interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 	variant?: ButtonVariant;
-	size?: ButtonSize;
+	color?: ButtonColor;
 	loading?: boolean;
 	fullWidth?: boolean;
 	leftIcon?: ReactNode;
@@ -17,8 +17,8 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 export default function Button({
 	children,
 	type = "button",
-	variant = "primary",
-	size = "md",
+	variant = "contained",
+	color = "primary",
 	loading = false,
 	fullWidth = false,
 	leftIcon,
@@ -30,7 +30,7 @@ export default function Button({
 	const buttonClasses = classNames(
 		classes.button,
 		classes[`variant-${variant}`],
-		classes[`size-${size}`],
+		classes[`color-${color}`],
 		{ [classes.fullWidth]: fullWidth, [classes.loading]: loading },
 		className,
 	);

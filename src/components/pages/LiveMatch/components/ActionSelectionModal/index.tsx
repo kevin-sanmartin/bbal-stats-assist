@@ -21,23 +21,13 @@ const ACTION_OPTIONS = [
 	{ type: EActionType.FOUL, label: "Faute", icon: "F", color: "#ef4444" },
 ];
 
-export default function ActionSelectionModal({
-	isOpen,
-	onClose,
-	selectedPlayer,
-	onActionSelect
-}: ActionSelectionModalProps) {
+export default function ActionSelectionModal({ isOpen, onClose, selectedPlayer, onActionSelect }: ActionSelectionModalProps) {
 	const handleActionClick = (actionType: EActionType) => {
 		onActionSelect(actionType);
 	};
 
 	return (
-		<Modal
-			isOpen={isOpen}
-			onClose={onClose}
-			title={`Action pour ${selectedPlayer?.name || "Joueur"}`}
-			size="md"
-		>
+		<Modal isOpen={isOpen} onClose={onClose} title={`Action pour ${selectedPlayer?.name || "Joueur"}`} size="md">
 			<div className={classes.playerInfo}>
 				{selectedPlayer && (
 					<div className={classes.selectedPlayer}>
@@ -56,8 +46,7 @@ export default function ActionSelectionModal({
 						key={action.type}
 						className={classes.actionCard}
 						onClick={() => handleActionClick(action.type)}
-						style={{ '--action-color': action.color } as React.CSSProperties}
-					>
+						style={{ "--action-color": action.color } as React.CSSProperties}>
 						<div className={classes.actionIcon}>{action.icon}</div>
 						<div className={classes.actionLabel}>{action.label}</div>
 					</button>
@@ -65,7 +54,7 @@ export default function ActionSelectionModal({
 			</div>
 
 			<div className={classes.modalFooter}>
-				<Button variant="secondary" onClick={onClose}>
+				<Button variant="ghost" onClick={onClose}>
 					Annuler
 				</Button>
 			</div>

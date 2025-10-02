@@ -38,10 +38,7 @@ export default function MatchTypeSelectionStep({ onMatchTypeSelect }: MatchTypeS
 					<p className={classes.typeDescription}>Saisissez les statistiques en temps réel pendant le match</p>
 				</Card>
 
-				<Card
-					variant="outlined"
-					padding="md"
-					className={`${classes.typeCard} ${classes.disabled}`}>
+				<Card variant="outlined" padding="md" className={`${classes.typeCard} ${classes.disabled}`}>
 					<div className={classes.typeHeader}>
 						<h3 className={classes.typeTitle}>Saisie manuelle</h3>
 						<div className={classes.typeIcon}>📝</div>
@@ -52,7 +49,7 @@ export default function MatchTypeSelectionStep({ onMatchTypeSelect }: MatchTypeS
 			</div>
 
 			<div className={classes.actions}>
-				<Button variant="primary" onClick={handleContinue} disabled={!selectedType}>
+				<Button onClick={handleContinue} disabled={!selectedType}>
 					Commencer
 				</Button>
 			</div>

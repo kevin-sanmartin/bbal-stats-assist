@@ -10,28 +10,20 @@ interface DeletePlayerConfirmModalProps {
 	loading?: boolean;
 }
 
-export default function DeletePlayerConfirmModal({
-	isOpen,
-	onClose,
-	onConfirm,
-	playerName,
-	loading = false
-}: DeletePlayerConfirmModalProps) {
+export default function DeletePlayerConfirmModal({ isOpen, onClose, onConfirm, playerName, loading = false }: DeletePlayerConfirmModalProps) {
 	return (
 		<Modal isOpen={isOpen} onClose={onClose} title="Supprimer le joueur">
 			<div className={classes.content}>
 				<p className={classes.message}>
 					Êtes-vous sûr de vouloir supprimer <strong>{playerName}</strong> de l'équipe ?
 				</p>
-				<p className={classes.warning}>
-					Cette action est irréversible.
-				</p>
+				<p className={classes.warning}>Cette action est irréversible.</p>
 
 				<div className={classes.actions}>
-					<Button variant="outline" onClick={onClose} disabled={loading}>
+					<Button variant="outlined" onClick={onClose} disabled={loading}>
 						Annuler
 					</Button>
-					<Button variant="danger" onClick={onConfirm} loading={loading}>
+					<Button color="danger" onClick={onConfirm} loading={loading}>
 						Supprimer
 					</Button>
 				</div>

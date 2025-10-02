@@ -30,9 +30,7 @@ export default function TeamSelectionStep({ onTeamSelect, teams }: TeamSelection
 		return (
 			<Alert variant="warning" title="Aucune équipe trouvée">
 				<p>Vous devez d'abord créer une équipe pour pouvoir créer un match.</p>
-				<Button variant="primary" onClick={() => (window.location.href = "/teams")}>
-					Créer une équipe
-				</Button>
+				<Button onClick={() => (window.location.href = "/teams")}>Créer une équipe</Button>
 			</Alert>
 		);
 	}
@@ -58,7 +56,7 @@ export default function TeamSelectionStep({ onTeamSelect, teams }: TeamSelection
 			</div>
 
 			<div className={classes.actions}>
-				<Button variant="primary" onClick={handleContinue} disabled={!selectedTeam}>
+				<Button onClick={handleContinue} disabled={!selectedTeam}>
 					Continuer
 				</Button>
 			</div>

@@ -14,11 +14,7 @@ export default function ManualMatch() {
 	return (
 		<div className={classes.root}>
 			<div className={classes.header}>
-				<Button
-					variant="secondary"
-					size="sm"
-					onClick={() => window.history.back()}
-				>
+				<Button variant="ghost" onClick={() => window.history.back()}>
 					← Retour
 				</Button>
 				<h1 className={classes.title}>Saisie manuelle</h1>
@@ -40,9 +36,15 @@ export default function ManualMatch() {
 					<div className={classes.debugInfo}>
 						<h3>Paramètres reçus :</h3>
 						<ul>
-							<li><strong>Équipe :</strong> {teamId || "Non spécifiée"}</li>
-							<li><strong>Compétition :</strong> {competitionId || "Aucune"}</li>
-							<li><strong>Type :</strong> {matchType || "Non spécifié"}</li>
+							<li>
+								<strong>Équipe :</strong> {teamId || "Non spécifiée"}
+							</li>
+							<li>
+								<strong>Compétition :</strong> {competitionId || "Aucune"}
+							</li>
+							<li>
+								<strong>Type :</strong> {matchType || "Non spécifié"}
+							</li>
 						</ul>
 					</div>
 				</div>
