@@ -2,11 +2,9 @@ import { InputHTMLAttributes, ReactNode } from "react";
 import classes from "./classes.module.scss";
 import classNames from "classnames";
 
-export type InputSize = "sm" | "md" | "lg";
 export type InputState = "default" | "error" | "success";
 
 interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size"> {
-	size?: InputSize;
 	state?: InputState;
 	label?: string;
 	helperText?: string;
@@ -15,10 +13,9 @@ interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size">
 	fullWidth?: boolean;
 }
 
-export default function Input({ size = "md", state = "default", label, helperText, leftIcon, rightIcon, fullWidth = false, className, ...props }: InputProps) {
+export default function Input({ state = "default", label, helperText, leftIcon, rightIcon, fullWidth = false, className, ...props }: InputProps) {
 	const inputClasses = classNames(
 		classes.input,
-		classes[`size-${size}`],
 		classes[`state-${state}`],
 		{ [classes.hasLeftIcon]: leftIcon, [classes.hasRightIcon]: rightIcon, [classes.fullWidth]: fullWidth },
 		className,

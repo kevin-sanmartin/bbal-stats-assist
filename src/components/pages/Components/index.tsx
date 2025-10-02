@@ -111,22 +111,10 @@ export default function Components() {
 				<div className={classes.section}>
 					<h2>Inputs</h2>
 					<div className={classes.grid}>
-						<Input placeholder="Default input" size="lg" />
-						<Input placeholder="With label" label="Email" size="lg" />
-						<Input placeholder="Error state" state="error" helperText="This field is required" size="lg" />
-						<Input placeholder="Success state" state="success" helperText="Looks good!" size="lg" />
-					</div>
-					<div className={classes.grid}>
 						<Input placeholder="Default input" />
 						<Input placeholder="With label" label="Email" />
 						<Input placeholder="Error state" state="error" helperText="This field is required" />
 						<Input placeholder="Success state" state="success" helperText="Looks good!" />
-					</div>
-					<div className={classes.grid}>
-						<Input placeholder="Default input" size="sm" />
-						<Input placeholder="With label" label="Email" size="sm" />
-						<Input placeholder="Error state" state="error" helperText="This field is required" size="sm" />
-						<Input placeholder="Success state" state="success" helperText="Looks good!" size="sm" />
 					</div>
 				</div>
 

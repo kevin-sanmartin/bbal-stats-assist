@@ -26,6 +26,9 @@
 	font-weight: var(--font-weight-normal);
 	font-size: var(--font-size-sm);
 
+	padding: var(--spacing-2) var(--spacing-3);
+	min-height: 2rem;
+
 	color: var(--color-text-primary);
 	background-color: var(--color-surface);
 
@@ -55,28 +58,6 @@
 		cursor: not-allowed;
 		background-color: var(--color-surface-secondary);
 	}
-}
-
-// === SIZES ===
-
-.size-sm {
-	padding: var(--spacing-2) var(--spacing-3);
-	font-size: var(--font-size-xs);
-	min-height: 1.75rem;
-
-	&.hasLeftIcon {
-		padding-left: var(--spacing-6);
-	}
-
-	&.hasRightIcon {
-		padding-right: var(--spacing-6);
-	}
-}
-
-.size-md {
-	padding: var(--spacing-2) var(--spacing-3);
-	font-size: var(--font-size-sm);
-	min-height: 2.25rem;
 
 	&.hasLeftIcon {
 		padding-left: var(--spacing-8);
@@ -84,20 +65,6 @@
 
 	&.hasRightIcon {
 		padding-right: var(--spacing-8);
-	}
-}
-
-.size-lg {
-	padding: var(--spacing-3) var(--spacing-4);
-	font-size: var(--font-size-base);
-	min-height: 2.75rem;
-
-	&.hasLeftIcon {
-		padding-left: var(--spacing-10);
-	}
-
-	&.hasRightIcon {
-		padding-right: var(--spacing-10);
 	}
 }
 
