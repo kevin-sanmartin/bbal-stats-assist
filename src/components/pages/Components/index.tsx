@@ -244,14 +244,8 @@ export default function Components() {
 
 				<div className={classes.section}>
 					<h2>Pagination </h2>
-					<div style={{ marginTop: "var(--spacing-4)", display: "flex", justifyContent: "center" }}>
-						<Pagination currentPage={currentPage} totalPages={10} onPageChange={setCurrentPage} size="lg" />
-					</div>
-					<div style={{ marginTop: "var(--spacing-4)", display: "flex", justifyContent: "center" }}>
-						<Pagination currentPage={currentPage} totalPages={10} onPageChange={setCurrentPage} size="md" />
-					</div>
-					<div style={{ marginTop: "var(--spacing-4)", display: "flex", justifyContent: "center" }}>
-						<Pagination currentPage={currentPage} totalPages={10} onPageChange={setCurrentPage} size="sm" />
+					<div className={classes.flexRow}>
+						<Pagination currentPage={currentPage} totalPages={10} onPageChange={setCurrentPage} />
 					</div>
 				</div>
 

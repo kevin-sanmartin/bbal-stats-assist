@@ -2,30 +2,18 @@ import { HiChevronDoubleLeft, HiChevronDoubleRight, HiChevronLeft, HiChevronRigh
 import classes from "./classes.module.scss";
 import classNames from "classnames";
 
-export type PaginationSize = "sm" | "md" | "lg";
-
 interface PaginationProps {
 	currentPage: number;
 	totalPages: number;
 	onPageChange: (page: number) => void;
-	size?: PaginationSize;
 	showFirstLast?: boolean;
 	showPrevNext?: boolean;
 	maxVisiblePages?: number;
 	className?: string;
 }
 
-export default function Pagination({
-	currentPage,
-	totalPages,
-	onPageChange,
-	size = "md",
-	showFirstLast = true,
-	showPrevNext = true,
-	maxVisiblePages = 5,
-	className,
-}: PaginationProps) {
-	const paginationClasses = classNames(classes.pagination, classes[`size-${size}`], className);
+export default function Pagination({ currentPage, totalPages, onPageChange, showFirstLast = true, showPrevNext = true, maxVisiblePages = 5, className }: PaginationProps) {
+	const paginationClasses = classNames(classes.pagination, className);
 
 	const getVisiblePages = () => {
 		const delta = Math.floor(maxVisiblePages / 2);
