@@ -16,7 +16,7 @@ export default function TeamCard({ team }: IProps) {
 	const router = useRouter();
 
 	return (
-		<Card key={team.id} className={classes.teamCard} hoverable>
+		<Card key={team.id} className={classes.teamCard} hoverable onClick={() => router.push(`/teams/${team.id}`)}>
 			<div className={classes.teamHeader}>
 				<div className={classes.teamTitleContainer}>
 					<FaBasketball size={30} className={classes.teamIcon} />
@@ -28,14 +28,6 @@ export default function TeamCard({ team }: IProps) {
 					</div>
 				</div>
 				<Badge variant={getCategoryColor(team.category)}>{team.category}</Badge>
-			</div>
-			<div className={classes.teamActions}>
-				<Button variant="outlined" onClick={() => router.push(`/teams/${team.id}/players`)} leftIcon={<FaUsers size={20} />} fullWidth>
-					Joueurs
-				</Button>
-				<Button color="primary" onClick={() => router.push(`/teams/${team.id}/history`)} leftIcon={<MdHistory size={20} />} fullWidth>
-					Historique
-				</Button>
 			</div>
 		</Card>
 	);

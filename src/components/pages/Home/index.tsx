@@ -9,7 +9,7 @@ import Button from "@/components/elements/Button";
 import StatCounter from "@/components/elements/StatCounter";
 import classes from "./classes.module.scss";
 import TeamCard from "@/components/materials/TeamCard";
-import { FaUsers, FaTrophy } from "react-icons/fa";
+import { FaTrophy } from "react-icons/fa";
 interface HomeProps {
 	teams: TTeamWithPlayers[];
 	userStats: UserStats;
@@ -91,11 +91,6 @@ export default function Home({ teams, userStats }: HomeProps) {
 								<FaTrophy size={40} className={classes.actionIcon} />
 								<h3>Nouveau match</h3>
 								<p>Démarrer un match en direct ou manuel</p>
-							</Card>
-							<Card className={classes.actionCard} onClick={() => router.push("/teams")}>
-								<FaUsers size={40} className={classes.actionIcon} />
-								<h3>Gérer les équipes</h3>
-								<p>Ajouter ou modifier vos équipes</p>
 							</Card>
 						</div>
 					</div>

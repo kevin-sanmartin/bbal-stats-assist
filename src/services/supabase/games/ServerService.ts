@@ -8,6 +8,17 @@ export interface UserStats {
 	winRate: number;
 }
 
+export interface TeamStats {
+	totalGames: number;
+	wins: number;
+	losses: number;
+	draws: number;
+	winRate: number;
+	avgPointsPerGame: number;
+	totalPointsFor: number;
+	totalPointsAgainst: number;
+}
+
 export class GamesServerService {
 	private static instance: GamesServerService;
 	private readonly gamesTableName = "games";
@@ -141,6 +152,51 @@ export class GamesServerService {
 
 		return count || 0;
 	}
+
+	public async getTeamStats(teamId: string): Promise<TeamStats> {
+		const supabase = await createServerSupabaseClient();
+
+		try {
+			const { data: games, error } = await supabase.from(this.gamesTableName).select("score, opponent_score").eq("team_id", teamId);
+
+			if (error) {
+				console.error("Erreur lors de la récupération des matchs pour les stats:", error);
+				throw error;
+			}
+
+			const totalGames = games?.length || 0;
+			const wins = games?.filter((game) => game.score > game.opponent_score).length || 0;
+			const losses = games?.filter((game) => game.score < game.opponent_score).length || 0;
+			const draws = games?.filter((game) => game.score === game.opponent_score).length || 0;
+			const winRate = totalGames > 0 ? Math.round((wins / totalGames) * 100) : 0;
+			const totalPointsFor = games?.reduce((sum, game) => sum + game.score, 0) || 0;
+			const totalPointsAgainst = games?.reduce((sum, game) => sum + game.opponent_score, 0) || 0;
+			const avgPointsPerGame = totalGames > 0 ? Math.round(totalPointsFor / totalGames) : 0;
+
+			return {
+				totalGames,
+				wins,
+				losses,
+				draws,
+				winRate,
+				avgPointsPerGame,
+				totalPointsFor,
+				totalPointsAgainst,
+			};
+		} catch (error) {
+			console.error("Erreur lors du calcul des statistiques de l'équipe:", error);
+			return {
+				totalGames: 0,
+				wins: 0,
+				losses: 0,
+				draws: 0,
+				winRate: 0,
+				avgPointsPerGame: 0,
+				totalPointsFor: 0,
+				totalPointsAgainst: 0,
+			};
+		}
+	}
 }
 
 // Exports pour l'utilisation dans les pages
@@ -151,3 +207,4 @@ export const getGameById = (gameId: string) => service.getGameById(gameId);
 export const getUserStats = () => service.getUserStats();
 export const getTeamGames = (teamId: string) => service.getTeamGames(teamId);
 export const getTeamGamesCount = (teamId: string) => service.getTeamGamesCount(teamId);
+export const getTeamStats = (teamId: string) => service.getTeamStats(teamId);

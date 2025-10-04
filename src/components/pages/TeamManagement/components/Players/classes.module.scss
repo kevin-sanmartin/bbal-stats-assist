@@ -9,66 +9,14 @@
 }
 
 .header {
-	border-bottom: 1px solid var(--color-border);
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-end;
 	align-items: center;
-	gap: var(--spacing-4);
-
-	@media (max-width: 768px) {
-		flex-direction: column;
-		align-items: stretch;
-	}
-}
-
-.headerContent {
-	display: flex;
-	align-items: center;
-	gap: var(--spacing-6);
-
-	@media (max-width: 768px) {
-		flex-direction: column;
-		align-items: flex-start;
-		gap: var(--spacing-4);
-	}
-}
-
-.headerActions {
-	display: flex;
-	align-items: center;
-	gap: var(--spacing-2);
-	padding-bottom: var(--spacing-4);
 
 	@media screen and (max-width: constants.$screen-sm) {
 		flex-direction: column;
 		align-items: stretch;
-	}
-}
-
-.teamInfo {
-	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-1);
-}
-
-.title {
-	font-size: var(--font-size-3xl);
-	font-weight: var(--font-weight-bold);
-	color: var(--color-text-primary);
-	letter-spacing: -0.025em;
-
-	@media screen and (max-width: constants.$screen-sm) {
-		font-size: var(--font-size-2xl);
-	}
-}
-
-.subtitle {
-	font-size: var(--font-size-lg);
-	color: var(--color-text-secondary);
-	font-weight: var(--font-weight-medium);
-
-	@media screen and (max-width: constants.$screen-sm) {
-		font-size: var(--font-size-md);
+		width: 100%;
 	}
 }
 

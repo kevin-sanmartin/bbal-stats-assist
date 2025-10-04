@@ -12,7 +12,6 @@ import DeletePlayerConfirmModal from "./components/DeletePlayerConfirmModal";
 import EmptyPlayersState from "./components/EmptyPlayersState";
 import classes from "./classes.module.scss";
 import PlayerCard from "./components/PlayerCard";
-import { useRouter } from "next/navigation";
 
 enum EPlayerPositionTranslated {
 	PG = "Meneur",
@@ -31,7 +30,6 @@ interface PlayersProps {
 const playersService = PlayersClientService.getInstance();
 
 export default function Players({ teamId, initialPlayers, teamName }: PlayersProps) {
-	const router = useRouter();
 	const { toast } = useToastContext();
 	const [players, setPlayers] = useState<TPlayer[]>(initialPlayers);
 	const [isPlayerModalOpen, setIsPlayerModalOpen] = useState(false);
@@ -123,10 +121,6 @@ export default function Players({ teamId, initialPlayers, teamName }: PlayersPro
 		setPlayerToDelete(null);
 	};
 
-	const backToTeams = () => {
-		router.push("/teams");
-	};
-
 	const filteredPlayers = useMemo(() => {
 		return players.filter((player) => {
 			const matchesSearch = player.name.toLowerCase().includes(searchQuery.toLowerCase());
@@ -138,20 +132,9 @@ export default function Players({ teamId, initialPlayers, teamName }: PlayersPro
 	return (
 		<div className={classes.root}>
 			<div className={classes.header}>
-				<div className={classes.headerContent}>
-					<div className={classes.teamInfo}>
-						<h1 className={classes.title}>Gestion des joueurs</h1>
-						<span className={classes.subtitle}>Gérez votre effectif et les informations des joueurs</span>
-					</div>
-				</div>
-				<div className={classes.headerActions}>
-					<Button variant="outlined" onClick={backToTeams} className={classes.backButton}>
-						Retour aux équipes
-					</Button>
-					<Button onClick={() => setIsPlayerModalOpen(true)} leftIcon="+">
-						Ajouter un joueur
-					</Button>
-				</div>
+				<Button onClick={() => setIsPlayerModalOpen(true)} leftIcon="+">
+					Ajouter un joueur
+				</Button>
 			</div>
 
 			{players.length > 0 && (

@@ -205,8 +205,8 @@ export default function MatchDetails({ game, team, actions, players }: MatchDeta
 		<div className={classes.root}>
 			{/* Header */}
 			<div className={classes.header}>
-				<Button variant="outlined" onClick={() => router.push(`/teams/${team.id}/history`)}>
-					← Historique
+				<Button variant="outlined" onClick={() => router.push(`/teams/${team.id}`)}>
+					← Retour à l'équipe
 				</Button>
 				<div className={classes.headerContent}>
 					<h1>Match du {formatDate(game.date)}</h1>

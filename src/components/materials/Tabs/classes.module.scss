@@ -32,13 +32,8 @@
 
 	transition: all var(--transition-fast);
 
-	&:hover:not(.disabled) {
+	&:hover:not(.disabled):not(.active) {
 		color: var(--color-text-primary);
-	}
-
-	&:focus {
-		outline: 2px solid var(--color-border-focus);
-		outline-offset: 2px;
 	}
 
 	&.active {
@@ -141,5 +136,5 @@
 // === CONTENT ===
 
 .content {
-	padding: var(--spacing-6) 0;
+	padding: var(--spacing-4) 0;
 }

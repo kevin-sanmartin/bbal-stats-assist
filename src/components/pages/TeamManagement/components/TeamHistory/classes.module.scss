@@ -1,0 +1,321 @@
+@use "themes/constants.module.scss";
+
+.root {
+	flex: 1;
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-4);
+}
+
+// === FILTERS SECTION ===
+
+.filtersSection {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-3);
+}
+
+.filtersRow {
+	display: flex;
+	gap: var(--spacing-3);
+	align-items: stretch;
+	flex-wrap: wrap;
+
+	@media (max-width: constants.$screen-md) {
+		flex-direction: column;
+		gap: var(--spacing-2);
+	}
+}
+
+.searchInput {
+	flex: 1;
+	max-width: 300px;
+	min-width: 200px;
+
+	@media (max-width: constants.$screen-md) {
+		max-width: 100%;
+		min-width: 100%;
+	}
+}
+
+.competitionSelect {
+	min-width: 200px;
+	max-width: 250px;
+
+	@media (max-width: constants.$screen-md) {
+		min-width: 100%;
+		max-width: 100%;
+	}
+}
+
+.activeFilters {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2);
+	flex-wrap: wrap;
+	padding: var(--spacing-3);
+	background: var(--color-surface);
+	border-radius: var(--radius-md);
+	border: 1px solid var(--color-border);
+
+	@media (max-width: constants.$screen-md) {
+		padding: var(--spacing-2);
+		gap: var(--spacing-2);
+	}
+}
+
+.filterLabel {
+	font-size: var(--font-size-sm);
+	font-weight: var(--font-weight-medium);
+	color: var(--color-text-secondary);
+
+	@media (max-width: constants.$screen-md) {
+		font-size: var(--font-size-xs);
+		width: 100%;
+		margin-bottom: var(--spacing-1);
+	}
+}
+
+.filterChip {
+	font-size: var(--font-size-xs);
+	padding: var(--spacing-1) var(--spacing-2);
+	border-radius: var(--radius-sm);
+
+	@media (max-width: constants.$screen-md) {
+		font-size: 11px;
+		padding: var(--spacing-1) var(--spacing-2);
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+}
+
+.clearFilters {
+	display: flex;
+	gap: var(--spacing-2);
+	flex-wrap: wrap;
+}
+
+// === EMPTY STATE ===
+
+.emptyState {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap: var(--spacing-4);
+	min-height: 50vh;
+	text-align: center;
+
+	h2 {
+		font-size: var(--font-size-2xl);
+		font-weight: var(--font-weight-semibold);
+		color: var(--color-text-primary);
+		margin: 0;
+	}
+
+	p {
+		font-size: var(--font-size-base);
+		color: var(--color-text-secondary);
+		margin: 0;
+		max-width: 400px;
+		line-height: 1.5;
+	}
+}
+
+.emptyIcon {
+	font-size: 4rem;
+	opacity: 0.6;
+}
+
+// === TIMELINE ===
+
+.timeline {
+	display: flex;
+	flex-direction: column;
+	position: relative;
+	padding: var(--spacing-2) 0;
+
+	@media (max-width: constants.$screen-md) {
+		padding: 0;
+	}
+}
+
+.timelineItem {
+	display: grid;
+	grid-template-columns: 50px 1fr;
+	gap: var(--spacing-4);
+	position: relative;
+
+	@media (max-width: constants.$screen-md) {
+		grid-template-columns: 40px 1fr;
+		gap: var(--spacing-3);
+	}
+}
+
+.timelineDotContainer {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: var(--spacing-1);
+}
+
+.timelineDate {
+	text-align: center;
+	font-weight: 700;
+	font-size: var(--font-size-xs);
+	color: var(--color-text-secondary);
+	line-height: 1.2;
+	margin-top: var(--spacing-1);
+
+	@media (max-width: constants.$screen-md) {
+		font-size: 10px;
+		margin-top: 0;
+	}
+}
+
+.timelineDot {
+	width: 14px;
+	height: 14px;
+	border-radius: 50%;
+	background: var(--color-primary);
+	border: 3px solid var(--color-background);
+	box-shadow: 0 0 0 2px var(--color-primary);
+	margin: 0 auto;
+	z-index: 2;
+	position: relative;
+	flex-shrink: 0;
+
+	@media (max-width: constants.$screen-md) {
+		width: 12px;
+		height: 12px;
+		border: 2px solid var(--color-background);
+		box-shadow: 0 0 0 1.5px var(--color-primary);
+	}
+}
+
+.timelineLine {
+	position: absolute;
+	left: 25px;
+	top: 42px;
+	bottom: -16px;
+	width: 2px;
+	background: linear-gradient(to bottom, var(--color-border) 0%, var(--color-border) 100%);
+	z-index: 1;
+
+	@media (max-width: constants.$screen-md) {
+		left: 20px;
+		top: 36px;
+		bottom: -12px;
+		width: 1.5px;
+	}
+}
+
+.timelineContent {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-2);
+	padding: var(--spacing-3);
+	background: var(--color-surface);
+	border: 1px solid var(--color-border);
+	border-radius: var(--radius-md);
+	margin-bottom: var(--spacing-4);
+	transition: all 0.2s ease;
+	box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+
+	&:hover {
+		transform: translateX(4px);
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+		border-color: var(--color-primary);
+	}
+
+	@media (max-width: constants.$screen-md) {
+		padding: var(--spacing-2);
+		margin-bottom: var(--spacing-3);
+		gap: var(--spacing-2);
+		border-radius: var(--radius-sm);
+
+		&:hover {
+			transform: none;
+		}
+	}
+}
+
+.timelineResult {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2);
+	padding-bottom: var(--spacing-2);
+	border-bottom: 1px solid var(--color-border);
+
+	@media (max-width: constants.$screen-md) {
+		gap: var(--spacing-2);
+		padding-bottom: var(--spacing-2);
+	}
+}
+
+.timelineScore {
+	font-size: var(--font-size-2xl);
+	font-weight: 800;
+	color: var(--color-text-primary);
+	letter-spacing: -0.02em;
+
+	@media (max-width: constants.$screen-md) {
+		font-size: var(--font-size-xl);
+		font-weight: 700;
+	}
+}
+
+.timelineOpponent {
+	font-size: var(--font-size-base);
+	font-weight: 600;
+	color: var(--color-text-primary);
+	line-height: 1.4;
+
+	@media (max-width: constants.$screen-md) {
+		font-size: var(--font-size-sm);
+		font-weight: 600;
+	}
+}
+
+.timelineMeta {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2);
+	flex-wrap: wrap;
+	padding: var(--spacing-1) 0;
+
+	@media (max-width: constants.$screen-md) {
+		gap: var(--spacing-1);
+	}
+}
+
+.timelineButton {
+	margin-top: var(--spacing-1);
+	align-self: flex-start;
+	font-size: var(--font-size-sm);
+
+	@media (max-width: constants.$screen-md) {
+		width: 100%;
+		margin-top: var(--spacing-1);
+		padding: var(--spacing-2);
+		font-size: var(--font-size-xs);
+	}
+}
+
+// === RESPONSIVE ===
+
+@media (max-width: constants.$screen-md) {
+	.root {
+		gap: var(--spacing-3);
+	}
+
+	.searchInput {
+		max-width: 100%;
+	}
+
+	.competitionSelect {
+		max-width: 100%;
+	}
+}

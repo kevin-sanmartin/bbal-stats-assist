@@ -17,6 +17,7 @@ interface StatCounterProps {
 	onChange?: (value: number) => void;
 	className?: string;
 	suffix?: string;
+	prefix?: string;
 }
 
 export default function StatCounter({
@@ -31,6 +32,7 @@ export default function StatCounter({
 	onChange,
 	className,
 	suffix,
+	prefix,
 }: StatCounterProps) {
 	const containerClasses = classNames(classes.statCounter, classes[`variant-${variant}`], { [classes.disabled]: disabled }, className);
 
@@ -64,6 +66,7 @@ export default function StatCounter({
 
 				<div className={classes.valueContainer}>
 					<span className={classes.value}>
+						{prefix}
 						{value}
 						{suffix}
 					</span>
