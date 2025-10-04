@@ -8,59 +8,6 @@
 	gap: var(--spacing-6);
 }
 
-// === HEADER ===
-
-.header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	margin-bottom: var(--spacing-6);
-
-	h1 {
-		font-size: var(--font-size-2xl);
-		font-weight: var(--font-weight-bold);
-		color: var(--color-text-primary);
-		margin: 0;
-	}
-}
-
-.headerContent {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	gap: var(--spacing-2);
-	flex: 1;
-}
-
-.matchInfo {
-	display: flex;
-	align-items: center;
-	gap: var(--spacing-3);
-	font-size: var(--font-size-lg);
-	color: var(--color-text-secondary);
-}
-
-.teamName {
-	font-weight: var(--font-weight-semibold);
-	color: var(--color-primary);
-}
-
-.vs {
-	font-weight: var(--font-weight-medium);
-	color: var(--color-text-tertiary);
-}
-
-.opponent {
-	font-weight: var(--font-weight-semibold);
-	color: var(--color-text-primary);
-}
-
-.headerActions {
-	display: flex;
-	align-items: center;
-	gap: var(--spacing-3);
-}
-
 // === GAME SUMMARY ===
 
 .gameSummary {
@@ -74,33 +21,41 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	margin-bottom: var(--spacing-3);
+	padding-bottom: var(--spacing-2);
+	border-bottom: 1px solid var(--color-border);
 }
 
-.gameDate {
-	font-size: var(--font-size-lg);
+.matchDate {
+	font-size: var(--font-size-base);
 	font-weight: var(--font-weight-semibold);
 	color: var(--color-text-primary);
-	text-transform: capitalize;
+}
+
+.headerBadges {
+	display: flex;
+	gap: var(--spacing-2);
+	align-items: center;
 }
 
 .matchup {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	gap: var(--spacing-8);
+	gap: var(--spacing-6);
 }
 
 .team {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	gap: var(--spacing-3);
+	gap: var(--spacing-2);
 	flex: 1;
 	max-width: 250px;
 }
 
 .teamName {
-	font-size: var(--font-size-xl);
+	font-size: var(--font-size-lg);
 	font-weight: var(--font-weight-semibold);
 	color: var(--color-text-primary);
 	text-align: center;
@@ -108,18 +63,18 @@
 }
 
 .teamScore {
-	font-size: var(--font-size-6xl);
+	font-size: var(--font-size-5xl);
 	font-weight: var(--font-weight-bold);
 	color: var(--color-primary);
 	font-family: monospace;
 }
 
 .vs {
-	font-size: var(--font-size-lg);
+	font-size: var(--font-size-base);
 	font-weight: var(--font-weight-medium);
 	color: var(--color-text-secondary);
 	text-transform: uppercase;
-	letter-spacing: 2px;
+	letter-spacing: 1px;
 }
 
 .gameInfo {
@@ -132,24 +87,26 @@
 // === FILTERS ===
 
 .filtersCard {
-	padding: var(--spacing-5);
+	padding: var(--spacing-4);
 
 	h3 {
-		font-size: var(--font-size-lg);
+		font-size: var(--font-size-base);
 		font-weight: var(--font-weight-semibold);
 		color: var(--color-text-primary);
-		margin: 0 0 var(--spacing-4) 0;
+		margin: 0 0 var(--spacing-3) 0;
 	}
 }
 
 .actionFilters {
-	display: flex;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
 	gap: var(--spacing-2);
-	flex-wrap: wrap;
 }
 
 .filterButton {
 	white-space: nowrap;
+	font-size: var(--font-size-sm);
+	padding: var(--spacing-2) var(--spacing-3);
 }
 
 // === MAIN CONTENT ===
@@ -157,7 +114,7 @@
 .mainContent {
 	display: grid;
 	grid-template-columns: 2fr 1fr;
-	gap: var(--spacing-6);
+	gap: var(--spacing-4);
 	align-items: start;
 }
 
@@ -169,13 +126,13 @@
 }
 
 .courtCard {
-	padding: var(--spacing-5);
+	padding: var(--spacing-4);
 
 	h3 {
-		font-size: var(--font-size-lg);
+		font-size: var(--font-size-base);
 		font-weight: var(--font-weight-semibold);
 		color: var(--color-text-primary);
-		margin: 0 0 var(--spacing-4) 0;
+		margin: 0 0 var(--spacing-3) 0;
 	}
 }
 
@@ -183,16 +140,8 @@
 	display: flex;
 	justify-content: center;
 	background-color: var(--color-background);
-	border-radius: var(--radius-lg);
-	padding: var(--spacing-4);
-	margin-bottom: var(--spacing-3);
-}
-
-.courtInfo {
-	text-align: center;
-	color: var(--color-text-secondary);
-	font-size: var(--font-size-sm);
-	margin: 0;
+	border-radius: var(--radius-md);
+	padding: var(--spacing-3);
 }
 
 // === STATS SECTION ===
@@ -200,107 +149,37 @@
 .statsSection {
 	display: flex;
 	flex-direction: column;
-	gap: var(--spacing-4);
+	gap: var(--spacing-3);
 }
 
 .statsCard {
-	padding: var(--spacing-5);
+	padding: var(--spacing-4);
 
 	h3 {
-		font-size: var(--font-size-lg);
+		font-size: var(--font-size-base);
 		font-weight: var(--font-weight-semibold);
 		color: var(--color-text-primary);
-		margin: 0 0 var(--spacing-4) 0;
+		margin: 0 0 var(--spacing-3) 0;
 	}
 }
 
 .statsGrid {
 	display: grid;
 	grid-template-columns: repeat(2, 1fr);
-	gap: var(--spacing-3);
-}
-
-// === ACTIONS LIST ===
-
-.actionsListCard {
-	padding: var(--spacing-5);
-
-	h3 {
-		font-size: var(--font-size-lg);
-		font-weight: var(--font-weight-semibold);
-		color: var(--color-text-primary);
-		margin: 0 0 var(--spacing-4) 0;
-	}
-}
-
-.actionsList {
-	display: flex;
-	flex-direction: column;
 	gap: var(--spacing-2);
-	max-height: 400px;
-	overflow-y: auto;
-}
-
-.actionItem {
-	display: flex;
-	align-items: center;
-	gap: var(--spacing-3);
-	padding: var(--spacing-3);
-	background: var(--color-surface);
-	border-radius: var(--radius-md);
-	border: 1px solid var(--color-border);
-}
-
-.actionIndex {
-	font-size: var(--font-size-xs);
-	color: var(--color-text-tertiary);
-	font-weight: var(--font-weight-medium);
-	font-family: monospace;
-	min-width: 24px;
-}
-
-.actionDetails {
-	display: flex;
-	flex-direction: column;
-	flex: 1;
-}
-
-.actionPlayer {
-	font-size: var(--font-size-sm);
-	font-weight: var(--font-weight-medium);
-	color: var(--color-text-primary);
-}
-
-.actionType {
-	font-size: var(--font-size-xs);
-	color: var(--color-text-secondary);
-	text-transform: uppercase;
-}
-
-.actionPosition {
-	font-size: var(--font-size-xs);
-	color: var(--color-text-tertiary);
-	font-family: monospace;
-}
-
-.moreActions {
-	text-align: center;
-	padding: var(--spacing-2);
-	color: var(--color-text-secondary);
-	font-size: var(--font-size-sm);
-	font-style: italic;
 }
 
 // === PLAYER STATISTICS ===
 
 .playersStatsCard {
-	padding: var(--spacing-5);
+	padding: var(--spacing-4);
+	overflow-x: auto;
 
 	h3 {
-		font-size: var(--font-size-lg);
+		font-size: var(--font-size-base);
 		font-weight: var(--font-weight-semibold);
 		color: var(--color-text-primary);
-		margin: 0 0 var(--spacing-4) 0;
+		margin: 0 0 var(--spacing-3) 0;
 	}
 }
 
@@ -330,115 +209,102 @@
 
 // === RESPONSIVE ===
 
-@media (max-width: constants.$screen-lg) {
-	.mainContent {
-		grid-template-columns: 1fr;
-		gap: var(--spacing-4);
-	}
-
-	.statsGrid {
-		grid-template-columns: repeat(3, 1fr);
-	}
-}
-
 @media (max-width: constants.$screen-md) {
 	.root {
-		gap: var(--spacing-4);
-	}
-
-	.header {
-		flex-direction: column;
-		align-items: stretch;
-		gap: var(--spacing-4);
-
-		h1 {
-			font-size: var(--font-size-xl);
-			text-align: center;
-		}
-	}
-
-	.headerContent {
-		order: -1;
-	}
-
-	.matchInfo {
-		justify-content: center;
-		font-size: var(--font-size-base);
+		gap: var(--spacing-3);
 	}
 
 	.gameSummary {
-		padding: var(--spacing-4);
+		padding: var(--spacing-3);
+		gap: var(--spacing-3);
+	}
+
+	.summaryHeader {
+		flex-direction: column;
+		gap: var(--spacing-2);
+		margin-bottom: var(--spacing-2);
+		padding-bottom: var(--spacing-2);
+	}
+
+	.matchDate {
+		font-size: var(--font-size-sm);
 	}
 
 	.matchup {
-		gap: var(--spacing-4);
+		gap: var(--spacing-3);
+	}
+
+	.team {
+		gap: var(--spacing-1);
+		max-width: 40%;
+	}
+
+	.teamName {
+		font-size: var(--font-size-base);
 	}
 
 	.teamScore {
 		font-size: var(--font-size-4xl);
 	}
 
-	.actionFilters {
-		justify-content: center;
-	}
-
-	.statsGrid {
-		grid-template-columns: repeat(2, 1fr);
-	}
-}
-
-@media (max-width: constants.$screen-sm) {
-	.headerActions {
-		flex-direction: column;
-		gap: var(--spacing-2);
-		align-items: stretch;
-	}
-
-	.matchInfo {
-		flex-direction: column;
-		gap: var(--spacing-1);
-		text-align: center;
-	}
-
-	.summaryHeader {
-		flex-direction: column;
-		gap: var(--spacing-3);
-		text-align: center;
-	}
-
-	.matchup {
-		flex-direction: column;
-		gap: var(--spacing-4);
-	}
-
-	.team {
-		flex-direction: row;
-		justify-content: space-between;
-		max-width: 100%;
-		width: 100%;
-		padding: var(--spacing-3);
-		background: var(--color-surface);
-		border-radius: var(--radius-md);
-	}
-
-	.teamScore {
-		font-size: var(--font-size-3xl);
-	}
-
 	.vs {
-		font-size: var(--font-size-base);
-		order: -1;
+		font-size: var(--font-size-sm);
 	}
 
-	.statsGrid {
-		grid-template-columns: 1fr;
+	.filtersCard {
+		padding: var(--spacing-3);
+
+		h3 {
+			font-size: var(--font-size-sm);
+			margin: 0 0 var(--spacing-2) 0;
+		}
 	}
 
 	.actionFilters {
-		flex-direction: column;
+		grid-template-columns: repeat(2, 1fr);
 	}
 
 	.filterButton {
+		font-size: var(--font-size-xs);
+		padding: var(--spacing-2);
 		text-align: center;
+	}
+
+	.mainContent {
+		grid-template-columns: 1fr;
+		gap: var(--spacing-3);
+	}
+
+	.courtCard {
+		padding: var(--spacing-3);
+
+		h3 {
+			font-size: var(--font-size-sm);
+			margin: 0 0 var(--spacing-2) 0;
+		}
+	}
+
+	.courtContainer {
+		padding: var(--spacing-2);
+		border-radius: var(--radius-sm);
+	}
+
+	.statsCard {
+		padding: var(--spacing-3);
+
+		h3 {
+			font-size: var(--font-size-sm);
+			margin: 0 0 var(--spacing-2) 0;
+		}
+	}
+
+	.playersStatsCard {
+		padding: var(--spacing-2);
+
+		h3 {
+			font-size: var(--font-size-sm);
+			margin: 0 0 var(--spacing-2) 0;
+			padding: 0 var(--spacing-1);
+		}
 	}
 }

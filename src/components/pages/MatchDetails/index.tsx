@@ -11,7 +11,6 @@ import BasketballCourt from "@/components/elements/BasketballCourt";
 import Card from "@/components/elements/Card";
 import Button from "@/components/elements/Button";
 import Badge from "@/components/elements/Badge";
-import Avatar from "@/components/elements/Avatar";
 import StatCounter from "@/components/elements/StatCounter";
 import Table, { TableColumn } from "@/components/materials/Table";
 import { CourtSize } from "@/components/elements/BasketballCourt/enums";
@@ -60,10 +59,9 @@ export default function MatchDetails({ game, team, actions, players }: MatchDeta
 	const formatDate = (dateString: string) => {
 		const date = new Date(dateString);
 		return date.toLocaleDateString("fr-FR", {
-			weekday: "long",
-			day: "numeric",
-			month: "long",
-			year: "numeric",
+			day: "2-digit",
+			month: "2-digit",
+			year: "2-digit",
 		});
 	};
 
@@ -203,32 +201,20 @@ export default function MatchDetails({ game, team, actions, players }: MatchDeta
 
 	return (
 		<div className={classes.root}>
-			{/* Header */}
-			<div className={classes.header}>
-				<Button variant="outlined" onClick={() => router.push(`/teams/${team.id}`)}>
-					← Retour à l'équipe
-				</Button>
-				<div className={classes.headerContent}>
-					<h1>Match du {formatDate(game.date)}</h1>
-					<div className={classes.matchInfo}>
-						<span className={classes.teamName}>{team.name}</span>
-						<span className={classes.vs}>vs</span>
-						<span className={classes.opponent}>{game.opponent}</span>
-					</div>
-				</div>
-				<div className={classes.headerActions}>
-					{getLocationBadge()}
-					{getResultBadge()}
-				</div>
-			</div>
-
 			{/* Game Summary */}
 			<Card className={classes.gameSummary}>
+				<div className={classes.summaryHeader}>
+					<div className={classes.matchDate}>{formatDate(game.date)}</div>
+					<div className={classes.headerBadges}>
+						{getLocationBadge()}
+						{getResultBadge()}
+					</div>
+				</div>
+
 				<div className={classes.matchup}>
 					<div className={classes.team}>
 						<div className={classes.teamName}>{team.name}</div>
 						<div className={classes.teamScore}>{game.score}</div>
-						<Badge variant="default">{team.category}</Badge>
 					</div>
 					<div className={classes.vs}>vs</div>
 					<div className={classes.team}>
@@ -273,10 +259,6 @@ export default function MatchDetails({ game, team, actions, players }: MatchDeta
 								onCourtClick={() => {}} // Mode lecture seule
 							/>
 						</div>
-						<p className={classes.courtInfo}>
-							{courtActions.length} action{courtActions.length > 1 ? "s" : ""} affichée{courtActions.length > 1 ? "s" : ""}
-							{selectedActionType !== "ALL" && ` (${actionTypes.find((a) => a.type === selectedActionType)?.label})`}
-						</p>
 					</Card>
 				</div>
 
@@ -293,33 +275,6 @@ export default function MatchDetails({ game, team, actions, players }: MatchDeta
 							<StatCounter label="Passes D." value={stats.assists} variant="success" showButtons={false} />
 						</div>
 					</Card>
-
-					{/* Actions List */}
-					{courtActions.length > 0 && (
-						<Card className={classes.actionsListCard}>
-							<h3>Actions détaillées</h3>
-							<div className={classes.actionsList}>
-								{courtActions.slice(0, 10).map((action, index) => (
-									<div key={action.id} className={classes.actionItem}>
-										<div className={classes.actionIndex}>#{courtActions.length - index}</div>
-										<Avatar name={action.playerName} size="xs" />
-										<div className={classes.actionDetails}>
-											<div className={classes.actionPlayer}>{action.playerName}</div>
-											<div className={classes.actionType}>{action.actionType}</div>
-										</div>
-										<div className={classes.actionPosition}>
-											({action.position.x.toFixed(1)}m, {action.position.y.toFixed(1)}m)
-										</div>
-									</div>
-								))}
-								{courtActions.length > 10 && (
-									<div className={classes.moreActions}>
-										... et {courtActions.length - 10} autre{courtActions.length - 10 > 1 ? "s" : ""} action{courtActions.length - 10 > 1 ? "s" : ""}
-									</div>
-								)}
-							</div>
-						</Card>
-					)}
 				</div>
 			</div>
 
@@ -329,7 +284,6 @@ export default function MatchDetails({ game, team, actions, players }: MatchDeta
 				<Table
 					columns={playerStatsColumns}
 					data={playerStats}
-					hoverable
 					striped
 					empty={
 						<div className={classes.emptyTable}>
