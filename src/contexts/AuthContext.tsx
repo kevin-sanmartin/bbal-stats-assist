@@ -60,10 +60,14 @@ const useAuth = (initialUser: User | null) => {
 	}, []);
 
 	const signInWithGoogle = useCallback(async () => {
+		const redirectUrl = process.env.NEXT_PUBLIC_SITE_URL
+			? `${process.env.NEXT_PUBLIC_SITE_URL}/api/auth/callback`
+			: `${window.location.origin}/api/auth/callback`;
+
 		const { error } = await supabase.auth.signInWithOAuth({
 			provider: "google",
 			options: {
-				redirectTo: `${window.location.origin}/api/auth/callback`,
+				redirectTo: redirectUrl,
 			},
 		});
 		if (error) throw error;
@@ -76,8 +80,12 @@ const useAuth = (initialUser: User | null) => {
 	}, []);
 
 	const resetPassword = useCallback(async (email: string) => {
+		const redirectUrl = process.env.NEXT_PUBLIC_SITE_URL
+			? `${process.env.NEXT_PUBLIC_SITE_URL}/auth/reset-password`
+			: `${window.location.origin}/auth/reset-password`;
+
 		const { error } = await supabase.auth.resetPasswordForEmail(email, {
-			redirectTo: `${window.location.origin}/auth/reset-password`,
+			redirectTo: redirectUrl,
 		});
 		if (error) throw error;
 	}, []);
