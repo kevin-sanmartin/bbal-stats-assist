@@ -31,7 +31,7 @@ export default function TeamHistory({ team, games }: TeamHistoryProps) {
 		// Filtrer par recherche
 		if (searchTerm.trim()) {
 			const term = searchTerm.toLowerCase().trim();
-			filtered = filtered.filter((game) => game.opponent.toLowerCase().includes(term) || game.competition?.name?.toLowerCase().includes(term));
+			filtered = filtered.filter((game) => game.opponent.toLowerCase().includes(term));
 		}
 
 		return filtered;
@@ -83,7 +83,7 @@ export default function TeamHistory({ team, games }: TeamHistoryProps) {
 					<div className={classes.filtersRow}>
 						<Input
 							type="text"
-							placeholder="Rechercher par adversaire ou compétition..."
+							placeholder="Rechercher par adversaire"
 							value={searchTerm}
 							onChange={(e) => setSearchTerm(e.target.value)}
 							className={classes.searchInput}
