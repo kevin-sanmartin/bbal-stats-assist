@@ -3,7 +3,6 @@ import { useState } from "react";
 import Button from "@/components/elements/Button";
 import { TCreateTeamInput, TTeam } from "@/types/team";
 import { ETeamCategory } from "@/enums/team";
-import TeamTable from "./components/TeamTable";
 import TeamModal from "./components/TeamModal";
 import DeleteConfirmModal from "./components/DeleteConfirmModal";
 import EmptyState from "./components/EmptyState";
@@ -123,7 +122,6 @@ export default function Teams(props: IProps) {
 						<div className={classes.teamsCount}>
 							{teams.length} équipe{teams.length > 1 ? "s" : ""} créée{teams.length > 1 ? "s" : ""}
 						</div>
-						<TeamTable teams={teams} onEdit={openEditModal} onDelete={openDeleteModal} />
 					</>
 				)}
 			</div>

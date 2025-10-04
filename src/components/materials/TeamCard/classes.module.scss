@@ -1,0 +1,44 @@
+@use "themes/constants.module.scss";
+
+.teamCard {
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-4);
+}
+
+.teamHeader {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+
+	h3 {
+		font-size: var(--font-size-md);
+		font-weight: var(--font-weight-semibold);
+		color: var(--color-text-primary);
+	}
+
+	p {
+		font-size: var(--font-size-sm);
+		color: var(--color-text-secondary);
+	}
+}
+
+.teamTitleContainer {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2);
+}
+
+.teamTitle {
+	display: flex;
+	flex-direction: column;
+}
+
+.teamIcon {
+	color: var(--color-primary);
+}
+
+.teamActions {
+	display: flex;
+	gap: var(--spacing-2);
+}
