@@ -156,6 +156,13 @@
 	}
 }
 
+.teamsSectionHeader {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap: var(--spacing-4);
+}
+
 .teamsGrid {
 	display: grid;
 	grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -237,6 +244,15 @@
 
 	.teamsGrid {
 		grid-template-columns: 1fr;
+	}
+
+	.teamsSectionHeader {
+		flex-direction: column;
+		align-items: stretch;
+
+		button {
+			width: 100%;
+		}
 	}
 
 	.actionsGrid {

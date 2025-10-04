@@ -1,23 +1,44 @@
 "use client";
 
+import { useState } from "react";
 import { useRouter } from "next/navigation";
 import { useAuthContext } from "@/contexts/AuthContext";
+import { useToastContext } from "@/contexts/ToastContext";
 import { TTeamWithPlayers } from "@/types/team";
+import { ETeamCategory } from "@/enums/team";
 import { UserStats } from "@/services/supabase/games/ServerService";
+import { TeamsClientService } from "@/services/supabase/teams/ClientService";
 import Card from "@/components/elements/Card";
 import Button from "@/components/elements/Button";
 import StatCounter from "@/components/elements/StatCounter";
+import TeamModal from "@/components/pages/TeamManagement/components/TeamModal";
 import classes from "./classes.module.scss";
 import TeamCard from "@/components/materials/TeamCard";
-import { FaTrophy } from "react-icons/fa";
+import { FaTrophy, FaPlus } from "react-icons/fa";
 interface HomeProps {
 	teams: TTeamWithPlayers[];
 	userStats: UserStats;
 }
 
+const teamsService = TeamsClientService.getInstance();
+
 export default function Home({ teams, userStats }: HomeProps) {
 	const { user } = useAuthContext();
 	const router = useRouter();
+	const { toast } = useToastContext();
+	const [isCreateTeamModalOpen, setIsCreateTeamModalOpen] = useState(false);
+
+	const handleCreateTeam = async (teamData: { name: string; category: ETeamCategory }) => {
+		try {
+			await teamsService.createTeam(teamData);
+			setIsCreateTeamModalOpen(false);
+			toast.success("Équipe créée avec succès");
+			router.refresh();
+		} catch (error) {
+			console.error("Erreur lors de la création de l'équipe :", error);
+			toast.error("Impossible de créer l'équipe");
+		}
+	};
 
 	if (!user) {
 		return (
@@ -76,11 +97,16 @@ export default function Home({ teams, userStats }: HomeProps) {
 					</div>
 
 					<div className={classes.teamsSection}>
-						<h2>Mes équipes</h2>
-						<div className={classes.teamsGrid}>
-							{teams.map((team) => (
-								<TeamCard key={team.id} team={team} />
-							))}
+						<div className={classes.teamsSectionHeader}>
+							<h2>Mes équipes</h2>
+							<div className={classes.teamsGrid}>
+								{teams.map((team) => (
+									<TeamCard key={team.id} team={team} />
+								))}
+							</div>
+							<Button variant="contained" onClick={() => setIsCreateTeamModalOpen(true)} leftIcon={<FaPlus />}>
+								Créer une équipe
+							</Button>
 						</div>
 					</div>
 
@@ -96,6 +122,8 @@ export default function Home({ teams, userStats }: HomeProps) {
 					</div>
 				</div>
 			)}
+
+			<TeamModal isOpen={isCreateTeamModalOpen} onClose={() => setIsCreateTeamModalOpen(false)} onSubmit={handleCreateTeam} title="Créer une équipe" />
 		</div>
 	);
 }
