@@ -3,83 +3,125 @@
 .root {
 	display: flex;
 	flex-direction: column;
-	gap: var(--spacing-4);
+	gap: var(--spacing-3);
 }
 
 .typesList {
-	display: flex;
-	flex-direction: column;
-	gap: var(--spacing-4);
-	max-width: 800px;
+	display: grid;
+	grid-template-columns: repeat(2, 1fr);
+	gap: var(--spacing-3);
+	max-width: 900px;
 	margin: 0 auto;
+	width: 100%;
+
+	@media (max-width: constants.$screen-md) {
+		grid-template-columns: 1fr;
+		gap: var(--spacing-3);
+	}
 }
 
 .typeCard {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	padding: var(--spacing-5);
+	background: var(--color-surface);
+	border: 2px solid var(--color-border);
+	border-radius: var(--radius-lg);
+	transition: all 0.2s ease;
+	cursor: pointer;
 	position: relative;
-	transition: all 0.3s ease;
 
-	&.selected {
-		border-color: var(--color-primary) !important;
-		background: var(--color-primary-50) !important;
+	&:not(.disabled):hover {
 		transform: translateY(-4px);
-		box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12);
+		border-color: var(--color-primary);
+		box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
 	}
 
 	&.disabled {
-		position: relative;
-		opacity: 0.7;
+		opacity: 0.6;
 		cursor: not-allowed;
-		background: var(--color-gray-50) !important;
-		border-color: var(--color-border) !important;
+		background: var(--color-surface-secondary);
 
 		&:hover {
 			transform: none;
 			box-shadow: none;
 		}
-
-		&::before {
-			content: "";
-			position: absolute;
-			top: 0;
-			left: 0;
-			right: 0;
-			bottom: 0;
-			background: repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(0, 0, 0, 0.03) 10px, rgba(0, 0, 0, 0.03) 20px);
-			border-radius: inherit;
-		}
 	}
 
-	&:not(.disabled):hover {
-		transform: translateY(-2px);
-		box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+	@media (max-width: constants.$screen-md) {
+		padding: var(--spacing-4);
 	}
 }
 
-.typeHeader {
+.typeIcon {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: center;
+	width: 72px;
+	height: 72px;
 	margin-bottom: var(--spacing-3);
-	position: relative;
+	border-radius: var(--radius-full);
+	background: var(--color-primary-50);
+	color: var(--color-primary);
+
+	svg {
+		width: 36px;
+		height: 36px;
+		stroke-width: 2px;
+	}
+
+	@media (max-width: constants.$screen-md) {
+		width: 64px;
+		height: 64px;
+		margin-bottom: var(--spacing-2);
+
+		svg {
+			width: 32px;
+			height: 32px;
+		}
+	}
+}
+
+.typeCard.disabled .typeIcon {
+	background: var(--color-gray-100);
+	color: var(--color-text-tertiary);
 }
 
 .typeTitle {
 	font-size: var(--font-size-lg);
-	font-weight: var(--font-weight-semibold);
+	font-weight: var(--font-weight-bold);
 	color: var(--color-text-primary);
-	margin: 0;
+	margin: 0 0 var(--spacing-2) 0;
+
+	@media (max-width: constants.$screen-md) {
+		font-size: var(--font-size-base);
+	}
 }
 
-.typeIcon {
-	font-size: 2rem;
-	filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+.typeDescription {
+	font-size: var(--font-size-sm);
+	color: var(--color-text-secondary);
+	margin: 0 0 var(--spacing-3) 0;
+	line-height: 1.5;
+
+	@media (max-width: constants.$screen-md) {
+		font-size: var(--font-size-sm);
+		margin: 0 0 var(--spacing-3) 0;
+	}
 }
 
-.comingSoon {
+.typeAction {
+	margin-top: auto;
+	width: 100%;
+}
+
+.comingSoonBadge {
 	position: absolute;
-	top: -8px;
-	right: -8px;
-	background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+	top: var(--spacing-2);
+	right: var(--spacing-2);
+	background: var(--color-warning);
 	color: white;
 	font-size: var(--font-size-xs);
 	font-weight: var(--font-weight-bold);
@@ -87,51 +129,9 @@
 	border-radius: var(--radius-full);
 	text-transform: uppercase;
 	letter-spacing: 0.5px;
-	box-shadow: 0 4px 12px rgba(238, 90, 36, 0.3);
-	border: 2px solid white;
-	z-index: 10;
-}
 
-.typeDescription {
-	font-size: var(--font-size-base);
-	color: var(--color-text-secondary);
-	margin: 0;
-	line-height: 1.5;
-}
-
-.actions {
-	display: flex;
-	justify-content: center;
-	padding-top: var(--spacing-4);
-}
-
-@media (max-width: constants.$screen-md) {
-	.typesList {
-		grid-template-columns: 1fr;
-		gap: var(--spacing-3);
-	}
-
-	.typeCard {
-		min-height: 140px;
-	}
-
-	.typeIcon {
-		font-size: 1.5rem;
-	}
-}
-
-@media (max-width: constants.$screen-sm) {
-	.comingSoon {
-		position: static;
-		margin-top: var(--spacing-2);
-		align-self: flex-start;
+	@media (max-width: constants.$screen-md) {
 		font-size: 10px;
 		padding: 4px 8px;
-	}
-
-	.typeHeader {
-		flex-direction: column;
-		align-items: flex-start;
-		gap: var(--spacing-2);
 	}
 }

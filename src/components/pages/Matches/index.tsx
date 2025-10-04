@@ -117,10 +117,8 @@ export default function Matches({ initialTeams }: MatchesProps) {
 	return (
 		<div className={classes.root}>
 			<div className={classes.header}>
-				<div className={classes.headerContent}>
-					<h1 className={classes.title}>Nouveau match</h1>
-					<p className={classes.subtitle}>Configurez votre match en 3 étapes</p>
-				</div>
+				<h1 className={classes.title}>Nouveau match</h1>
+				<p className={classes.subtitle}>Configurez votre match en 3 étapes</p>
 			</div>
 
 			<div className={classes.content}>
@@ -154,7 +152,7 @@ export default function Matches({ initialTeams }: MatchesProps) {
 						<h2 className={classes.stepTitle}>{getStepTitle()}</h2>
 						<p className={classes.stepSubtitle}>{getStepSubtitle()}</p>
 						{currentStep !== "team" && (
-							<Button variant="ghost" onClick={handleBack} className={classes.backButton}>
+							<Button variant="outlined" onClick={handleBack} className={classes.backButton}>
 								← Retour
 							</Button>
 						)}
