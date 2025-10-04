@@ -1,11 +1,8 @@
-import { ReactNode } from "react";
 import classes from "./classes.module.scss";
 import classNames from "classnames";
 import Avatar from "@/components/elements/Avatar";
 import Badge from "@/components/elements/Badge";
-
-export type PlayerPosition = "PG" | "SG" | "SF" | "PF" | "C" | "OTHER";
-export type PlayerCardSize = "sm" | "md" | "lg";
+import { EPlayerPosition } from "@/enums/player";
 
 interface PlayerStats {
 	points?: number;
@@ -18,9 +15,8 @@ interface PlayerStats {
 interface PlayerCardProps {
 	name: string;
 	number: number;
-	position: PlayerPosition;
+	position: EPlayerPosition;
 	stats?: PlayerStats;
-	size?: PlayerCardSize;
 	active?: boolean;
 	avatarUrl?: string;
 	className?: string;
@@ -28,12 +24,12 @@ interface PlayerCardProps {
 }
 
 const positionLabels = {
-	PG: "Point Guard",
-	SG: "Shooting Guard",
-	SF: "Small Forward",
-	PF: "Power Forward",
-	C: "Center",
-	OTHER: "Utility",
+	PG: "Meneur",
+	SG: "Arrière",
+	SF: "Ailier",
+	PF: "Ailier fort",
+	C: "Pivot",
+	OTHER: "Autre",
 };
 
 const positionColors = {
@@ -45,19 +41,19 @@ const positionColors = {
 	OTHER: "default" as const,
 };
 
-export default function PlayerCard({ name, number, position, stats, size = "sm", active = false, avatarUrl, className, onClick }: PlayerCardProps) {
-	const cardClasses = classNames(classes.playerCard, classes[`size-${size}`], { [classes.active]: active, [classes.clickable]: onClick }, className);
+export default function PlayerCard({ name, number, position, stats, active = false, avatarUrl, className, onClick }: PlayerCardProps) {
+	const cardClasses = classNames(classes.playerCard, { [classes.active]: active, [classes.clickable]: onClick }, className);
 
 	return (
 		<div className={cardClasses} onClick={onClick}>
 			<div className={classes.header}>
-				<Avatar name={name} src={avatarUrl} size={size === "sm" ? "sm" : size === "lg" ? "lg" : "md"} />
+				<Avatar name={name} src={avatarUrl} size="md" />
 				<div className={classes.playerInfo}>
 					<div className={classes.nameRow}>
 						<h3 className={classes.name}>{name}</h3>
 						<span className={classes.number}>#{number}</span>
 					</div>
-					<Badge variant={positionColors[position]}>{position}</Badge>
+					<Badge variant={positionColors[position]}>{positionLabels[position]}</Badge>
 				</div>
 			</div>
 

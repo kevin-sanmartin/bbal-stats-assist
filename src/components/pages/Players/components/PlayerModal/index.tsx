@@ -26,34 +26,39 @@ const positionLabels: Record<EPlayerPosition, string> = {
 	[EPlayerPosition.SF]: "Ailier (SF)",
 	[EPlayerPosition.PF]: "Ailier fort (PF)",
 	[EPlayerPosition.C]: "Pivot (C)",
-	[EPlayerPosition.OTHER]: "Autre",
 };
 
 export default function PlayerModal({ isOpen, onClose, onSubmit, title, initialData }: PlayerModalProps) {
 	const [loading, setLoading] = useState(false);
+	const [error, setError] = useState("");
 	const [formData, setFormData] = useState({
 		name: "",
-		number: 1,
+		number: "" as number | "",
 		position: EPlayerPosition.PG,
 	});
 
 	const resetForm = () => {
 		setFormData({
 			name: "",
-			number: 1,
+			number: "",
 			position: EPlayerPosition.PG,
 		});
 	};
 
 	const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();
+		setError("");
 		if (!formData.name.trim()) return;
-		if (formData.number < 1 || formData.number > 99) return;
+		const numberValue = typeof formData.number === "number" ? formData.number : parseInt(formData.number);
+		if (isNaN(numberValue) || numberValue < 0 || numberValue > 99) {
+			setError("Le numéro de maillot doit être entre 0 et 99");
+			return;
+		}
 		setLoading(true);
 
 		onSubmit({
 			name: formData.name.trim(),
-			number: formData.number,
+			number: numberValue,
 			position: formData.position,
 		})
 			.then(() => {
@@ -69,6 +74,12 @@ export default function PlayerModal({ isOpen, onClose, onSubmit, title, initialD
 	const handleClose = () => {
 		onClose();
 		resetForm();
+		setError("");
+	};
+
+	const handleNumberChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		const value = e.target.value;
+		setFormData({ ...formData, number: value === "" ? "" : parseInt(value) });
 	};
 
 	useEffect(() => {
@@ -86,17 +97,15 @@ export default function PlayerModal({ isOpen, onClose, onSubmit, title, initialD
 	return (
 		<Modal isOpen={isOpen} onClose={handleClose} title={title}>
 			<form className={classes.form} onSubmit={handleSubmit}>
-				<Input label="Nom du joueur" placeholder="Ex: Jean Dupont" value={formData.name} onChange={(e) => setFormData({ ...formData, name: e.target.value })} fullWidth />
-
 				<Input
-					label="Numéro de maillot"
-					type="number"
-					min="1"
-					max="99"
-					value={formData.number.toString()}
-					onChange={(e) => setFormData({ ...formData, number: parseInt(e.target.value) || 1 })}
+					label="Nom du joueur"
+					placeholder="Ex: Michael Jordan"
+					value={formData.name}
+					onChange={(e) => setFormData({ ...formData, name: e.target.value })}
 					fullWidth
 				/>
+
+				<Input label="Numéro de maillot" type="number" min="0" max="99" value={formData.number.toString()} onChange={handleNumberChange} fullWidth />
 
 				<Select
 					label="Position"
@@ -108,6 +117,8 @@ export default function PlayerModal({ isOpen, onClose, onSubmit, title, initialD
 					}))}
 					fullWidth
 				/>
+
+				{error && <p className={classes.error}>{error}</p>}
 
 				<div className={classes.modalActions}>
 					<Button type="button" variant="outlined" onClick={handleClose} disabled={loading}>

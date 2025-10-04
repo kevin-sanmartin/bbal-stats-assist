@@ -1,0 +1,58 @@
+.playerCard {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-3);
+}
+
+.playerInfo {
+	flex: 1;
+	display: flex;
+	flex-direction: column;
+	gap: var(--spacing-2);
+}
+
+.nameRow {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	gap: var(--spacing-2);
+}
+
+.name {
+	font-size: var(--font-size-base);
+	font-weight: var(--font-weight-semibold);
+	color: var(--color-text-primary);
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.number {
+	font-size: var(--font-size-xs);
+	font-weight: var(--font-weight-bold);
+	color: var(--color-text-secondary);
+	background-color: var(--color-surface-secondary);
+	padding: var(--spacing-0-5) var(--spacing-1);
+	border-radius: var(--radius-sm);
+	flex-shrink: 0;
+}
+
+.bottomRow {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.actions {
+	display: flex;
+	align-items: center;
+	gap: var(--spacing-2);
+}
+
+.icon {
+	cursor: pointer;
+}
+
+.trashIcon {
+	color: var(--color-primary);
+}

@@ -3,6 +3,5 @@ export enum EPlayerPosition {
 	SG = "SG", // Shooting Guard
 	SF = "SF", // Small Forward
 	PF = "PF", // Power Forward
-	C = "C",   // Center
-	OTHER = "OTHER",
+	C = "C", // Center
 }

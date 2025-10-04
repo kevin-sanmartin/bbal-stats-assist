@@ -12,6 +12,7 @@ import Badge from "@/components/elements/Badge";
 import { useToastContext } from "@/contexts/ToastContext";
 import { CourtPosition } from "@/components/elements/BasketballCourt/types";
 import { CourtSize, CourtTheme } from "@/components/elements/BasketballCourt/enums";
+import { EPlayerPosition } from "@/enums/player";
 
 // Demo players data - moved outside component to avoid recreation on each render
 const demoPlayers = [
@@ -19,35 +20,35 @@ const demoPlayers = [
 		id: 1,
 		name: "Michael Jordan",
 		number: 23,
-		position: "SG" as const,
+		position: EPlayerPosition.SG,
 		stats: { points: 28, rebounds: 6, assists: 5, steals: 2, fouls: 1 },
 	},
 	{
 		id: 2,
 		name: "LeBron James",
 		number: 6,
-		position: "SF" as const,
+		position: EPlayerPosition.SF,
 		stats: { points: 25, rebounds: 8, assists: 7, steals: 1, fouls: 2 },
 	},
 	{
 		id: 3,
 		name: "Stephen Curry",
 		number: 30,
-		position: "PG" as const,
+		position: EPlayerPosition.PG,
 		stats: { points: 32, rebounds: 4, assists: 8, steals: 3, fouls: 0 },
 	},
 	{
 		id: 4,
 		name: "Shaquille O'Neal",
 		number: 34,
-		position: "C" as const,
+		position: EPlayerPosition.C,
 		stats: { points: 22, rebounds: 12, assists: 2, steals: 0, fouls: 4 },
 	},
 	{
 		id: 5,
 		name: "Tim Duncan",
 		number: 21,
-		position: "PF" as const,
+		position: EPlayerPosition.PF,
 		stats: { points: 18, rebounds: 10, assists: 3, steals: 1, fouls: 2 },
 	},
 ];
@@ -242,15 +243,6 @@ export default function BasketStats() {
 				{/* Démonstration des différentes tailles */}
 				<div className={classes.section}>
 					<h2>Variations des composants</h2>
-
-					<div className={classes.subsection}>
-						<h3>PlayerCard - Différentes tailles</h3>
-						<div className={classes.playerSizesGrid}>
-							<PlayerCard name="Magic Johnson" number={32} position="PG" stats={{ points: 15, rebounds: 5, assists: 10 }} size="sm" />
-							<PlayerCard name="Kobe Bryant" number={24} position="SG" stats={{ points: 28, rebounds: 6, assists: 4 }} size="md" />
-							<PlayerCard name="Kareem Abdul-Jabbar" number={33} position="C" stats={{ points: 24, rebounds: 11, assists: 2 }} size="lg" />
-						</div>
-					</div>
 
 					<div className={classes.subsection}>
 						<h3>StatCounter - Différentes variantes</h3>

@@ -1,17 +1,26 @@
 "use client";
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
+import { useState, useMemo } from "react";
 import Button from "@/components/elements/Button";
-import { TPlayer, TCreatePlayerInput } from "@/types/player";
+import Input from "@/components/elements/Input";
+import { TPlayer } from "@/types/player";
 import { EPlayerPosition } from "@/enums/player";
 import { PlayersClientService } from "@/services/supabase/players/ClientService";
 import { useToastContext } from "@/contexts/ToastContext";
-import PlayerTable from "./components/PlayerTable";
 import PlayerModal from "./components/PlayerModal";
 import DeletePlayerConfirmModal from "./components/DeletePlayerConfirmModal";
 import EmptyPlayersState from "./components/EmptyPlayersState";
 import classes from "./classes.module.scss";
+import PlayerCard from "./components/PlayerCard";
+import { useRouter } from "next/navigation";
+
+enum EPlayerPositionTranslated {
+	PG = "Meneur",
+	SG = "Arrière",
+	SF = "Ailier",
+	PF = "Ailier fort",
+	C = "Pivot",
+}
 
 interface PlayersProps {
 	teamId: string;
@@ -22,6 +31,7 @@ interface PlayersProps {
 const playersService = PlayersClientService.getInstance();
 
 export default function Players({ teamId, initialPlayers, teamName }: PlayersProps) {
+	const router = useRouter();
 	const { toast } = useToastContext();
 	const [players, setPlayers] = useState<TPlayer[]>(initialPlayers);
 	const [isPlayerModalOpen, setIsPlayerModalOpen] = useState(false);
@@ -30,6 +40,8 @@ export default function Players({ teamId, initialPlayers, teamName }: PlayersPro
 	const [selectedPlayer, setSelectedPlayer] = useState<TPlayer | null>(null);
 	const [playerToDelete, setPlayerToDelete] = useState<TPlayer | null>(null);
 	const [deleteLoading, setDeleteLoading] = useState(false);
+	const [searchQuery, setSearchQuery] = useState("");
+	const [selectedPosition, setSelectedPosition] = useState<EPlayerPosition | "ALL">("ALL");
 
 	const isJerseyNumberTaken = async (number: number, excludePlayerId?: string) => {
 		const isTaken = await playersService.checkJerseyNumber(teamId, number, excludePlayerId);
@@ -111,6 +123,18 @@ export default function Players({ teamId, initialPlayers, teamName }: PlayersPro
 		setPlayerToDelete(null);
 	};
 
+	const backToTeams = () => {
+		router.push("/teams");
+	};
+
+	const filteredPlayers = useMemo(() => {
+		return players.filter((player) => {
+			const matchesSearch = player.name.toLowerCase().includes(searchQuery.toLowerCase());
+			const matchesPosition = selectedPosition === "ALL" || player.position === selectedPosition;
+			return matchesSearch && matchesPosition;
+		});
+	}, [players, searchQuery, selectedPosition]);
+
 	return (
 		<div className={classes.root}>
 			<div className={classes.header}>
@@ -120,10 +144,44 @@ export default function Players({ teamId, initialPlayers, teamName }: PlayersPro
 						<span className={classes.subtitle}>Gérez votre effectif et les informations des joueurs</span>
 					</div>
 				</div>
-				<Button onClick={() => setIsPlayerModalOpen(true)} leftIcon="+">
-					Ajouter un joueur
-				</Button>
+				<div className={classes.headerActions}>
+					<Button variant="outlined" onClick={backToTeams} className={classes.backButton}>
+						Retour aux équipes
+					</Button>
+					<Button onClick={() => setIsPlayerModalOpen(true)} leftIcon="+">
+						Ajouter un joueur
+					</Button>
+				</div>
 			</div>
+
+			{players.length > 0 && (
+				<div className={classes.filters}>
+					<Input
+						placeholder="Rechercher un joueur..."
+						value={searchQuery}
+						onChange={(e) => setSearchQuery(e.target.value)}
+						leftIcon={
+							<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor">
+								<path strokeLinecap="round" strokeLinejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+							</svg>
+						}
+						fullWidth
+					/>
+					<div className={classes.positionFilters}>
+						<button className={`${classes.filterButton} ${selectedPosition === "ALL" ? classes.active : ""}`} onClick={() => setSelectedPosition("ALL")}>
+							Tous
+						</button>
+						{Object.values(EPlayerPosition).map((position) => (
+							<button
+								key={position}
+								className={`${classes.filterButton} ${selectedPosition === position ? classes.active : ""}`}
+								onClick={() => setSelectedPosition(position)}>
+								{EPlayerPositionTranslated[position]}
+							</button>
+						))}
+					</div>
+				</div>
+			)}
 
 			<div className={classes.content}>
 				{players.length === 0 && <EmptyPlayersState onAddPlayer={() => setIsPlayerModalOpen(true)} />}
@@ -131,9 +189,26 @@ export default function Players({ teamId, initialPlayers, teamName }: PlayersPro
 				{players.length > 0 && (
 					<>
 						<div className={classes.playersCount}>
-							{players.length} joueur{players.length > 1 ? "s" : ""} dans l'équipe {teamName}
+							{filteredPlayers.length} joueur{filteredPlayers.length > 1 ? "s" : ""} dans l'équipe {teamName}
+							{(searchQuery || selectedPosition !== "ALL") && ` (${players.length} au total)`}
 						</div>
-						<PlayerTable players={players} onEdit={openEditModal} onDelete={openDeleteModal} />
+						<div className={classes.playersList}>
+							{filteredPlayers.map((player) => (
+								<PlayerCard
+									key={player.id}
+									name={player.name}
+									number={player.number}
+									position={player.position}
+									onDelete={() => openDeleteModal(player)}
+									onEdit={() => openEditModal(player)}
+								/>
+							))}
+						</div>
+						{filteredPlayers.length === 0 && (
+							<div className={classes.noResults}>
+								<p>Aucun joueur ne correspond aux critères de recherche</p>
+							</div>
+						)}
 					</>
 				)}
 			</div>

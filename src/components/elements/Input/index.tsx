@@ -13,7 +13,18 @@ interface InputProps extends Omit<InputHTMLAttributes<HTMLInputElement>, "size">
 	fullWidth?: boolean;
 }
 
-export default function Input({ state = "default", label, helperText, leftIcon, rightIcon, fullWidth = false, className, ...props }: InputProps) {
+export default function Input({ state = "default", label, helperText, leftIcon, rightIcon, fullWidth = false, className, onChange, ...props }: InputProps) {
+	const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+		if (props.type === "number") {
+			const value = e.target.value;
+			if (value === "") {
+				const emptyEvent = { ...e, target: { ...e.target, value: "" } };
+				onChange?.(emptyEvent as React.ChangeEvent<HTMLInputElement>);
+				return;
+			}
+		}
+		onChange?.(e);
+	};
 	const inputClasses = classNames(
 		classes.input,
 		classes[`state-${state}`],
@@ -32,7 +43,7 @@ export default function Input({ state = "default", label, helperText, leftIcon, 
 			)}
 			<div className={classes.inputWrapper}>
 				{leftIcon && <span className={classes.leftIcon}>{leftIcon}</span>}
-				<input className={inputClasses} {...props} />
+				<input className={inputClasses} {...props} onChange={handleChange} />
 				{rightIcon && <span className={classes.rightIcon}>{rightIcon}</span>}
 			</div>
 			{helperText && <p className={classes.helperText}>{helperText}</p>}

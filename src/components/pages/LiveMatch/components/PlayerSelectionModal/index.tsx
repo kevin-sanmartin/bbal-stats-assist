@@ -57,7 +57,6 @@ export default function PlayerSelectionModal({ isOpen, onClose, players, onPlaye
 								name={player.name}
 								number={player.number}
 								position={player.position as any}
-								size="md"
 								onClick={() => handlePlayerClick(player)}
 								className={classes.selectablePlayerCard}
 							/>

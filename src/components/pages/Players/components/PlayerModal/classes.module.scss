@@ -4,6 +4,11 @@
 	gap: var(--spacing-6);
 }
 
+.error {
+	color: var(--color-danger);
+	font-size: var(--font-size-sm);
+}
+
 .modalActions {
 	display: flex;
 	gap: var(--spacing-4);

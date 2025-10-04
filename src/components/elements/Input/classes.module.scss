@@ -24,7 +24,7 @@
 	width: 100%;
 	font-family: inherit;
 	font-weight: var(--font-weight-normal);
-	font-size: var(--font-size-sm);
+	font-size: var(--font-size-base);
 
 	padding: var(--spacing-2) var(--spacing-3);
 	min-height: 2rem;
@@ -65,6 +65,17 @@
 
 	&.hasRightIcon {
 		padding-right: var(--spacing-8);
+	}
+
+	// Hide number input arrows
+	&[type='number'] {
+		-moz-appearance: textfield;
+
+		&::-webkit-outer-spin-button,
+		&::-webkit-inner-spin-button {
+			-webkit-appearance: none;
+			margin: 0;
+		}
 	}
 }
 
