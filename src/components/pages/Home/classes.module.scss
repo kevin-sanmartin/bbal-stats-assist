@@ -222,7 +222,6 @@
 
 @media (max-width: constants.$screen-md) {
 	.root {
-		padding: var(--spacing-4);
 		gap: var(--spacing-4);
 	}
 
@@ -269,7 +268,6 @@
 
 @media (max-width: constants.$screen-sm) {
 	.root {
-		padding: var(--spacing-3);
 		gap: var(--spacing-4);
 	}
 
