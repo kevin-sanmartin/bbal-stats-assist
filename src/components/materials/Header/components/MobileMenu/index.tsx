@@ -35,7 +35,7 @@ export default function MobileMenu({ isOpen, isUserLoggedIn, onClose, onLogout, 
 								<FiUsers size={20} />
 								<span>Mes Équipes</span>
 							</Link>
-							<Link href="/matches" className={classes.mobileNavLink} onClick={onClose}>
+							<Link href="/match" className={classes.mobileNavLink} onClick={onClose}>
 								<FiTarget size={20} />
 								<span>Matches</span>
 							</Link>

@@ -19,7 +19,7 @@ export default function DesktopNav({ isUserLoggedIn }: DesktopNavProps) {
 			<Link href="/teams" className={classes.navLink}>
 				<FiUsers /> Équipes
 			</Link>
-			<Link href="/matches" className={classes.navLink}>
+			<Link href="/match" className={classes.navLink}>
 				<FiTarget /> Matches
 			</Link>
 		</nav>

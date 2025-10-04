@@ -142,7 +142,7 @@ export default function TeamHistory({ team, games }: TeamHistoryProps) {
 									<Badge variant={game.location === "HOME" ? "info" : "default"}>{game.location === "HOME" ? "🏠 Domicile" : "✈️ Extérieur"}</Badge>
 									{game.competition && <Badge variant="primary">{game.competition.name}</Badge>}
 								</div>
-								<Button variant="outlined" className={classes.timelineButton} onClick={() => router.push(`/matches/${game.id}`)}>
+								<Button variant="outlined" className={classes.timelineButton} onClick={() => router.push(`/match/${game.id}`)}>
 									Voir détails →
 								</Button>
 							</div>

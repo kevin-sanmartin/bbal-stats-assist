@@ -62,9 +62,9 @@ export default function Matches({ initialTeams }: MatchesProps) {
 		});
 
 		if (matchType === EMatchType.LIVE) {
-			router.push(`/matches/live?${queryParams.toString()}`);
+			router.push(`/match/live?${queryParams.toString()}`);
 		} else {
-			router.push(`/matches/manual?${queryParams.toString()}`);
+			router.push(`/match/manual?${queryParams.toString()}`);
 		}
 	};
 

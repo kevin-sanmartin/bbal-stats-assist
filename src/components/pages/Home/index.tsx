@@ -87,7 +87,7 @@ export default function Home({ teams, userStats }: HomeProps) {
 					<div className={classes.quickActions}>
 						<h2>Actions rapides</h2>
 						<div className={classes.actionsGrid}>
-							<Card className={classes.actionCard} onClick={() => router.push("/matches")}>
+							<Card className={classes.actionCard} onClick={() => router.push("/match")}>
 								<FaTrophy size={40} className={classes.actionIcon} />
 								<h3>Nouveau match</h3>
 								<p>Démarrer un match en direct ou manuel</p>
