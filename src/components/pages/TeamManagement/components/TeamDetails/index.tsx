@@ -15,6 +15,7 @@ import { TeamsClientService } from "@/services/supabase/teams/ClientService";
 import { useToastContext } from "@/contexts/ToastContext";
 import classes from "./classes.module.scss";
 import { FaEdit, FaTrash } from "react-icons/fa";
+import { FiTarget } from "react-icons/fi";
 
 interface TeamDetailsProps {
 	team: TTeam;
@@ -81,7 +82,10 @@ export default function TeamDetails({ team: initialTeam, playersCount, teamStats
 					<Badge variant={getCategoryColor(team.category)}>{team.category}</Badge>
 				</div>
 				<div className={classes.teamActions}>
-					<Button variant="contained" onClick={() => setIsEditModalOpen(true)} leftIcon={<FaEdit />}>
+					<Button variant="contained" onClick={() => router.push(`/match?team=${team.id}`)} leftIcon={<FiTarget />}>
+						Nouveau match
+					</Button>
+					<Button variant="outlined" onClick={() => setIsEditModalOpen(true)} leftIcon={<FaEdit />}>
 						Modifier
 					</Button>
 					<Button color="danger" variant="outlined" onClick={() => setIsDeleteModalOpen(true)} leftIcon={<FaTrash />}>

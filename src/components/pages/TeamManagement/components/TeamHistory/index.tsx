@@ -120,7 +120,16 @@ export default function TeamHistory({ team, games }: TeamHistoryProps) {
 				<div className={classes.emptyState}>
 					<div className={classes.emptyIcon}>🔍</div>
 					<h2>Aucun match trouvé</h2>
-					<p>Aucun match ne correspond aux critères sélectionnés</p>
+					<p>
+						{games.length === 0
+							? "Cette équipe n'a pas encore joué de match"
+							: "Aucun match ne correspond aux critères sélectionnés"}
+					</p>
+					{games.length === 0 && (
+						<Button onClick={() => router.push(`/match?team=${team.id}`)}>
+							Créer le premier match
+						</Button>
+					)}
 				</div>
 			) : (
 				<div className={classes.timeline}>

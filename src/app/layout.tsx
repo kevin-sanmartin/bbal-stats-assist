@@ -4,6 +4,7 @@ import { Roboto } from "next/font/google";
 import { cookies } from "next/headers";
 import Header from "@/components/materials/Header";
 import PageTemplate from "@/components/elements/PageTemplate";
+import FloatingActionButton from "@/components/elements/FloatingActionButton";
 import { AuthProvider } from "@/contexts/AuthContext";
 import { ToastProvider } from "@/contexts/ToastContext";
 import { createServerSupabaseClient } from "@/utils/supabase/server";
@@ -43,6 +44,7 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
 					<ToastProvider>
 						<Header />
 						<PageTemplate>{children}</PageTemplate>
+						{initialUser && <FloatingActionButton />}
 					</ToastProvider>
 				</AuthProvider>
 			</body>
