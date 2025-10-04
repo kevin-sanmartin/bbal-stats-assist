@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { FiHome, FiUsers, FiTarget, FiLogOut } from "react-icons/fi";
+import { FiHome, FiTarget, FiLogOut } from "react-icons/fi";
 import classes from "./classes.module.scss";
 
 interface MobileMenuProps {
@@ -31,13 +31,9 @@ export default function MobileMenu({ isOpen, isUserLoggedIn, onClose, onLogout, 
 								<FiHome size={20} />
 								<span>Accueil</span>
 							</Link>
-							<Link href="/teams" className={classes.mobileNavLink} onClick={onClose}>
-								<FiUsers size={20} />
-								<span>Mes Équipes</span>
-							</Link>
 							<Link href="/match" className={classes.mobileNavLink} onClick={onClose}>
 								<FiTarget size={20} />
-								<span>Matches</span>
+								<span>Nouveau Match</span>
 							</Link>
 						</>
 					)}
