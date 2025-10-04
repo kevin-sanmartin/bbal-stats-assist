@@ -158,8 +158,7 @@
 
 .teamsSectionHeader {
 	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	flex-direction: column;
 	gap: var(--spacing-4);
 }
 
@@ -247,7 +246,6 @@
 	}
 
 	.teamsSectionHeader {
-		flex-direction: column;
 		align-items: stretch;
 
 		button {
